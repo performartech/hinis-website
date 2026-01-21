@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(move essencia.html programas )",
+      "Bash(move climax.html programas )",
+      "Bash(move:*)",
+      "Bash(find:*)",
+      "Bash(identify:*)",
+      "Bash(python3:*)",
+      "Bash(grep:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}

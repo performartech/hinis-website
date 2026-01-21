@@ -1,0 +1,10 @@
+# robots.txt para Hinis
+User-agent: *
+Allow: /
+
+# Bloquear acesso a arquivos e pastas desnecessários
+Disallow: /js/
+Disallow: /css/
+
+# Sitemap
+Sitemap: https://www.hinis.com.br/sitemap.xml
