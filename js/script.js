@@ -163,23 +163,62 @@ faqItems.forEach(item => {
 });
 
 // =========================================
-// NEWSLETTER FORM SUBMISSION
+// MÁSCARA DE TELEFONE
 // =========================================
 
-const newsletterForm = document.getElementById('newsletterForm');
+function phoneMask(value) {
+    if (!value) return '';
+    value = value.replace(/\D/g, '');
 
-if (newsletterForm) {
-    newsletterForm.addEventListener('submit', function(e) {
+    if (value.length <= 10) {
+        // Formato: (XX) XXXX-XXXX
+        value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+        value = value.replace(/(\d)(\d{4})$/, '$1-$2');
+    } else {
+        // Formato: (XX) XXXXX-XXXX
+        value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+        value = value.replace(/(\d)(\d{4})$/, '$1-$2');
+    }
+
+    return value;
+}
+
+// Aplicar máscara em todos os campos de telefone
+document.addEventListener('DOMContentLoaded', function() {
+    const telefoneInputs = document.querySelectorAll('input[type="tel"], .telefone-mask');
+
+    telefoneInputs.forEach(input => {
+        input.addEventListener('input', function(e) {
+            e.target.value = phoneMask(e.target.value);
+        });
+    });
+});
+
+// =========================================
+// CONTATO RÁPIDO FORM SUBMISSION
+// =========================================
+
+const contatoRapidoForm = document.getElementById('contatoRapidoForm');
+
+if (contatoRapidoForm) {
+    contatoRapidoForm.addEventListener('submit', function(e) {
         e.preventDefault();
 
-        const emailInput = this.querySelector('input[type="email"]');
-        const email = emailInput.value;
+        const nome = this.querySelector('input[name="nome"]').value;
+        const email = this.querySelector('input[name="email"]').value;
+        const telefone = this.querySelector('input[name="telefone"]').value;
+        const mensagem = this.querySelector('textarea[name="mensagem"]').value;
 
-        if (email) {
-            // Aqui você integraria com sua plataforma de e-mail marketing
-            alert('Obrigada por se inscrever! Em breve você receberá nossos conteúdos exclusivos.');
-            emailInput.value = '';
+        // Validação de e-mail
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Por favor, insira um e-mail válido.');
+            return;
         }
+
+        // Aqui você integraria com seu backend ou serviço de e-mail
+        alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+        this.reset();
     });
 }
 
@@ -484,8 +523,21 @@ if (depoimentosCarousel && carouselIndicators.length > 0) {
     function updateCarousel(index, smooth = true) {
         currentIndex = index;
 
-        // Atualizar transform do carrossel
-        const offset = -100 * currentIndex;
+        // Detectar se está em mobile (768px ou menos)
+        const isMobile = window.innerWidth <= 768;
+
+        // Calcular offset:
+        // - Desktop: cada card ocupa 50%, então movemos 50% por card
+        //   Adicionamos 25% para centralizar (mostra metade do anterior, card completo no centro, metade do próximo)
+        // - Mobile: cada card ocupa 100% (mostra 1 por vez)
+        let offset;
+        if (isMobile) {
+            offset = -100 * currentIndex;
+        } else {
+            // Desktop: mover 50% por card, começando com +25% para mostrar layout correto
+            offset = -50 * currentIndex + 25;
+        }
+
         depoimentosCarousel.style.transition = smooth ? 'transform 0.6s ease-in-out' : 'none';
         depoimentosCarousel.style.transform = `translateX(${offset}%)`;
 
@@ -602,4 +654,30 @@ if (depoimentosCarousel && carouselIndicators.length > 0) {
             }
         }
     });
+
+    // Recalcular posição ao redimensionar (com debounce para performance)
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            updateCarousel(currentIndex, false); // false = sem animação
+        }, 250);
+    });
 }
+
+// =========================================
+// LUCIDE ICONS INITIALIZATION
+// =========================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof lucide !== 'undefined') {
+        try {
+            lucide.createIcons();
+            console.log('✓ Ícones Lucide inicializados com sucesso');
+        } catch (error) {
+            console.error('Erro ao inicializar ícones Lucide:', error);
+        }
+    } else {
+        console.warn('Biblioteca Lucide não carregada. Ícones não serão exibidos corretamente.');
+    }
+});

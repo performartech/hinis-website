@@ -39,6 +39,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- CSS principal -->
     <link rel="stylesheet" href="css/styles.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <!-- Header e Menu Principal -->
@@ -47,7 +49,7 @@
             <div class="container">
                 <div class="nav-wrapper">
                     <a href="index.html" class="logo">
-                        <img src="assets/logo/Ativo-2.png" alt="Hinis" class="logo-img">
+                        <img src="assets/logo/Hinis-logo1.png" alt="Hinis" class="logo-img">
                     </a>
                     <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
                         <span></span>
@@ -55,7 +57,7 @@
                         <span></span>
                     </button>
                     <ul class="nav-menu">
-                        <li><a href="index.html" class="nav-link active">Home</a></li>
+                        <li><a href="index.html" class="nav-link active">Início</a></li>
                         <li class="nav-item-dropdown">
                             <a href="programas.html" class="nav-link">Programas</a>
                             <ul class="dropdown-menu">
@@ -66,6 +68,7 @@
                         </li>
                         <li><a href="quem-somos.html" class="nav-link">Quem somos</a></li>
                         <li><a href="contato.html" class="nav-link">Contato</a></li>
+                        <li><a href="faq.html" class="nav-link">FAQ</a></li>
                     </ul>
                 </div>
             </div>
@@ -97,28 +100,28 @@
                 </div>
                 <div class="caminhos-grid">
                     <a href="programas/essencia.html" class="caminho-card">
-                        <div class="caminho-icon">◇</div>
+                        <i data-lucide="diamond" class="caminho-icon" aria-hidden="true"></i>
                         <div class="caminho-content">
                             <h3>Quero começar pelo básico</h3>
                             <p>Integre autocuidado na sua rotina, no seu tempo</p>
                         </div>
-                        <div class="caminho-arrow">→</div>
+                        <i data-lucide="arrow-right" class="caminho-arrow" aria-hidden="true"></i>
                     </a>
                     <a href="programas/climax.html" class="caminho-card">
-                        <div class="caminho-icon">◆</div>
+                        <i data-lucide="gem" class="caminho-icon" aria-hidden="true"></i>
                         <div class="caminho-content">
                             <h3>Quero uma experiência profunda</h3>
                             <p>Viva uma imersão sensorial transformadora</p>
                         </div>
-                        <div class="caminho-arrow">→</div>
+                        <i data-lucide="arrow-right" class="caminho-arrow" aria-hidden="true"></i>
                     </a>
                     <a href="programas/bff.html" class="caminho-card">
-                        <div class="caminho-icon">❖</div>
+                        <i data-lucide="users" class="caminho-icon" aria-hidden="true"></i>
                         <div class="caminho-content">
                             <h3>Quero caminhar junto com outras mulheres</h3>
                             <p>Faça parte de uma rede de apoio solidária</p>
                         </div>
-                        <div class="caminho-arrow">→</div>
+                        <i data-lucide="arrow-right" class="caminho-arrow" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
@@ -134,7 +137,7 @@
             <div class="programa-box reverse">
                 <div class="programa-content">
                     <div class="programa-image">
-                        <div class="image-placeholder"></div>
+                        <img src="assets/img/Essencia - retrato.png" alt="Programa Essência" class="programa-img">
                     </div>
                     <div class="programa-text">
                         <h3>Essência</h3>
@@ -165,7 +168,7 @@
                         <a href="programas/climax.html" class="btn btn-primary">Sinta o prazer de cuidar de si</a>
                     </div>
                     <div class="programa-image">
-                        <div class="image-placeholder"></div>
+                        <img src="assets/img/Climax - retrato.png" alt="Programa Clímax" class="programa-img">
                     </div>
                 </div>
             </div>
@@ -174,7 +177,7 @@
             <div class="programa-box reverse">
                 <div class="programa-content">
                     <div class="programa-image">
-                        <div class="image-placeholder"></div>
+                        <img src="assets/img/BFF - retrato.png" alt="Programa BFF - Bela Força Feminina" class="programa-img">
                     </div>
                     <div class="programa-text">
                         <h3>BFF - Bela Força Feminina</h3>
@@ -222,15 +225,18 @@
         </div>
     </section>
 
-    <!-- Newsletter -->
+    <!-- Contato Rápido -->
     <section class="newsletter">
         <div class="container">
             <div class="newsletter-content">
-                <h2>Receba conteúdos exclusivos de autocuidado e autoestima</h2>
-                <p>Insights, práticas e inspiração direto no seu e-mail</p>
-                <form class="newsletter-form" id="newsletterForm">
-                    <input type="email" name="email" placeholder="Seu melhor e-mail" required aria-label="E-mail">
-                    <button type="submit" class="btn btn-primary">Quero receber</button>
+                <h2>Entre em contato conosco</h2>
+                <p>Estamos aqui para ouvir você e esclarecer suas dúvidas</p>
+                <form class="contato-rapido-form" id="contatoRapidoForm">
+                    <input type="text" name="nome" placeholder="Nome" required aria-label="Nome">
+                    <input type="email" name="email" placeholder="E-mail" required aria-label="E-mail">
+                    <input type="tel" name="telefone" placeholder="Telefone" class="telefone-mask" aria-label="Telefone">
+                    <textarea name="mensagem" placeholder="Mensagem" rows="3" required aria-label="Mensagem"></textarea>
+                    <button type="submit" class="btn btn-primary">Enviar mensagem</button>
                 </form>
                 <p class="newsletter-privacy">Seus dados estão protegidos. <a href="politica-privacidade.html">Política de privacidade</a></p>
             </div>
@@ -242,16 +248,17 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <img src="assets/logo/Ativo-2.png" alt="Hinis" class="footer-logo">
+                    <img src="assets/logo/Hinis-logo2.png" alt="Hinis" class="footer-logo">
                     <p>Eleve sua autoestima respeitando seu tempo, sua história e seu corpo.</p>
                 </div>
                 <div class="footer-links">
                     <h4>Menu</h4>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html">Início</a></li>
                         <li><a href="programas.html">Programas</a></li>
                         <li><a href="quem-somos.html">Quem somos</a></li>
                         <li><a href="contato.html">Contato</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
                     </ul>
                 </div>
                 <div class="footer-programs">

@@ -8,7 +8,16 @@
       "Bash(identify:*)",
       "Bash(python3:*)",
       "Bash(grep:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(for file in programas.html quem-somos.html programas/essencia.html programas/climax.html programas/bff.html politica-privacidade.html)",
+      "Bash(do if [ -f \"$file\" ])",
+      "Bash(then echo \"$file exists\")",
+      "Bash(fi)",
+      "Bash(done)"
     ]
   }
 }

@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <!-- Header e Menu Principal -->
@@ -18,7 +20,7 @@
             <div class="container">
                 <div class="nav-wrapper">
                     <a href="index.html" class="logo">
-                        <img src="assets/logo/Ativo-2.png" alt="Hinis" class="logo-img">
+                        <img src="assets/logo/Hinis-logo1.png" alt="Hinis" class="logo-img">
                     </a>
                     <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
                         <span></span>
@@ -26,7 +28,7 @@
                         <span></span>
                     </button>
                     <ul class="nav-menu">
-                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li><a href="index.html" class="nav-link">Início</a></li>
                         <li class="nav-item-dropdown">
                             <a href="programas.html" class="nav-link">Programas</a>
                             <ul class="dropdown-menu">
@@ -37,6 +39,7 @@
                         </li>
                         <li><a href="quem-somos.html" class="nav-link">Quem somos</a></li>
                         <li><a href="contato.html" class="nav-link active">Contato</a></li>
+                        <li><a href="faq.html" class="nav-link">FAQ</a></li>
                     </ul>
                 </div>
             </div>
@@ -63,54 +66,17 @@
                     <h2>Envie sua mensagem</h2>
                     <p>Preencha o formulário abaixo e retornaremos o mais breve possível</p>
 
-                    <form class="contato-form" id="contatoForm">
-                        <div class="form-group">
-                            <label for="nome">Nome completo *</label>
-                            <input type="text" id="nome" name="nome" required aria-label="Nome completo">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">E-mail *</label>
-                            <input type="email" id="email" name="email" required aria-label="E-mail">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="telefone">Telefone</label>
-                            <input type="tel" id="telefone" name="telefone" aria-label="Telefone">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="assunto">Assunto *</label>
-                            <select id="assunto" name="assunto" required aria-label="Assunto">
-                                <option value="">Selecione um assunto</option>
-                                <option value="essencia">Programa Essência</option>
-                                <option value="climax">Programa Clímax</option>
-                                <option value="bff">Programa BFF</option>
-                                <option value="duvida">Dúvida sobre os programas</option>
-                                <option value="parceria">Parceria</option>
-                                <option value="outro">Outro</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="mensagem">Mensagem *</label>
-                            <textarea id="mensagem" name="mensagem" rows="6" required aria-label="Mensagem"></textarea>
-                        </div>
-
-                        <div class="form-group form-checkbox">
-                            <input type="checkbox" id="privacidade" name="privacidade" required>
-                            <label for="privacidade">
-                                Li e aceito a <a href="politica-privacidade.html">Política de Privacidade</a> *
-                            </label>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-large">Enviar mensagem</button>
-
-                        <p class="form-info">* Campos obrigatórios</p>
-                        <p class="form-privacidade">
-                            Seus dados estão protegidos e serão utilizados apenas para responder sua mensagem.
-                        </p>
+                    <form class="contato-rapido-form" id="contatoForm">
+                        <input type="text" name="nome" placeholder="Nome" required aria-label="Nome">
+                        <input type="email" name="email" placeholder="E-mail" required aria-label="E-mail">
+                        <input type="tel" name="telefone" placeholder="Telefone" class="telefone-mask" aria-label="Telefone">
+                        <textarea name="mensagem" placeholder="Mensagem" rows="5" required aria-label="Mensagem"></textarea>
+                        <button type="submit" class="btn btn-primary">Enviar mensagem</button>
                     </form>
+
+                    <p class="form-privacidade">
+                        Seus dados estão protegidos e serão utilizados apenas para responder sua mensagem.
+                    </p>
                 </div>
 
                 <!-- Informações de Contato -->
@@ -119,7 +85,7 @@
                         <h3>Outras formas de contato</h3>
 
                         <div class="info-item">
-                            <div class="info-icon">📱</div>
+                            <i data-lucide="smartphone" class="info-icon" aria-hidden="true"></i>
                             <div class="info-content">
                                 <h4>WhatsApp</h4>
                                 <p>A forma mais rápida de nos contatar</p>
@@ -133,7 +99,7 @@
                         </div>
 
                         <div class="info-item">
-                            <div class="info-icon">📧</div>
+                            <i data-lucide="mail" class="info-icon" aria-hidden="true"></i>
                             <div class="info-content">
                                 <h4>E-mail</h4>
                                 <p><a href="mailto:contato@hinis.com.br">contato@hinis.com.br</a></p>
@@ -141,7 +107,7 @@
                         </div>
 
                         <div class="info-item">
-                            <div class="info-icon">📞</div>
+                            <i data-lucide="phone" class="info-icon" aria-hidden="true"></i>
                             <div class="info-content">
                                 <h4>Telefone</h4>
                                 <p>(21) 98860-2474</p>
@@ -169,137 +135,22 @@
         </div>
     </section>
 
-    <!-- Perguntas Frequentes -->
-    <section class="faq-section">
-        <div class="container">
-            <h2 class="section-title">Perguntas frequentes</h2>
-            <div class="faq-accordion">
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>Qual programa devo escolher?</span>
-                        <span class="faq-icon" aria-hidden="true">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Essência é ideal para começar uma rotina de autocuidado integrada ao seu dia a dia. É um programa digital que respeita seu tempo e ritmo.</p>
-                        <p>Clímax é para quem busca uma experiência imersiva e transformadora através de um retiro presencial em pequenos grupos.</p>
-                        <p>BFF (Bela Força Feminina) é para quem deseja apoio contínuo em comunidade, com encontros online e presenciais.</p>
-                        <p><a href="programas.html" class="faq-link">Ver todos os programas →</a></p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>Os programas são online ou presenciais?</span>
-                        <span class="faq-icon" aria-hidden="true">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p><strong>Essência:</strong> 100% digital. Você acessa o conteúdo de onde estiver, no seu próprio ritmo.</p>
-                        <p><strong>Clímax:</strong> Totalmente presencial. É um retiro imersivo com experiências sensoriais e afetivas em pequenos grupos reservados.</p>
-                        <p><strong>BFF:</strong> Formato híbrido que combina encontros online (semanais ou quinzenais) e encontros presenciais especiais.</p>
-                        <p><a href="programas.html" class="faq-link">Saiba mais sobre os formatos →</a></p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>Posso parcelar o pagamento?</span>
-                        <span class="faq-icon" aria-hidden="true">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Sim! Oferecemos opções de parcelamento flexíveis para todos os programas, porque acreditamos que o autocuidado deve ser acessível.</p>
-                        <p>As condições variam de acordo com o programa escolhido. Entre em contato para conhecer os planos de pagamento disponíveis e encontrar a melhor opção para você.</p>
-                        <p><a href="#contatoForm" class="faq-link">Falar sobre condições de pagamento →</a></p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>Posso fazer mais de um programa ao mesmo tempo?</span>
-                        <span class="faq-icon" aria-hidden="true">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Sim! Os programas foram criados para se complementarem. Muitas participantes combinam:</p>
-                        <ul>
-                            <li><strong>Essência + BFF:</strong> Para ter uma base de autocuidado diário com suporte de comunidade</li>
-                            <li><strong>Essência → Clímax:</strong> Começar com o básico e depois viver a experiência imersiva</li>
-                            <li><strong>Clímax + BFF:</strong> Aprofundar a experiência e manter a conexão com outras mulheres</li>
-                        </ul>
-                        <p><a href="programas.html" class="faq-link">Ver como os programas se complementam →</a></p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>Quanto tempo dura cada programa?</span>
-                        <span class="faq-icon" aria-hidden="true">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p><strong>Essência:</strong> Você tem acesso vitalício ao conteúdo e pode seguir no seu próprio ritmo. O programa base tem duração sugerida de 8 semanas.</p>
-                        <p><strong>Clímax:</strong> É um retiro intensivo de 2 a 3 dias, com experiências presenciais e imersivas.</p>
-                        <p><strong>BFF:</strong> É uma comunidade contínua. Você pode participar pelo tempo que desejar, com encontros regulares e suporte constante.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>Preciso ter experiência prévia com autocuidado?</span>
-                        <span class="faq-icon" aria-hidden="true">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Não! Os programas foram criados para mulheres em diferentes momentos da jornada de autocuidado.</p>
-                        <p>Se você está começando agora, o Essência é perfeito para você. Se já tem uma prática estabelecida, o Clímax pode levar sua experiência para outro nível.</p>
-                        <p>O mais importante é o desejo genuíno de cuidar de si mesma e estar aberta para novas experiências.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>Como funciona o suporte durante os programas?</span>
-                        <span class="faq-icon" aria-hidden="true">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Cada programa tem seu formato de suporte:</p>
-                        <p><strong>Essência:</strong> Suporte via plataforma digital, com possibilidade de tirar dúvidas e compartilhar sua evolução.</p>
-                        <p><strong>Clímax:</strong> Acompanhamento integral durante todo o retiro, com a Dra. Hexandra e equipe presente em tempo integral.</p>
-                        <p><strong>BFF:</strong> Suporte contínuo da comunidade, facilitadoras e encontros regulares para troca de experiências.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        <span>Não encontrei minha dúvida aqui. Como posso entrar em contato?</span>
-                        <span class="faq-icon" aria-hidden="true">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Estamos aqui para ajudar! Você pode entrar em contato conosco através de:</p>
-                        <ul>
-                            <li><strong>WhatsApp:</strong> A forma mais rápida de nos contatar (link acima)</li>
-                            <li><strong>Formulário:</strong> Preencha o formulário nesta página</li>
-                            <li><strong>E-mail:</strong> contato@hinis.com.br</li>
-                            <li><strong>Telefone:</strong> (21) 98860-2474 (Seg a Sex, 9h às 18h)</li>
-                        </ul>
-                        <p>Teremos prazer em conversar com você e esclarecer todas as suas dúvidas.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <img src="assets/logo/Ativo-2.png" alt="Hinis" class="footer-logo">
+                    <img src="assets/logo/Hinis-logo2.png" alt="Hinis" class="footer-logo">
                     <p>Eleve sua autoestima respeitando seu tempo, sua história e seu corpo.</p>
                 </div>
                 <div class="footer-links">
                     <h4>Menu</h4>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html">Início</a></li>
                         <li><a href="programas.html">Programas</a></li>
                         <li><a href="quem-somos.html">Quem somos</a></li>
                         <li><a href="contato.html">Contato</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
                     </ul>
                 </div>
                 <div class="footer-programs">
