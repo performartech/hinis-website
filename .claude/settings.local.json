@@ -17,7 +17,8 @@
       "Bash(do if [ -f \"$file\" ])",
       "Bash(then echo \"$file exists\")",
       "Bash(fi)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(node cleanup.js:*)"
     ]
   }
 }

@@ -288,7 +288,7 @@ ul {
             rgba(255, 255, 255, 0.92) 0%,
             rgba(255, 255, 255, 0.88) 100%
         ),
-        url('../assets/img/Hinis - home.png');
+        url('../assets/img/Hinis-home-retrato.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -329,14 +329,6 @@ ul {
     width: fit-content;
 }
 
-.hero-image {
-    display: none;
-}
-
-.hero-placeholder {
-    display: none;
-}
-
 /* Responsividade da Hero */
 @media (max-width: 1024px) {
     .hero {
@@ -355,11 +347,16 @@ ul {
     .hero {
         min-height: 60vh;
         margin-top: 60px;
-        background-attachment: scroll;
+        background-image: none;
+        background-color: var(--light-color);
     }
 
     .hero-content {
         padding: var(--spacing-md) var(--spacing-sm);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: calc(60vh - 60px);
     }
 
     .hero-title {
@@ -367,7 +364,13 @@ ul {
     }
 
     .hero-subtitle {
-        margin-bottom: var(--spacing-lg);
+        font-size: clamp(1.1rem, 2vw, 1.25rem);
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .hero-content .btn {
+        margin-top: auto;
+        padding-bottom: var(--spacing-md);
     }
 }
 
@@ -395,18 +398,6 @@ ul {
 }
 
 .btn-primary:hover {
-    background-color: var(--primary-color);
-    color: var(--white);
-    transform: translateY(-1px);
-}
-
-.btn-secondary {
-    background-color: transparent;
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
-}
-
-.btn-secondary:hover {
     background-color: var(--primary-color);
     color: var(--white);
     transform: translateY(-1px);
@@ -670,12 +661,6 @@ section {
     }
 }
 
-.image-placeholder {
-    width: 100%;
-    height: 100%;
-    background: var(--light-color);
-}
-
 .programa-img {
     width: 100%;
     height: 100%;
@@ -848,53 +833,6 @@ section {
     font-size: 1.1rem;
     text-align: center;
     width: 100%;
-}
-
-.newsletter-form {
-    display: flex;
-    gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-sm);
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.newsletter-form input {
-    flex: 1;
-    min-width: 250px;
-    padding: 1rem 1.5rem;
-    border-radius: 8px;
-    border: none;
-    font-size: 1rem;
-    font-family: var(--font-primary);
-}
-
-.newsletter-form input:focus {
-    outline: 2px solid rgba(255, 255, 255, 0.5);
-}
-
-.newsletter-form button {
-    padding: 1rem 2rem;
-    background-color: var(--white);
-    color: var(--primary-color);
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.newsletter-form button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.newsletter-privacy {
-    font-size: 0.8rem;
-    opacity: 0.9;
-}
-
-.newsletter-privacy a {
-    text-decoration: underline;
 }
 
 /* Formulário de Contato Rápido - Compacto */
@@ -1085,15 +1023,26 @@ section {
 /* Backgrounds específicos por programa */
 .hero-essencia {
     background-image: url('../assets/img/Essencia - retrato.png');
+    background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .hero-climax {
-    background-image: url('../assets/img/Climax.jpeg');
+    background-image: url('../assets/img/Climax - retrato.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .hero-bff {
-    background-image: url('../assets/img/BFF.jpeg');
+    background-image: url('../assets/img/BFF - retrato.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .programas-visao {
@@ -1403,7 +1352,70 @@ section {
     .hero-programas {
         min-height: 100vh;
         margin-top: 60px;
-        padding-top: 90px;
+        padding-top: 0;
+        padding-bottom: 0;
+        background-attachment: scroll;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: inherit !important;
+        background-color: transparent !important;
+    }
+
+    .hero-programas .hero-content {
+        text-align: center;
+        padding: var(--spacing-md);
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: auto;
+        margin: 0 auto;
+    }
+
+    .hero-programas .hero-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .hero-programas .hero-subtitle {
+        text-align: center;
+        font-size: 1.125rem;
+        margin-bottom: 0;
+    }
+
+    .hero-programas .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Manter imagens de background dos produtos no mobile */
+    .hero-essencia {
+        background-image: url('../assets/img/Essencia - retrato.png') !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-attachment: scroll !important;
+        background-color: transparent !important;
+    }
+
+    .hero-climax {
+        background-image: url('../assets/img/Climax - retrato.png') !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-attachment: scroll !important;
+        background-color: transparent !important;
+    }
+
+    .hero-bff {
+        background-image: url('../assets/img/BFF - retrato.png') !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-attachment: scroll !important;
+        background-color: transparent !important;
     }
 
     .caminhos {
@@ -1420,18 +1432,28 @@ section {
         flex: 1;
         width: 100%;
         padding-right: 0;
+        display: contents;
     }
 
     .caminhos-header .section-title {
         text-align: center;
+        order: 1;
+        width: 100%;
     }
 
     .btn-programas {
         align-self: center;
+        order: 3;
+        width: auto;
+        max-width: 90%;
+        text-align: center;
+        display: block;
+        margin: 0 auto;
     }
 
     .caminhos-grid {
         width: 100%;
+        order: 2;
     }
 
     .caminho-card {
@@ -1534,16 +1556,34 @@ section {
     }
 
     .programa-content {
-        grid-template-columns: 1fr;
+        flex-direction: column;
     }
 
     .programa-box.reverse .programa-content {
-        direction: ltr;
+        flex-direction: column;
     }
 
-    /* Ocultar imagens em mobile para melhor performance e foco no conteúdo */
-    .programa-image {
-        display: none;
+    /* Ajustar imagens em mobile - sempre no topo */
+    .programa-content .programa-image {
+        width: 100%;
+        height: 250px;
+        min-height: 250px;
+        max-height: 250px;
+        order: -1 !important;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .programa-content .programa-text {
+        order: 1 !important;
+    }
+
+    .programa-box.reverse .programa-content .programa-image {
+        order: -1 !important;
+    }
+
+    .programa-box.reverse .programa-content .programa-text {
+        order: 1 !important;
     }
 
     /* Ajustar texto para melhor leitura em mobile */
@@ -1678,7 +1718,31 @@ section {
     }
 
     .componentes-grid {
-        grid-template-columns: 1fr;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-sm);
+        padding: 0 var(--spacing-sm);
+        width: calc(100% - var(--spacing-md));
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+
+    .componente-item {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        min-height: 250px;
+        height: auto;
+        padding: var(--spacing-sm);
+        box-sizing: border-box;
+    }
+
+    .componente-item h4 {
+        font-size: 1rem;
+    }
+
+    .componente-item p {
+        font-size: 0.875rem;
     }
 
     .sobre-content {
@@ -1690,7 +1754,23 @@ section {
     }
 
     .contato-grid {
-        grid-template-columns: 1fr;
+        display: block !important;
+        grid-template-columns: none !important;
+        width: 100%;
+        gap: 0;
+    }
+
+    .contato-form-wrapper,
+    .contato-info-wrapper {
+        width: 100%;
+        margin-bottom: 2rem;
+        display: block;
+    }
+
+    .contato-info-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
     }
 
     .contato-form-wrapper .contato-rapido-form {
@@ -2735,31 +2815,65 @@ input:focus {
 @media (max-width: 768px) {
     /* Hero - Melhor proporção em mobile */
     .hero {
-        min-height: 85vh;
+        min-height: 90vh;
         padding-top: 80px;
-        /* Remover fixed em mobile para melhor performance */
-        background-attachment: scroll;
-        /* Aumentar opacidade do overlay para melhor legibilidade */
+        /* Background image para mobile home */
         background-image:
             linear-gradient(
                 135deg,
-                rgba(248, 246, 244, 0.95) 0%,
-                rgba(255, 255, 255, 0.92) 100%
+                rgba(255, 255, 255, 0.92) 0%,
+                rgba(255, 255, 255, 0.88) 100%
             ),
-            url('../assets/img/Hexandra-58-scaled.jpg');
+            url('../assets/img/Hinis-home-retrato.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-bottom: var(--spacing-xl);
+    }
+
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        min-height: calc(90vh - 80px - var(--spacing-xl));
+        flex: 1;
+    }
+
+    /* Container dentro do hero-content precisa ser flex também */
+    .hero-content .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex: 1;
+        min-height: 100%;
     }
 
     .hero-title {
         /* Título maior em mobile para mais impacto */
-        font-size: clamp(2rem, 6vw, 3rem);
+        font-size: clamp(2.5rem, 7vw, 3.5rem);
         line-height: 1.25;
         margin-bottom: 1.5rem;
         padding: var(--spacing-sm) 0;
     }
 
     .hero-subtitle {
-        font-size: clamp(1.125rem, 3vw, 1.375rem);
-        margin-bottom: 2rem;
+        font-size: clamp(1.25rem, 3.5vw, 1.5rem);
+        margin-bottom: auto;
+        /* Garante espaçamento mínimo acima do botão */
+        padding-bottom: var(--spacing-lg);
+    }
+
+    /* Posicionar botão CTA no final da seção hero em mobile */
+    .hero-content .btn {
+        width: calc(100% - var(--spacing-md));
+        max-width: 400px;
+        margin: var(--spacing-lg) auto 0;
+        align-self: center;
+        /* Garante que o botão fique sempre no final */
+        margin-top: auto;
     }
 
     /* Botões - Touch targets maiores */
@@ -2985,8 +3099,28 @@ input:focus {
     }
 
     .contato-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+        display: block !important;
+        grid-template-columns: none !important;
+        width: 100%;
+        gap: 0;
+    }
+
+    /* Garantir que elementos fiquem um abaixo do outro */
+    .contato-form-wrapper,
+    .contato-info-wrapper {
+        width: 100%;
+        margin-bottom: 2rem;
+        display: block;
+    }
+
+    .contato-info-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .contato-info-wrapper > .contato-social-box:last-child {
+        margin-bottom: 0;
     }
 
     .contato-form-wrapper .contato-rapido-form {

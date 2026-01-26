@@ -215,11 +215,22 @@ O site está em conformidade com a LGPD (Lei Geral de Proteção de Dados), incl
 
 ## 📄 Licença
 
-© 2025 Hinis. Todos os direitos reservados.
+© 2026 Hinis. Todos os direitos reservados.
 
 ## 🔄 Versão & Changelog
 
-**Versão atual**: 1.1.0 (Janeiro 2025)
+**Versão atual**: 1.2.0 (Janeiro 2026)
+
+### v1.2.0 - Janeiro 2026
+- **Limpeza de código**:
+  - Removido código CSS não utilizado (.hero-image, .hero-placeholder, .image-placeholder, .newsletter-form)
+  - Removido scroll handler duplicado no JavaScript
+  - Removidas 11 imagens não utilizadas (economizando ~35MB de espaço)
+  - Removidos arquivos SVG de logo não utilizados
+- **Atualizações**:
+  - Sitemap.xml atualizado com data de 2026-01-25
+  - Hero da página de contato otimizado para mobile
+  - Estrutura de código mais limpa e organizada
 
 ### v1.1.0 - Janeiro 2025
 - Otimizações mobile completas (touch targets, GPU acceleration, viewport dinâmico)
