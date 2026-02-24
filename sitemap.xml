@@ -3,7 +3,7 @@
     <!-- Página Principal -->
     <url>
         <loc>https://www.hinis.com.br/</loc>
-        <lastmod>2026-01-25</lastmod>
+        <lastmod>2026-01-27</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -11,50 +11,50 @@
     <!-- Páginas Principais -->
     <url>
         <loc>https://www.hinis.com.br/programas.html</loc>
-        <lastmod>2026-01-25</lastmod>
+        <lastmod>2026-01-27</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
 
     <url>
         <loc>https://www.hinis.com.br/quem-somos.html</loc>
-        <lastmod>2026-01-25</lastmod>
+        <lastmod>2026-01-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://www.hinis.com.br/contato.html</loc>
-        <lastmod>2026-01-25</lastmod>
+        <lastmod>2026-01-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://www.hinis.com.br/faq.html</loc>
-        <lastmod>2026-01-25</lastmod>
+        <lastmod>2026-01-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
 
     <!-- Programas -->
     <url>
-        <loc>https://www.hinis.com.br/programas/essencia.html</loc>
-        <lastmod>2026-01-25</lastmod>
+        <loc>https://www.hinis.com.br/programas/essentia.html</loc>
+        <lastmod>2026-01-27</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
 
     <url>
-        <loc>https://www.hinis.com.br/programas/climax.html</loc>
-        <lastmod>2026-01-25</lastmod>
+        <loc>https://www.hinis.com.br/programas/refugium.html</loc>
+        <lastmod>2026-01-27</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
 
     <url>
-        <loc>https://www.hinis.com.br/programas/bff.html</loc>
-        <lastmod>2026-01-25</lastmod>
+        <loc>https://www.hinis.com.br/programas/amicae.html</loc>
+        <lastmod>2026-01-27</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -62,7 +62,7 @@
     <!-- Páginas Legais -->
     <url>
         <loc>https://www.hinis.com.br/politica-privacidade.html</loc>
-        <lastmod>2026-01-25</lastmod>
+        <lastmod>2026-01-27</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>

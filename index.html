@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta name="description" content="Eleve sua autoestima respeitando seu tempo, sua história e seu corpo. Autocuidado integral para mulheres.">
 
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://script.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://script.google.com;">
+
     <!-- Mobile Web App -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -38,49 +41,18 @@
     <!-- Fontes com font-display swap para melhor performance -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- CSS principal -->
-    <link rel="stylesheet" href="css/styles.css">
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/styles.css?v=2.0.0">
 </head>
 <body>
-    <!-- Header e Menu Principal -->
-    <header class="header">
-        <nav class="navbar">
-            <div class="container">
-                <div class="nav-wrapper">
-                    <a href="index.html" class="logo">
-                        <img src="assets/logo/Hinis-logo1.png" alt="Hinis" class="logo-img">
-                    </a>
-                    <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                    <ul class="nav-menu">
-                        <li><a href="index.html" class="nav-link active">Início</a></li>
-                        <li class="nav-item-dropdown">
-                            <a href="programas.html" class="nav-link">Programas</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="programas/essencia.html" class="dropdown-link">Essência</a></li>
-                                <li><a href="programas/climax.html" class="dropdown-link">Clímax</a></li>
-                                <li><a href="programas/bff.html" class="dropdown-link">BFF</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="quem-somos.html" class="nav-link">Quem somos</a></li>
-                        <li><a href="contato.html" class="nav-link">Contato</a></li>
-                        <li><a href="faq.html" class="nav-link">FAQ</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <!-- Header (carregado dinamicamente) -->
+    <div data-component="header"></div>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <div class="container">
-                <h1 class="hero-title">Eleve sua autoestima respeitando seu tempo, sua história e seu corpo.</h1>
-                <p class="hero-subtitle">Uma jornada de autocuidado integral que se integra à sua rotina real</p>
+                <h1 class="hero-title">Amor próprio incondicional</h1>
+                <p class="hero-subtitle">Eleve sua autoestima respeitando seu tempo, sua história e seu corpo.</p>
                 <a href="#caminhos" class="btn btn-primary">Comece hoje um gesto de cuidado com você</a>
             </div>
         </div>
@@ -99,26 +71,26 @@
                     <a href="programas.html" class="btn-programas">Ver nossos programas</a>
                 </div>
                 <div class="caminhos-grid">
-                    <a href="programas/essencia.html" class="caminho-card">
+                    <a href="programas/essentia.html" class="caminho-card">
                         <i data-lucide="diamond" class="caminho-icon" aria-hidden="true"></i>
                         <div class="caminho-content">
-                            <h3>Quero começar pelo básico</h3>
-                            <p>Integre autocuidado na sua rotina, no seu tempo</p>
+                            <h3>Você, no seu tempo</h3>
+                            <p>Cuide melhor de você respeitando a sua rotina.</p>
                         </div>
                         <i data-lucide="arrow-right" class="caminho-arrow" aria-hidden="true"></i>
                     </a>
-                    <a href="programas/climax.html" class="caminho-card">
+                    <a href="programas/refugium.html" class="caminho-card">
                         <i data-lucide="gem" class="caminho-icon" aria-hidden="true"></i>
                         <div class="caminho-content">
-                            <h3>Quero uma experiência profunda</h3>
+                            <h3>Um encontro profundo com você mesma</h3>
                             <p>Viva uma imersão sensorial transformadora</p>
                         </div>
                         <i data-lucide="arrow-right" class="caminho-arrow" aria-hidden="true"></i>
                     </a>
-                    <a href="programas/bff.html" class="caminho-card">
+                    <a href="programas/amicae.html" class="caminho-card">
                         <i data-lucide="users" class="caminho-icon" aria-hidden="true"></i>
                         <div class="caminho-content">
-                            <h3>Quero caminhar junto com outras mulheres</h3>
+                            <h3>De você para elas. Delas para você.</h3>
                             <p>Faça parte de uma rede de apoio solidária</p>
                         </div>
                         <i data-lucide="arrow-right" class="caminho-arrow" aria-hidden="true"></i>
@@ -133,62 +105,62 @@
         <div class="container">
             <h2 class="section-title">Nossos Programas</h2>
 
-            <!-- Essência -->
+            <!-- Essentia -->
             <div class="programa-box reverse">
                 <div class="programa-content">
                     <div class="programa-text">
-                        <h3>Essência</h3>
+                        <h3>Essentia</h3>
                         <p class="programa-tagline">Você, no seu tempo</p>
-                        <p>O coração do Hinis. Um caminho prático para integrar pequenos gestos de cuidado na sua rotina, sem culpa e sem exageros.</p>
+                        <p>O coração da Hinis. Um caminho prático para integrar pequenos gestos de cuidado na sua rotina, mesmo que você tenha uma agenda cheia. Sem culpa. Sem exageros.</p>
                         <ul class="beneficios-list">
-                            <li>Maior clareza diante do espelho</li>
                             <li>Mais paz com a própria imagem</li>
                             <li>Hábitos que cabem no seu tempo e realidade</li>
+                            <li>Um valor justo que você pode pagar</li>
                         </ul>
-                        <a href="programas/essencia.html" class="btn btn-primary">Cuide de você como ninguém mais</a>
+                        <a href="programas/essentia.html" class="btn btn-primary">Cuide de você como ninguém mais</a>
                     </div>
                     <div class="programa-image">
-                        <img src="assets/img/Essencia - retrato.png" alt="Programa Essência" class="programa-img">
+                        <img src="assets/img/Essencia - retrato.png" alt="Programa Essentia" class="programa-img" loading="lazy">
                     </div>
                 </div>
             </div>
 
-            <!-- Clímax -->
+            <!-- Refugium -->
             <div class="programa-box">
                 <div class="programa-content">
                     <div class="programa-text">
-                        <h3>Clímax</h3>
-                        <p class="programa-tagline">De você, para você</p>
-                        <p>Uma experiência de autocuidado diferente de tudo: imersão sensorial e afetiva em pequenos grupos reservados.</p>
+                        <h3>Refugium</h3>
+                        <p class="programa-tagline">Um encontro profundo com você mesma</p>
+                        <p>Uma experiência de autocuidado diferente de tudo: imersão prática, sensorial e afetiva em um pequeno grupo exclusivo. Você conhece mais sobre você e faz muito mais com o seu tempo.</p>
                         <ul class="beneficios-list">
-                            <li>Ampliar autoconhecimento</li>
-                            <li>Fortalecer autoestima</li>
-                            <li>Conectar autocuidado físico e emocional</li>
+                            <li>Fim de semana exclusivo em um lugar especial</li>
+                            <li>Experiências sensoriais memoráveis</li>
+                            <li>Acompanhamento especializado</li>
                         </ul>
-                        <a href="programas/climax.html" class="btn btn-primary">Sinta o prazer de cuidar de si</a>
+                        <a href="programas/refugium.html" class="btn btn-primary">Sinta o prazer de cuidar de si</a>
                     </div>
                     <div class="programa-image">
-                        <img src="assets/img/Climax - retrato.png" alt="Programa Clímax" class="programa-img">
+                        <img src="assets/img/Climax - retrato.png" alt="Programa Refugium" class="programa-img" loading="lazy">
                     </div>
                 </div>
             </div>
 
-            <!-- BFF -->
+            <!-- Amicae -->
             <div class="programa-box reverse">
                 <div class="programa-content">
                     <div class="programa-text">
-                        <h3>BFF - Bela Força Feminina</h3>
+                        <h3>Amicae</h3>
                         <p class="programa-tagline">De você para elas. Delas para você</p>
-                        <p>A rede de apoio da Hinis. Um espaço seguro para compartilhar experiências e reforçar o compromisso com o autocuidado.</p>
+                        <p>A rede de apoio da Hinis. Um espaço seguro para compartilhar experiências e reforçar o compromisso mútuo com o autocuidado.</p>
                         <ul class="beneficios-list">
                             <li>Sensação de pertencimento</li>
                             <li>Apoio em momentos de baixa</li>
                             <li>Inspiração para manter a rotina</li>
                         </ul>
-                        <a href="programas/bff.html" class="btn btn-primary">Cuide-se e seja cuidada</a>
+                        <a href="programas/amicae.html" class="btn btn-primary">Cuide-se e seja cuidada</a>
                     </div>
                     <div class="programa-image">
-                        <img src="assets/img/BFF - retrato.png" alt="Programa BFF - Bela Força Feminina" class="programa-img">
+                        <img src="assets/img/BFF - retrato.png" alt="Programa Amicae" class="programa-img" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -202,16 +174,16 @@
             <div class="depoimentos-carousel-wrapper">
                 <div class="depoimentos-grid" id="depoimentosCarousel">
                     <div class="depoimento-card">
-                        <p class="depoimento-texto">"Aprendi a me olhar no espelho sem julgamento. Hoje consigo ver beleza onde antes só via defeitos."</p>
-                        <p class="depoimento-autor">— Maria, 42 anos</p>
+                        <p class="depoimento-texto">"Ah, eu sou muito feliz de ter conseguido encontrar a Dra. Hexandra."</p>
                     </div>
                     <div class="depoimento-card">
-                        <p class="depoimento-texto">"Mesmo com a rotina corrida, consegui encaixar pequenos momentos de cuidado. Isso mudou minha relação comigo mesma."</p>
-                        <p class="depoimento-autor">— Ana, 35 anos</p>
+                        <p class="depoimento-texto">"Ela tem uma postura que passa confiança e credibilidade."</p>
                     </div>
                     <div class="depoimento-card">
-                        <p class="depoimento-texto">"Encontrei outras mulheres que me entendem. Não estou mais sozinha nessa jornada de me aceitar."</p>
-                        <p class="depoimento-autor">— Paula, 58 anos</p>
+                        <p class="depoimento-texto">"É realmente muito competente no que faz."</p>
+                    </div>
+                    <div class="depoimento-card">
+                        <p class="depoimento-texto">"Eu gosto de cuidar. E para cuidar do outro, eu tenho que estar bem cuidada."</p>
                     </div>
                 </div>
 
@@ -220,6 +192,7 @@
                     <button class="carousel-indicator active" data-index="0" aria-label="Depoimento 1"></button>
                     <button class="carousel-indicator" data-index="1" aria-label="Depoimento 2"></button>
                     <button class="carousel-indicator" data-index="2" aria-label="Depoimento 3"></button>
+                    <button class="carousel-indicator" data-index="3" aria-label="Depoimento 4"></button>
                 </div>
             </div>
         </div>
@@ -229,61 +202,25 @@
     <section class="newsletter">
         <div class="container">
             <div class="newsletter-content">
-                <h2>Entre em contato conosco</h2>
-                <p>Estamos aqui para ouvir você e esclarecer suas dúvidas</p>
-                <form class="contato-rapido-form" id="contatoRapidoForm">
-                    <input type="text" name="nome" placeholder="Nome" required aria-label="Nome">
-                    <input type="email" name="email" placeholder="E-mail" required aria-label="E-mail">
-                    <input type="tel" name="telefone" placeholder="Telefone" class="telefone-mask" aria-label="Telefone">
-                    <textarea name="mensagem" placeholder="Mensagem" rows="3" required aria-label="Mensagem"></textarea>
-                    <button type="submit" class="btn btn-primary">Enviar mensagem</button>
-                </form>
+                <h2>Comece hoje um gesto de cuidado com você</h2>
+                <p>Estamos aqui para encontrar a melhor jornada de autocuidado para você.</p>
+                <!-- Componente de formulário carregado dinamicamente -->
+                <div data-component="form-contato"></div>
                 <p class="newsletter-privacy">Seus dados estão protegidos. <a href="politica-privacidade.html">Política de privacidade</a></p>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <img src="assets/logo/Hinis-logo2.png" alt="Hinis" class="footer-logo">
-                    <p>Eleve sua autoestima respeitando seu tempo, sua história e seu corpo.</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Menu</h4>
-                    <ul>
-                        <li><a href="index.html">Início</a></li>
-                        <li><a href="programas.html">Programas</a></li>
-                        <li><a href="quem-somos.html">Quem somos</a></li>
-                        <li><a href="contato.html">Contato</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-programs">
-                    <h4>Nossos Programas</h4>
-                    <ul>
-                        <li><a href="programas/essencia.html">Essência</a></li>
-                        <li><a href="programas/climax.html">Clímax</a></li>
-                        <li><a href="programas/bff.html">BFF</a></li>
-                    </ul>
-                </div>
-                <div class="footer-social">
-                    <h4>Redes Sociais</h4>
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/drahexandrahertel/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-icon">Instagram</a>
-                        <a href="https://wa.me/5521988602474?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20os%20programas%20Hinis" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="social-icon">WhatsApp</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; <span id="currentYear"></span> Hinis. Todos os direitos reservados. | <a href="politica-privacidade.html">Política de Privacidade</a></p>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer (carregado dinamicamente) -->
+    <div data-component="footer"></div>
 
-    <script src="js/script.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="js/config.js?v=1.0.0"></script>
+    <script src="js/utm-tracker.js?v=1.0.0"></script>
+    <script src="js/load-components.js?v=1.0.4"></script>
+    <script src="js/script.js?v=1.0.3"></script>
+    <script src="js/form-handler.js?v=1.0.5"></script>
 
     <!-- Schema.org structured data -->
     <script type="application/ld+json">
@@ -314,5 +251,6 @@
         }
     }
     </script>
+    <script src="js/phone-protection.js?v=1.0.0"></script>
 </body>
 </html>

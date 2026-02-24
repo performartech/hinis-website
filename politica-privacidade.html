@@ -6,43 +6,14 @@
     <meta name="description" content="Política de Privacidade do Hinis - Como tratamos e protegemos seus dados pessoais.">
     <title>Política de Privacidade - Hinis</title>
     <link rel="icon" type="image/png" href="assets/logo/Ativo-1.png">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css?v=2.0.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header e Menu Principal -->
-    <header class="header">
-        <nav class="navbar">
-            <div class="container">
-                <div class="nav-wrapper">
-                    <a href="index.html" class="logo">
-                        <img src="assets/logo/Hinis-logo1.png" alt="Hinis" class="logo-img">
-                    </a>
-                    <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                    <ul class="nav-menu">
-                        <li><a href="index.html" class="nav-link">Início</a></li>
-                        <li class="nav-item-dropdown">
-                            <a href="programas.html" class="nav-link">Programas</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="programas/essencia.html" class="dropdown-link">Essência</a></li>
-                                <li><a href="programas/climax.html" class="dropdown-link">Clímax</a></li>
-                                <li><a href="programas/bff.html" class="dropdown-link">BFF</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="quem-somos.html" class="nav-link">Quem somos</a></li>
-                        <li><a href="contato.html" class="nav-link">Contato</a></li>
-                        <li><a href="faq.html" class="nav-link">FAQ</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <!-- Header (carregado dinamicamente) -->
+    <div data-component="header"></div>
 
     <!-- Hero -->
     <section class="hero hero-programas">
@@ -91,7 +62,7 @@
                 <h2>2. Como Utilizamos Suas Informações</h2>
                 <p>Utilizamos seus dados pessoais para:</p>
                 <ul>
-                    <li>Processar inscrições nos programas Essência, Clímax e BFF</li>
+                    <li>Processar inscrições nos programas Essentia, Refugium e Amicae</li>
                     <li>Enviar comunicações sobre os programas e conteúdos exclusivos</li>
                     <li>Responder a suas solicitações e perguntas</li>
                     <li>Melhorar nossos serviços e experiência do usuário</li>
@@ -200,8 +171,8 @@
                 <p>Se você tiver dúvidas sobre esta Política de Privacidade ou sobre o tratamento de seus dados pessoais, entre em contato conosco:</p>
                 <p>
                     <strong>E-mail:</strong> <a href="mailto:contato@hinis.com.br">contato@hinis.com.br</a><br>
-                    <strong>Telefone:</strong> (21) 98860-2474<br>
-                    <strong>WhatsApp:</strong> <a href="https://wa.me/5521988602474" target="_blank" rel="noopener noreferrer">(21) 98860-2474</a>
+                    <strong>Telefone:</strong> <span data-phone="KzU1MjE5ODg2MDI0NzQ=">PHONE_DISPLAY</span><br>
+                    <strong>WhatsApp:</strong> <a href="https://wa.me/PHONE_PLACEHOLDER" data-phone="KzU1MjE5ODg2MDI0NzQ=" target="_blank" rel="noopener noreferrer">PHONE_DISPLAY</a>
                 </p>
             </div>
 
@@ -212,46 +183,12 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <img src="assets/logo/Hinis-logo2.png" alt="Hinis" class="footer-logo">
-                    <p>Eleve sua autoestima respeitando seu tempo, sua história e seu corpo.</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Menu</h4>
-                    <ul>
-                        <li><a href="index.html">Início</a></li>
-                        <li><a href="programas.html">Programas</a></li>
-                        <li><a href="quem-somos.html">Quem somos</a></li>
-                        <li><a href="contato.html">Contato</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-programs">
-                    <h4>Nossos Programas</h4>
-                    <ul>
-                        <li><a href="programas/essencia.html">Essência</a></li>
-                        <li><a href="programas/climax.html">Clímax</a></li>
-                        <li><a href="programas/bff.html">BFF</a></li>
-                    </ul>
-                </div>
-                <div class="footer-social">
-                    <h4>Redes Sociais</h4>
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/drahexandrahertel/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-icon">Instagram</a>
-                        <a href="https://wa.me/5521988602474?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20os%20programas%20Hinis" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="social-icon">WhatsApp</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; <span id="currentYear"></span> Hinis. Todos os direitos reservados. | <a href="politica-privacidade.html">Política de Privacidade</a></p>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer (carregado dinamicamente) -->
+    <div data-component="footer"></div>
 
-    <script src="js/script.js"></script>
+    <script src="js/utm-tracker.js?v=1.0.0"></script>
+    <script src="js/load-components.js?v=1.0.4"></script>
+    <script src="js/script.js?v=1.0.3"></script>
+    <script src="js/phone-protection.js?v=1.0.0"></script>
 </body>
 </html>

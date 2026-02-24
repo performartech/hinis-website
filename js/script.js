@@ -655,14 +655,37 @@ if (depoimentosCarousel && carouselIndicators.length > 0) {
 // =========================================
 
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('=== LUCIDE DEBUG ===');
+    console.log('1. Lucide disponível?', typeof lucide !== 'undefined');
+    console.log('2. Lucide object:', typeof lucide !== 'undefined' ? lucide : 'undefined');
+
+    const iconsBeforeInit = document.querySelectorAll('[data-lucide]');
+    console.log('3. Ícones encontrados antes de inicializar:', iconsBeforeInit.length);
+    iconsBeforeInit.forEach((icon, idx) => {
+        console.log(`   - Ícone ${idx + 1}:`, icon.getAttribute('data-lucide'), 'classes:', icon.className);
+    });
+
     if (typeof lucide !== 'undefined') {
         try {
             lucide.createIcons();
-            console.log('✓ Ícones Lucide inicializados com sucesso');
-        } catch (error) {
-            console.error('Erro ao inicializar ícones Lucide:', error);
+            console.log('4. ✓ Ícones Lucide inicializados com sucesso');
+
+            // Verificar se os ícones foram realmente renderizados
+            setTimeout(() => {
+                const iconsAfterInit = document.querySelectorAll('[data-lucide]');
+                console.log('5. Verificando renderização após 100ms:');
+                iconsAfterInit.forEach((icon, idx) => {
+                    const hasSvg = icon.querySelector('svg') !== null;
+                    console.log(`   - Ícone ${idx + 1}:`, icon.getAttribute('data-lucide'), 'tem SVG?', hasSvg);
+                    if (!hasSvg) {
+                        console.error(`   ✗ Ícone ${icon.getAttribute('data-lucide')} NÃO foi renderizado!`);
+                    }
+                });
+            }, 100);
+        } catch (erro) {
+            console.error('4. ✗ Erro ao criar ícones:', erro);
         }
     } else {
-        console.warn('Biblioteca Lucide não carregada. Ícones não serão exibidos corretamente.');
+        console.error('4. ✗ Lucide não está disponível!');
     }
 });

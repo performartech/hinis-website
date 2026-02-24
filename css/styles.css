@@ -30,15 +30,6 @@
     --spacing-lg: clamp(3rem, 5vw, 5rem);
     --spacing-xl: clamp(4rem, 7vw, 8rem);
 
-    /* Tamanhos de fonte fluidos */
-    --font-size-sm: clamp(0.875rem, 1vw, 1rem);
-    --font-size-base: clamp(1rem, 1.2vw, 1.125rem);
-    --font-size-lg: clamp(1.125rem, 1.5vw, 1.25rem);
-    --font-size-xl: clamp(1.25rem, 2vw, 1.5rem);
-    --font-size-2xl: clamp(1.5rem, 2.5vw, 2rem);
-    --font-size-3xl: clamp(2rem, 3vw, 2.5rem);
-    --font-size-4xl: clamp(2.5rem, 4vw, 3.5rem);
-
     /* Transições */
     --transition: all 0.3s ease;
 
@@ -343,37 +334,6 @@ ul {
     }
 }
 
-@media (max-width: 768px) {
-    .hero {
-        min-height: 60vh;
-        margin-top: 60px;
-        background-image: none;
-        background-color: var(--light-color);
-    }
-
-    .hero-content {
-        padding: var(--spacing-md) var(--spacing-sm);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        min-height: calc(60vh - 60px);
-    }
-
-    .hero-title {
-        font-size: clamp(2.2rem, 5vw, 2.5rem);
-    }
-
-    .hero-subtitle {
-        font-size: clamp(1.1rem, 2vw, 1.25rem);
-        margin-bottom: var(--spacing-sm);
-    }
-
-    .hero-content .btn {
-        margin-top: auto;
-        padding-bottom: var(--spacing-md);
-    }
-}
-
 /* =========================================
    BOTÕES
    ========================================= */
@@ -392,14 +352,14 @@ ul {
 }
 
 .btn-primary {
-    background-color: transparent;
-    color: var(--primary-color);
+    background-color: var(--primary-color);
+    color: var(--white);
     border: 2px solid var(--primary-color);
 }
 
 .btn-primary:hover {
-    background-color: var(--primary-color);
-    color: var(--white);
+    background-color: transparent;
+    color: var(--primary-color);
     transform: translateY(-1px);
 }
 
@@ -702,7 +662,7 @@ section {
 
 .depoimento-card {
     background-color: var(--white);
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md);
     border-radius: 12px;
     border: 1px solid #E8E8E8;
     border-left: 3px solid var(--primary-color);
@@ -716,11 +676,11 @@ section {
 }
 
 .depoimento-texto {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-style: italic;
     color: var(--text-color);
-    margin-bottom: var(--spacing-md);
-    line-height: 1.8;
+    margin-bottom: 0;
+    line-height: 1.6;
 }
 
 .depoimento-autor {
@@ -791,12 +751,12 @@ section {
     }
 
     .depoimento-card {
-        padding: 1.25rem;
+        padding: 1rem;
         border-radius: 16px;
     }
 
     .depoimento-texto {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         line-height: 1.7;
     }
 
@@ -845,6 +805,7 @@ section {
 }
 
 .contato-rapido-form input,
+.contato-rapido-form select,
 .contato-rapido-form textarea {
     padding: 0.875rem 1.25rem;
     border-radius: 8px;
@@ -855,17 +816,29 @@ section {
     color: var(--dark-color);
 }
 
+.contato-rapido-form select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23666' d='M1.41 0L6 4.58 10.59 0 12 1.41l-6 6-6-6z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 12px;
+    padding-right: 2.5rem;
+    cursor: pointer;
+}
+
 .contato-rapido-form textarea {
     resize: vertical;
     min-height: 80px;
 }
 
 .contato-rapido-form input::placeholder,
+.contato-rapido-form select option[value=""],
 .contato-rapido-form textarea::placeholder {
     color: #999;
 }
 
 .contato-rapido-form input:focus,
+.contato-rapido-form select:focus,
 .contato-rapido-form textarea:focus {
     outline: 2px solid rgba(255, 255, 255, 0.5);
 }
@@ -1071,7 +1044,7 @@ section {
 
 .visao-card {
     background-color: var(--white);
-    padding: var(--spacing-lg);
+    padding: 1.25rem 1.5rem;
     border-radius: 12px;
     text-align: left;
     box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
@@ -1086,7 +1059,7 @@ section {
 }
 
 .visao-descricao {
-    line-height: 1.8;
+    line-height: 1.6;
     color: var(--text-color);
 }
 
@@ -1095,9 +1068,32 @@ section {
 }
 
 .programa-detalhe {
-    margin-bottom: var(--spacing-xl);
-    padding-bottom: var(--spacing-xl);
-    border-bottom: 1px solid var(--light-color);
+    margin-bottom: 0;
+    padding: var(--spacing-xl) 0;
+    border-bottom: none;
+    position: relative;
+}
+
+/* Essentia e Amicae - fundo branco (padrão) */
+.programa-detalhe:nth-child(odd) {
+    background-color: transparent;
+}
+
+/* Refugium - fundo bege full-width usando pseudo-elemento */
+.programa-detalhe:nth-child(even)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 100%;
+    background-color: var(--light-color);
+    z-index: -1;
+}
+
+.programa-detalhe:nth-child(even) {
+    position: relative;
 }
 
 .programa-detalhe:last-child {
@@ -1180,6 +1176,21 @@ section {
     margin-bottom: var(--spacing-lg);
 }
 
+.programa-beneficios {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.programa-beneficios .beneficios-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm) var(--spacing-lg);
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0;
+}
+
 .programa-componentes {
     display: flex;
     flex-direction: column;
@@ -1201,11 +1212,13 @@ section {
 }
 
 .componentes-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 240px);
+    display: flex;
+    flex-wrap: wrap;
     gap: var(--spacing-md);
     justify-content: center;
     width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .componente-item {
@@ -1220,8 +1233,8 @@ section {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    min-height: 300px;
-    height: 300px;
+    min-height: 320px;
+    height: auto;
     width: 240px;
     max-width: 100%;
 }
@@ -1231,17 +1244,6 @@ section {
     box-shadow: 0 6px 18px rgba(139, 115, 85, 0.08);
     transform: translateY(-3px);
     border-color: var(--primary-color);
-}
-
-.componente-icon {
-    font-size: 2.5rem;
-    display: block;
-    margin: 0 auto var(--spacing-sm) auto;
-    transition: transform 0.3s ease;
-}
-
-.componente-item:hover .componente-icon {
-    transform: scale(1.1);
 }
 
 .componente-item h4 {
@@ -1616,6 +1618,11 @@ section {
         margin: var(--spacing-md) 0;
     }
 
+    .programa-beneficios .beneficios-list {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+    }
+
     .beneficios-list li {
         text-align: left;
     }
@@ -1642,6 +1649,7 @@ section {
     }
 
     .contato-rapido-form input,
+    .contato-rapido-form select,
     .contato-rapido-form textarea {
         padding: 0.75rem 1rem;
     }
@@ -1924,34 +1932,6 @@ section {
 .faq-container {
     max-width: 900px;
     margin: 0 auto;
-}
-
-.faq-item {
-    background-color: var(--white);
-    margin-bottom: var(--spacing-sm);
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid #E8E8E8;
-}
-
-.faq-question {
-    width: 100%;
-    padding: var(--spacing-md);
-    background: none;
-    border: none;
-    text-align: left;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--dark-color);
-    transition: var(--transition);
-}
-
-.faq-question:hover {
-    color: var(--primary-color);
 }
 
 .faq-icon {
@@ -2405,6 +2385,7 @@ section {
 }
 
 .contato-form-wrapper .contato-rapido-form input,
+.contato-form-wrapper .contato-rapido-form select,
 .contato-form-wrapper .contato-rapido-form textarea {
     background-color: var(--light-color);
     border: 1px solid #D0D0D0;
@@ -2413,11 +2394,13 @@ section {
 }
 
 .contato-form-wrapper .contato-rapido-form input::placeholder,
+.contato-form-wrapper .contato-rapido-form select option[value=""],
 .contato-form-wrapper .contato-rapido-form textarea::placeholder {
     color: #999;
 }
 
 .contato-form-wrapper .contato-rapido-form input:focus,
+.contato-form-wrapper .contato-rapido-form select:focus,
 .contato-form-wrapper .contato-rapido-form textarea:focus {
     outline: none;
     border-color: var(--primary-color);
@@ -2897,9 +2880,12 @@ input:focus {
 
     /* Cards - Melhor espaçamento e legibilidade */
     .caminho-card,
-    .programa-box,
-    .depoimento-card {
+    .programa-box {
         padding: 1.5rem;
+    }
+
+    .depoimento-card {
+        padding: 1rem;
     }
 
     .caminho-card h3 {
@@ -2982,6 +2968,7 @@ input:focus {
 
     /* Formulário de contato rápido */
     .contato-rapido-form input,
+    .contato-rapido-form select,
     .contato-rapido-form textarea {
         font-size: 16px; /* Previne zoom no iOS */
         min-height: var(--touch-target-min);
@@ -3129,6 +3116,7 @@ input:focus {
     }
 
     .contato-form-wrapper .contato-rapido-form input,
+    .contato-form-wrapper .contato-rapido-form select,
     .contato-form-wrapper .contato-rapido-form textarea {
         font-size: 16px; /* Previne zoom no iOS */
         min-height: var(--touch-target-min);
@@ -3184,13 +3172,19 @@ i[data-lucide] {
 .componente-icon[data-lucide] {
     width: 2.5rem;
     height: 2.5rem;
-    stroke-width: 2;
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    flex-shrink: 0;
+    stroke-width: 1.5;
     color: var(--primary-color);
-    transition: color 0.3s ease;
+    display: block;
+    margin: 0 auto var(--spacing-sm) auto;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .componente-item:hover .componente-icon[data-lucide] {
     color: var(--secondary-color);
+    transform: scale(1.1);
 }
 
 /* Ícones de informações de contato */
