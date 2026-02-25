@@ -2509,6 +2509,7 @@ section {
     font-size: 0.9rem;
     color: var(--text-light);
     font-style: italic;
+    margin-top: 1rem;
 }
 
 .btn-whatsapp {
@@ -2551,6 +2552,14 @@ section {
 .faq-section {
     background-color: var(--light-color);
     padding: var(--spacing-xl) 0;
+}
+
+.faq-intro {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .faq-accordion {
@@ -2624,8 +2633,8 @@ section {
 
 .faq-answer p {
     color: var(--text-color);
-    line-height: 1.8;
-    margin-bottom: var(--spacing-sm);
+    line-height: 1.7;
+    margin-bottom: 0.5rem;
 }
 
 .faq-answer p:first-child {
@@ -3226,7 +3235,7 @@ i[data-lucide] {
 .caminho-icon[data-lucide] {
     width: 2.5rem;
     height: 2.5rem;
-    stroke-width: 2;
+    stroke-width: 1.5;
     color: var(--white);
 }
 

@@ -27,7 +27,7 @@ Elevar a autoestima feminina respeitando o tempo, a história e o corpo de cada 
   - Acompanhamento especializado
   - Práticas transformadoras
 
-### 3. **BFF (Bela Força Feminina)** - De você para elas. Delas para você
+### 3. **Amicae** - De você para elas. Delas para você
 - Foco: Comunidade e rede de apoio
 - Formato: Híbrido (online + presencial)
 - Componentes:

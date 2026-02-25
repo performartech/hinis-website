@@ -18,7 +18,17 @@
       "Bash(then echo \"$file exists\")",
       "Bash(fi)",
       "Bash(done)",
-      "Bash(node cleanup.js:*)"
+      "Bash(node cleanup.js:*)",
+      "Bash(dir /B \"c:\\\\Users\\\\Pedro Moraes\\\\OneDrive\\\\Desktop\\\\Projetos\\\\Hinis\")",
+      "Bash(dir /s \"c:\\\\Users\\\\Pedro Moraes\\\\OneDrive\\\\Desktop\\\\Projetos\\\\Hinis\")",
+      "Bash(findstr:*)",
+      "Bash(netstat:*)",
+      "Bash(tasklist /FI \"PID eq 33220\" /FO LIST)",
+      "Bash(tasklist:*)",
+      "Bash(taskkill /PID 33220 /F)",
+      "Bash(powershell -Command \"Stop-Process -Id 33220 -Force\")",
+      "Bash(dir:*)",
+      "Bash(git rm:*)"
     ]
   }
 }

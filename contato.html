@@ -59,26 +59,11 @@
                     <h2>Envie sua mensagem</h2>
                     <p>Preencha o formulário abaixo e retornaremos o mais breve possível</p>
 
-                    <form class="contato-rapido-form" id="contatoForm">
-                        <input type="text" name="nome" placeholder="Nome completo" required aria-label="Nome completo">
-                        <input type="email" name="email" placeholder="E-mail" required aria-label="E-mail">
-                        <input type="tel" name="telefone" placeholder="Telefone" class="telefone-mask" required aria-label="Telefone">
+                    <!-- Componente de formulário carregado dinamicamente -->
+                    <div data-component="form-contato"></div>
 
-                        <select name="programa" required aria-label="Programa de interesse">
-                            <option value="">Selecione um programa</option>
-                            <option value="Essentia">Essentia - Você, no seu tempo</option>
-                            <option value="Refugium">Refugium - De você, para você</option>
-                            <option value="Amicae">Amicae - De você para elas. Delas para você</option>
-                            <option value="Outro">Outro assunto</option>
-                        </select>
-
-                        <textarea name="mensagem" placeholder="Sua mensagem..." rows="5" aria-label="Mensagem"></textarea>
-
-                        <button type="submit" class="btn btn-primary" id="submitButton">Enviar mensagem</button>
-
-                        <!-- Mensagem de feedback -->
-                        <div id="formFeedback" style="display: none; padding: 1rem; border-radius: 8px; text-align: center; font-weight: 500;"></div>
-                    </form>
+                    <!-- Mensagem de feedback -->
+                    <div id="formFeedback" style="display: none; padding: 1rem; border-radius: 8px; text-align: center; font-weight: 500; margin-top: 1rem;"></div>
 
                     <p class="form-privacidade">
                         Seus dados estão protegidos e serão utilizados apenas para responder sua mensagem.
@@ -95,7 +80,7 @@
                             <div class="info-content">
                                 <h4>WhatsApp</h4>
                                 <p>A forma mais rápida de nos contatar</p>
-                                <a href="https://wa.me/PHONE_PLACEHOLDER?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20os%20programas%20Hinis" data-phone="KzU1MjE5ODg2MDI0NzQ="
+                                <a href="https://wa.me/PHONE_PLACEHOLDER?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20os%20programas%20Hinis" data-phone="KzU1MjE5OTQwNDE2NDg="
                                    target="_blank"
                                    rel="noopener noreferrer"
                                    class="btn btn-secondary btn-whatsapp">
@@ -116,7 +101,8 @@
                             <i data-lucide="phone" class="info-icon" aria-hidden="true"></i>
                             <div class="info-content">
                                 <h4>Telefone</h4>
-                                <p data-phone="KzU1MjE5ODg2MDI0NzQ=">PHONE_DISPLAY</p>
+                                <p>(21) 2266-2474</p>
+                                <p>+55 21 99404-1648</p>
                                 <p class="info-horario">Seg a Sex, 9h às 18h</p>
                             </div>
                         </div>
@@ -172,7 +158,7 @@
             },
             "sameAs": [
                 "https://www.instagram.com/drahexandrahertel/",
-                "https://wa.me/5521988602474"
+                "https://wa.me/5521994041648"
             ]
         }
     }

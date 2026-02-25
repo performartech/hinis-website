@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Conheça a Dra. Hexandra Hertel, cirurgiã plástica e criadora do Hinis. Mais de 15 anos dedicados ao autocuidado e autoestima feminina. Descubra a história e valores do Hinis.">
+    <meta name="description" content="Conheça a Dra. Hexandra Hertel, cirurgiã plástica e criadora do Hinis. Mais de 20 anos dedicados ao autocuidado e autoestima feminina. Descubra a história e valores do Hinis.">
     <meta name="keywords" content="dra hexandra hertel, cirurgiã plástica, sobre hinis, autocuidado feminino, história hinis, quem é dra hexandra, autoestima feminina">
     <meta name="author" content="Hinis - Dra. Hexandra Hertel">
     <meta name="robots" content="index, follow">
@@ -13,14 +13,14 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.hinis.com.br/quem-somos.html">
     <meta property="og:title" content="Quem Somos - Dra. Hexandra Hertel | Hinis">
-    <meta property="og:description" content="Conheça a Dra. Hexandra Hertel, cirurgiã plástica e criadora do Hinis. Mais de 15 anos dedicados ao autocuidado e autoestima feminina.">
+    <meta property="og:description" content="Conheça a Dra. Hexandra Hertel, cirurgiã plástica e criadora do Hinis. Mais de 20 anos dedicados ao autocuidado e autoestima feminina.">
     <meta property="og:image" content="https://www.hinis.com.br/assets/logo/Ativo-2.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary">
     <meta property="twitter:url" content="https://www.hinis.com.br/quem-somos.html">
     <meta property="twitter:title" content="Quem Somos - Dra. Hexandra Hertel | Hinis">
-    <meta property="twitter:description" content="Conheça a Dra. Hexandra Hertel, cirurgiã plástica e criadora do Hinis. Mais de 15 anos dedicados ao autocuidado e autoestima feminina.">
+    <meta property="twitter:description" content="Conheça a Dra. Hexandra Hertel, cirurgiã plástica e criadora do Hinis. Mais de 20 anos dedicados ao autocuidado e autoestima feminina.">
     <meta property="twitter:image" content="https://www.hinis.com.br/assets/logo/Ativo-2.png">
 
     <title>Quem Somos - Hinis</title>
@@ -41,7 +41,7 @@
     <section class="hero hero-programas">
         <div class="hero-content">
             <div class="container">
-                <h1 class="hero-title">Uma jornada de mais de 15 anos</h1>
+                <h1 class="hero-title">Uma jornada de mais de <span id="anosExperiencia">20</span> anos</h1>
                 <p class="hero-subtitle">Da cirurgia plástica à educação em autoestima</p>
             </div>
         </div>
@@ -58,7 +58,7 @@
                     <h2>Dra. Hexandra Hertel</h2>
                     <p class="sobre-subtitulo">Cirurgiã plástica e criadora do Hinis</p>
                     <p>
-                        Durante mais de 15 anos atendendo mulheres de diferentes idades, localidades e classes sociais,
+                        Durante mais de <span id="anosExperienciaTexto">20</span> anos atendendo mulheres de diferentes idades, localidades e classes sociais,
                         a Dra. Hexandra compreendeu que a verdadeira transformação vai muito além do bisturi.
                     </p>
                     <p>
@@ -214,7 +214,7 @@
         "@type": "Person",
         "name": "Dra. Hexandra Hertel",
         "jobTitle": "Cirurgiã Plástica e Criadora do Hinis",
-        "description": "Mais de 15 anos dedicados ao autocuidado e autoestima feminina. Criadora da plataforma Hinis de educação em autoestima.",
+        "description": "Mais de 20 anos dedicados ao autocuidado e autoestima feminina. Criadora da plataforma Hinis de educação em autoestima.",
         "url": "https://www.hinis.com.br/quem-somos.html",
         "worksFor": {
             "@type": "Organization",
@@ -232,6 +232,21 @@
             "Educação em Saúde"
         ]
     }
+    </script>
+
+    <!-- Calcula anos de experiência automaticamente -->
+    <script>
+        (function() {
+            const anoInicio = 2006;
+            const anoAtual = new Date().getFullYear();
+            const anosExperiencia = anoAtual - anoInicio;
+
+            // Atualiza todos os elementos com anos de experiência
+            const elementos = document.querySelectorAll('#anosExperiencia, #anosExperienciaTexto');
+            elementos.forEach(el => {
+                if (el) el.textContent = anosExperiencia;
+            });
+        })();
     </script>
 </body>
 </html>
