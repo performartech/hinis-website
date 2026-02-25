@@ -60,7 +60,7 @@ Hinis/
 ├── programas/
 │   ├── essencia.html       # Detalhes do programa Essência
 │   ├── climax.html         # Detalhes do programa Clímax
-│   └── bff.html            # Detalhes do programa BFF
+│   └── amicae.html         # Detalhes do programa Amicae
 ├── components/
 │   ├── header.html         # Componente header reutilizável
 │   ├── footer.html         # Componente footer reutilizável
@@ -333,7 +333,7 @@ O projeto utiliza **arquitetura baseada em componentes** para reduzir duplicaç�
 2. **Nome** - Nome completo
 3. **E-mail** - Endereço de e-mail
 4. **Telefone** - Com máscara formatada
-5. **Programa** - Essência, Clímax, BFF ou "Não especificado"
+5. **Programa** - Essentia, Refugium, Amicae ou "Não especificado"
 6. **Mensagem** - Texto livre
 
 #### Dados de Rastreamento UTM (7 colunas)

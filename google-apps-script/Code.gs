@@ -380,9 +380,9 @@ function enviarEmailConfirmacao(dados) {
               </li>
 
               <li style="margin-bottom: 12px;">
-                <a href="https://www.hinis.com.br/programas/bff.html"
+                <a href="https://www.hinis.com.br/programas/amicae.html"
                    style="color: #BB9476; text-decoration: none; font-weight: 500;">
-                  ❖ BFF
+                  ❖ Amicae
                 </a>
                 <span style="color: #7B7B7B; font-size: 14px;"> - De você para elas. Delas para você</span>
               </li>

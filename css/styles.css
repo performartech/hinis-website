@@ -187,11 +187,11 @@ ul {
     min-width: 180px;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
+    transform: translateY(-5px);
     transition: all 0.3s ease;
     z-index: 1001;
     list-style: none;
-    margin-top: 0.5rem;
+    margin-top: 0;
 }
 
 .nav-item-dropdown:hover .dropdown-menu {
@@ -2026,7 +2026,7 @@ section {
     line-height: 1.7;
 }
 
-/* Passos (BFF) */
+/* Passos (Amicae) */
 .como-participar {
     max-width: 800px;
     margin: 0 auto;
@@ -2072,20 +2072,21 @@ section {
 
 .porque-card {
     background-color: var(--white);
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md);
     border-radius: 12px;
     border: 1px solid #E8E8E8;
 }
 
 .porque-card h3 {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     color: var(--primary-color);
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: 0.75rem;
 }
 
 .porque-card p {
-    line-height: 1.8;
+    line-height: 1.6;
     color: var(--text-color);
+    font-size: 0.95rem;
 }
 
 /* =========================================

@@ -2,7 +2,7 @@
 // MENU MOBILE TOGGLE
 // =========================================
 
-document.addEventListener('DOMContentLoaded', function() {
+function initMobileMenu() {
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.nav-menu');
 
@@ -86,6 +86,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 menuToggle.focus(); // Retornar foco ao botão
             }
         });
+    }
+}
+
+// Inicializa quando DOM carregar
+document.addEventListener('DOMContentLoaded', initMobileMenu);
+
+// Reinicializa quando header for carregado dinamicamente
+document.addEventListener('componentLoaded', function(event) {
+    if (event.detail.componentName === 'header') {
+        initMobileMenu();
     }
 });
 
