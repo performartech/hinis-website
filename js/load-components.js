@@ -36,9 +36,9 @@
                 <option value="Outro">Outro assunto</option>
             </select>
 
-            <div class="h-captcha"></div>
-
             <button type="submit" class="btn btn-primary">Enviar mensagem</button>
+
+            <div class="h-captcha"></div>
         </form>
     `
 };
