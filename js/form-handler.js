@@ -139,6 +139,17 @@
                 return;
             }
 
+            // Valida hCaptcha
+            const hCaptchaResponse = form.querySelector('textarea[name=h-captcha-response]');
+            if (hCaptchaResponse && !hCaptchaResponse.value) {
+                showFeedback(
+                    'Por favor, complete a verificação de segurança (captcha).',
+                    'error',
+                    feedback
+                );
+                return;
+            }
+
             // Desabilita botão e mostra loading
             submitButton.disabled = true;
             const originalButtonText = submitButton.textContent;
