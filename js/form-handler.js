@@ -211,7 +211,8 @@
                 email: dados.email,
                 telefone: dados.telefone,
                 programa: dados.programa,
-                botcheck: ''
+                botcheck: '',
+                'h-captcha-response': formData.get('h-captcha-response') || ''
             };
 
             // Adiciona dados UTM se disponíveis
