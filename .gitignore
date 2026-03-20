@@ -26,8 +26,6 @@ node_modules/
 .env
 .env.local
 
-# Configuração com dados sensíveis
-js/config.js
 
 # Arquivos pessoais
 Website Hinis.txt
