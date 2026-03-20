@@ -24,6 +24,9 @@
         ? window.CONFIG.WEB3FORMS_ACCESS_KEY
         : null;
 
+    // hCaptcha (sitekey do Web3Forms free plan)
+    const HCAPTCHA_SITEKEY = '50b2fe65-b00b-4b9e-ad62-3ba471098be2';
+
     // =========================================
     // RATE LIMITING
     // =========================================
@@ -56,6 +59,37 @@
     }
 
     // =========================================
+    // hCAPTCHA
+    // =========================================
+
+    let hcaptchaWidgetId = null;
+
+    function renderHcaptcha() {
+        const container = document.querySelector('#contatoForm .h-captcha');
+        if (!container) return;
+
+        // Evita renderizar duas vezes
+        if (container.querySelector('iframe')) return;
+
+        // hCaptcha API pode não ter carregado ainda
+        if (typeof hcaptcha === 'undefined') {
+            log('hCaptcha API ainda não carregou, aguardando...');
+            return;
+        }
+
+        hcaptchaWidgetId = hcaptcha.render(container, {
+            sitekey: HCAPTCHA_SITEKEY
+        });
+        log('✓ hCaptcha renderizado, widgetId:', hcaptchaWidgetId);
+    }
+
+    // Callback global chamada quando a API do hCaptcha carrega
+    window.onHcaptchaLoad = function() {
+        log('✓ hCaptcha API carregada');
+        renderHcaptcha();
+    };
+
+    // =========================================
     // INICIALIZAÇÃO
     // =========================================
 
@@ -73,6 +107,9 @@
             if (keyField && WEB3FORMS_ACCESS_KEY) {
                 keyField.value = WEB3FORMS_ACCESS_KEY;
             }
+
+            // Renderiza hCaptcha (se API já carregou)
+            renderHcaptcha();
         } else {
             log('ℹ️ Formulário não encontrado no DOM inicial (será carregado dinamicamente)');
         }
@@ -140,8 +177,11 @@
             }
 
             // Valida hCaptcha
-            const hCaptchaResponse = form.querySelector('textarea[name=h-captcha-response]');
-            if (hCaptchaResponse && !hCaptchaResponse.value) {
+            let hcaptchaToken = '';
+            if (typeof hcaptcha !== 'undefined' && hcaptchaWidgetId !== null) {
+                hcaptchaToken = hcaptcha.getResponse(hcaptchaWidgetId);
+            }
+            if (!hcaptchaToken) {
                 showFeedback(
                     'Por favor, complete a verificação de segurança (captcha).',
                     'error',
@@ -212,7 +252,7 @@
                 telefone: dados.telefone,
                 programa: dados.programa,
                 botcheck: '',
-                'h-captcha-response': formData.get('h-captcha-response') || ''
+                'h-captcha-response': hcaptchaToken
             };
 
             // Adiciona dados UTM se disponíveis
@@ -261,6 +301,11 @@
                 const keyField = form.querySelector('#web3formsKey');
                 if (keyField) {
                     keyField.value = WEB3FORMS_ACCESS_KEY;
+                }
+
+                // Reseta hCaptcha após envio
+                if (typeof hcaptcha !== 'undefined' && hcaptchaWidgetId !== null) {
+                    hcaptcha.reset(hcaptchaWidgetId);
                 }
             } else {
                 showFeedback(
