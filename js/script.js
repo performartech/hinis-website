@@ -158,38 +158,6 @@ faqItems.forEach(item => {
 });
 
 // =========================================
-// MÁSCARA DE TELEFONE
-// =========================================
-
-function phoneMask(value) {
-    if (!value) return '';
-    value = value.replace(/\D/g, '');
-
-    if (value.length <= 10) {
-        // Formato: (XX) XXXX-XXXX
-        value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
-        value = value.replace(/(\d)(\d{4})$/, '$1-$2');
-    } else {
-        // Formato: (XX) XXXXX-XXXX
-        value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
-        value = value.replace(/(\d)(\d{4})$/, '$1-$2');
-    }
-
-    return value;
-}
-
-// Aplicar máscara em todos os campos de telefone
-document.addEventListener('DOMContentLoaded', function() {
-    const telefoneInputs = document.querySelectorAll('input[type="tel"], .telefone-mask');
-
-    telefoneInputs.forEach(input => {
-        input.addEventListener('input', function(e) {
-            e.target.value = phoneMask(e.target.value);
-        });
-    });
-});
-
-// =========================================
 // ANIMAÇÃO DE ENTRADA DOS ELEMENTOS
 // =========================================
 
@@ -352,13 +320,6 @@ if (currentYearElement) {
 }
 
 // =========================================
-// CONSOLE MESSAGE
-// =========================================
-
-console.log('%c🌸 Hinis - Autoestima e Autocuidado Feminino', 'font-size: 16px; font-weight: bold; color: #8B7355;');
-console.log('%cEleve sua autoestima respeitando seu tempo, sua história e seu corpo.', 'font-size: 12px; color: #6B6B6B;');
-
-// =========================================
 // OTIMIZAÇÕES MOBILE
 // =========================================
 
@@ -372,35 +333,6 @@ function handleOrientationChange() {
 window.addEventListener('load', handleOrientationChange);
 window.addEventListener('resize', debounce(handleOrientationChange, 200));
 window.addEventListener('orientationchange', handleOrientationChange);
-
-// Otimização: Lazy loading de imagens (fallback para navegadores sem suporte nativo)
-if ('loading' in HTMLImageElement.prototype) {
-    // Navegador suporta lazy loading nativo
-    const images = document.querySelectorAll('img[loading="lazy"]');
-    images.forEach(img => {
-        if (img.dataset.src) {
-            img.src = img.dataset.src;
-        }
-    });
-} else {
-    // Fallback com Intersection Observer
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                if (img.dataset.src) {
-                    img.src = img.dataset.src;
-                    img.removeAttribute('data-src');
-                    observer.unobserve(img);
-                }
-            }
-        });
-    });
-
-    document.querySelectorAll('img[data-src]').forEach(img => {
-        imageObserver.observe(img);
-    });
-}
 
 // Prevenir zoom duplo-toque em iOS (melhor UX)
 let lastTouchEnd = 0;
@@ -595,37 +527,7 @@ if (depoimentosCarousel && carouselIndicators.length > 0) {
 // =========================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('=== LUCIDE DEBUG ===');
-    console.log('1. Lucide disponível?', typeof lucide !== 'undefined');
-    console.log('2. Lucide object:', typeof lucide !== 'undefined' ? lucide : 'undefined');
-
-    const iconsBeforeInit = document.querySelectorAll('[data-lucide]');
-    console.log('3. Ícones encontrados antes de inicializar:', iconsBeforeInit.length);
-    iconsBeforeInit.forEach((icon, idx) => {
-        console.log(`   - Ícone ${idx + 1}:`, icon.getAttribute('data-lucide'), 'classes:', icon.className);
-    });
-
     if (typeof lucide !== 'undefined') {
-        try {
-            lucide.createIcons();
-            console.log('4. ✓ Ícones Lucide inicializados com sucesso');
-
-            // Verificar se os ícones foram realmente renderizados
-            setTimeout(() => {
-                const iconsAfterInit = document.querySelectorAll('[data-lucide]');
-                console.log('5. Verificando renderização após 100ms:');
-                iconsAfterInit.forEach((icon, idx) => {
-                    const hasSvg = icon.querySelector('svg') !== null;
-                    console.log(`   - Ícone ${idx + 1}:`, icon.getAttribute('data-lucide'), 'tem SVG?', hasSvg);
-                    if (!hasSvg) {
-                        console.error(`   ✗ Ícone ${icon.getAttribute('data-lucide')} NÃO foi renderizado!`);
-                    }
-                });
-            }, 100);
-        } catch (erro) {
-            console.error('4. ✗ Erro ao criar ícones:', erro);
-        }
-    } else {
-        console.error('4. ✗ Lucide não está disponível!');
+        lucide.createIcons();
     }
 });

@@ -52,17 +52,3 @@ function formatPhoneDisplay(phone) {
     return phone;
 }
 
-// =========================================
-// HELPER: ENCODE PHONE (para uso no console)
-// =========================================
-
-// Use esta função no console do navegador para gerar o código Base64 de um telefone
-// Exemplo: encodePhone('+5521988602474')
-function encodePhone(phone) {
-    return btoa(phone);
-}
-
-// Expõe a função para uso no console (apenas desenvolvimento)
-if (typeof window !== 'undefined') {
-    window.encodePhone = encodePhone;
-}

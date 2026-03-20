@@ -19,6 +19,11 @@
     const COMPONENT_TEMPLATES = {
     'form-contato': `
         <form class="contato-rapido-form" id="contatoForm">
+            <input type="hidden" name="access_key" id="web3formsKey">
+            <input type="hidden" name="subject" value="Novo contato via site Hinis">
+            <input type="hidden" name="from_name" value="Site Hinis">
+            <input type="checkbox" name="botcheck" class="hidden" style="display:none;">
+
             <input type="text" name="nome" placeholder="Nome completo" required aria-label="Nome completo">
             <input type="email" name="email" placeholder="E-mail" required aria-label="E-mail">
             <input type="tel" name="telefone" placeholder="Telefone" class="telefone-mask" required aria-label="Telefone">
@@ -37,7 +42,7 @@
 };
 
 /**
- * Detecta se página está em subpasta (ex: programas/essencia.html)
+ * Detecta se página está em subpasta (ex: programas/essentia.html)
  * e ajusta paths automaticamente
  */
 function getBasePath() {
