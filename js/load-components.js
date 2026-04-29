@@ -38,7 +38,7 @@
 
             <button type="submit" class="btn btn-primary">Enviar mensagem</button>
 
-            <div class="cf-turnstile" data-sitekey="0x4AAAAAADFwO33Z_LmcjVsV" data-theme="light"></div>
+            <div class="cf-turnstile"></div>
         </form>
     `
 };
