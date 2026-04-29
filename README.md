@@ -37,7 +37,7 @@ Elevar a autoestima feminina respeitando o tempo, a história e o corpo de cada 
 - **Google Fonts** - Playfair Display + Montserrat
 - **Lucide Icons** - Ícones SVG via CDN
 - **Web3Forms** - Envio de formulários via API REST
-- **hCaptcha** - Proteção contra spam nos formulários
+- **Cloudflare Turnstile** - Proteção contra spam nos formulários
 - **Google Analytics 4** - Monitoramento de conversões
 - **Cloudflare Pages** - Hospedagem e CDN
 

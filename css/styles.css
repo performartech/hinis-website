@@ -874,26 +874,146 @@ section {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* hCaptcha widget */
-.contato-rapido-form .h-captcha {
+/* Cloudflare Turnstile widget */
+.contato-rapido-form .cf-turnstile {
     display: flex;
     justify-content: center;
     margin-top: 0.5rem;
+}
+
+/* =========================================
+   MODAL FORMULÁRIO POPUP
+   ========================================= */
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-sm);
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 1.25rem;
+    max-width: 420px;
+    width: 100%;
     position: relative;
-    z-index: 100;
-    overflow: visible;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    animation: modalSlideIn 0.3s ease;
 }
 
-.contato-rapido-form,
-.newsletter-content,
-.contato-form-wrapper {
-    overflow: visible !important;
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-@media (max-width: 400px) {
-    .contato-rapido-form .h-captcha {
-        transform: scale(0.9);
-        transform-origin: center;
+.modal-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-light);
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.modal-close:hover {
+    background: var(--light-color);
+    color: var(--dark-color);
+}
+
+.modal-content h2 {
+    font-family: var(--font-secondary);
+    font-size: 1.25rem;
+    color: var(--dark-color);
+    margin-bottom: 0.15rem;
+    padding-right: 2rem;
+}
+
+.modal-content > p {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+}
+
+.modal-content .contato-rapido-form {
+    gap: 0.5rem;
+}
+
+.modal-content .contato-rapido-form input,
+.modal-content .contato-rapido-form select {
+    padding: 0.65rem 1rem;
+}
+
+.modal-content .contato-rapido-form button {
+    padding: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+.modal-content .contato-rapido-form input,
+.modal-content .contato-rapido-form select {
+    background: var(--light-color);
+    border: 1px solid #E0E0E0;
+    color: var(--dark-color);
+}
+
+.modal-content .contato-rapido-form input:focus,
+.modal-content .contato-rapido-form select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
+}
+
+.modal-content .contato-rapido-form button {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: 2px solid var(--primary-color);
+}
+
+.modal-content .contato-rapido-form button:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        padding: 1rem;
+        border-radius: 12px;
+    }
+
+    .modal-content h2 {
+        font-size: 1.1rem;
+    }
+
+    .modal-content .contato-rapido-form input,
+    .modal-content .contato-rapido-form select {
+        padding: 0.6rem 0.85rem;
     }
 }
 
@@ -1853,7 +1973,6 @@ section {
     }
 
     .estrutura-programa,
-    .porque-comunidade,
     .para-quem-grid {
         grid-template-columns: 1fr;
     }
@@ -2111,9 +2230,22 @@ section {
 }
 
 .porque-comunidade {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-md);
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-md) 0;
+}
+
+/* Linha vertical central */
+.porque-comunidade::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--secondary-color);
+    transform: translateX(-50%);
 }
 
 .porque-card {
@@ -2121,6 +2253,58 @@ section {
     padding: var(--spacing-md);
     border-radius: 12px;
     border: 1px solid #E8E8E8;
+    width: 45%;
+    position: relative;
+    margin-bottom: var(--spacing-md);
+    counter-increment: timeline;
+}
+
+.porque-card:last-child {
+    margin-bottom: 0;
+}
+
+/* Número na linha do tempo */
+.porque-card::after {
+    content: counter(timeline);
+    position: absolute;
+    top: 50%;
+    width: 2rem;
+    height: 2rem;
+    background: var(--primary-color);
+    color: var(--white);
+    border: 3px solid var(--white);
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--secondary-color);
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+/* Ímpares: esquerda */
+.porque-card:nth-child(odd) {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.porque-card:nth-child(odd)::after {
+    right: -7%;
+}
+
+/* Pares: direita */
+.porque-card:nth-child(even) {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.porque-card:nth-child(even)::after {
+    left: -7%;
+}
+
+.porque-comunidade {
+    counter-reset: timeline;
 }
 
 .porque-card h3 {
@@ -2133,6 +2317,18 @@ section {
     line-height: 1.6;
     color: var(--text-color);
     font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .porque-card {
+        width: 75%;
+    }
+
+    .porque-card::after {
+        width: 1.6rem;
+        height: 1.6rem;
+        font-size: 0.65rem;
+    }
 }
 
 /* =========================================

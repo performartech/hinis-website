@@ -24,8 +24,6 @@
         ? window.CONFIG.WEB3FORMS_ACCESS_KEY
         : null;
 
-    // hCaptcha (sitekey do Web3Forms free plan)
-    const HCAPTCHA_SITEKEY = '50b2fe65-b00b-4b9e-ad62-3ba471098be2';
 
     // =========================================
     // RATE LIMITING
@@ -59,48 +57,42 @@
     }
 
     // =========================================
-    // hCAPTCHA
+    // CLOUDFLARE TURNSTILE
     // =========================================
 
-    let hcaptchaWidgetId = null;
+    const TURNSTILE_SITEKEY = '0x4AAAAAADFwO33Z_LmcjVsV';
+    let turnstileWidgetId = null;
 
-    function renderHcaptcha() {
-        const container = document.querySelector('#contatoForm .h-captcha');
+    function renderTurnstile() {
+        const container = document.querySelector('#contatoForm .cf-turnstile');
         if (!container) return;
 
-        // hCaptcha API pode não ter carregado ainda
-        if (typeof hcaptcha === 'undefined') {
-            log('hCaptcha API ainda não carregou, aguardando...');
+        if (typeof turnstile === 'undefined') {
+            log('Turnstile API ainda não carregou, aguardando...');
             return;
         }
 
-        // Se já foi renderizado (auto ou manual), capturar widgetId
+        // Já renderizado
         if (container.querySelector('iframe')) {
-            // hCaptcha auto-renderizou via data-sitekey, capturar widgetId
-            if (hcaptchaWidgetId === null) {
-                hcaptchaWidgetId = 0; // primeiro widget na página
-                log('✓ hCaptcha já renderizado (auto), widgetId:', hcaptchaWidgetId);
-            }
+            if (turnstileWidgetId === null) turnstileWidgetId = 0;
             return;
         }
 
-        // Renderização explícita (para formulários carregados dinamicamente)
         try {
-            hcaptchaWidgetId = hcaptcha.render(container, {
-                sitekey: HCAPTCHA_SITEKEY,
-                size: 'normal',
+            turnstileWidgetId = turnstile.render(container, {
+                sitekey: TURNSTILE_SITEKEY,
                 theme: 'light'
             });
-            log('✓ hCaptcha renderizado (explícito), widgetId:', hcaptchaWidgetId);
+            log('✓ Turnstile renderizado, widgetId:', turnstileWidgetId);
         } catch (e) {
-            log('hCaptcha render error:', e);
+            log('Turnstile render error:', e);
         }
     }
 
-    // Callback global chamada quando a API do hCaptcha carrega
-    window.onHcaptchaLoad = function() {
-        log('✓ hCaptcha API carregada');
-        renderHcaptcha();
+    // Callback global quando a API do Turnstile carrega
+    window.onTurnstileLoad = function() {
+        log('✓ Turnstile API carregada');
+        renderTurnstile();
     };
 
     // =========================================
@@ -122,8 +114,8 @@
                 keyField.value = WEB3FORMS_ACCESS_KEY;
             }
 
-            // Renderiza hCaptcha (se API já carregou)
-            renderHcaptcha();
+            // Renderiza Turnstile (se API já carregou)
+            renderTurnstile();
         } else {
             log('ℹ️ Formulário não encontrado no DOM inicial (será carregado dinamicamente)');
         }
@@ -190,14 +182,14 @@
                 return;
             }
 
-            // Valida hCaptcha
-            let hcaptchaToken = '';
-            if (typeof hcaptcha !== 'undefined' && hcaptchaWidgetId !== null) {
-                hcaptchaToken = hcaptcha.getResponse(hcaptchaWidgetId);
+            // Valida Turnstile
+            let turnstileToken = '';
+            if (typeof turnstile !== 'undefined' && turnstileWidgetId !== null) {
+                turnstileToken = turnstile.getResponse(turnstileWidgetId);
             }
-            if (!hcaptchaToken) {
+            if (!turnstileToken) {
                 showFeedback(
-                    'Por favor, complete a verificação de segurança (captcha).',
+                    'Por favor, aguarde a verificação de segurança.',
                     'error',
                     feedback
                 );
@@ -266,7 +258,7 @@
                 telefone: dados.telefone,
                 programa: dados.programa,
                 botcheck: '',
-                'h-captcha-response': hcaptchaToken
+                'cf-turnstile-response': turnstileToken
             };
 
             // Adiciona dados UTM se disponíveis
@@ -317,9 +309,9 @@
                     keyField.value = WEB3FORMS_ACCESS_KEY;
                 }
 
-                // Reseta hCaptcha após envio
-                if (typeof hcaptcha !== 'undefined' && hcaptchaWidgetId !== null) {
-                    hcaptcha.reset(hcaptchaWidgetId);
+                // Reseta Turnstile após envio
+                if (typeof turnstile !== 'undefined' && turnstileWidgetId !== null) {
+                    turnstile.reset(turnstileWidgetId);
                 }
             } else {
                 showFeedback(

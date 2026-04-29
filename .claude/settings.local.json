@@ -35,7 +35,8 @@
       "Bash(sed -i 's/\\\\.\\\\.\\\\/js\\\\/script\\\\.js?v=1\\\\.0\\\\.3/..\\\\/js\\\\/script.js?v=2.0.0/g' programas/essentia.html programas/refugium.html programas/amicae.html)",
       "Bash(sed -i 's/form-handler\\\\.js?v=1\\\\.0\\\\.5/form-handler.js?v=2.0.0/g' index.html contato.html programas.html)",
       "Bash(sed -i 's/load-components\\\\.js?v=1\\\\.0\\\\.4/load-components.js?v=2.0.0/g' index.html contato.html programas.html quem-somos.html faq.html politica-privacidade.html)",
-      "Bash(sed -i 's/\\\\.\\\\.\\\\/js\\\\/load-components\\\\.js?v=1\\\\.0\\\\.4/..\\\\/js\\\\/load-components.js?v=2.0.0/g' programas/essentia.html programas/refugium.html programas/amicae.html)"
+      "Bash(sed -i 's/\\\\.\\\\.\\\\/js\\\\/load-components\\\\.js?v=1\\\\.0\\\\.4/..\\\\/js\\\\/load-components.js?v=2.0.0/g' programas/essentia.html programas/refugium.html programas/amicae.html)",
+      "WebFetch(domain:developers.cloudflare.com)"
     ]
   }
 }

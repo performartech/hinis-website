@@ -340,6 +340,41 @@ if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) {
 }
 
 // =========================================
+// MODAL FORMULÁRIO POPUP
+// =========================================
+
+document.addEventListener('click', function(e) {
+    const trigger = e.target.closest('[data-open-modal]');
+    if (trigger) {
+        e.preventDefault();
+        const modalId = trigger.getAttribute('data-open-modal');
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    // Fechar ao clicar no X ou no overlay
+    if (e.target.classList.contains('modal-close') || e.target.classList.contains('modal-overlay')) {
+        const modal = e.target.closest('.modal-overlay') || e.target;
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+});
+
+// Fechar com Escape
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const modal = document.querySelector('.modal-overlay.active');
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+});
+
+// =========================================
 // CARROSSEL DE DEPOIMENTOS
 // =========================================
 

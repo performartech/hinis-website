@@ -195,7 +195,7 @@
             <div class="cta-final">
                 <h2>Faça parte dessa comunidade</h2>
                 <p>Autocuidado é mais fácil quando você não está sozinha</p>
-                <a href="#" class="btn btn-primary btn-large">Cuide-se e seja cuidada</a>
+                <a href="#" class="btn btn-primary btn-large" data-open-modal="formModal" data-programa="Amicae">Cuide-se e seja cuidada</a>
                 <p class="cta-info">Inscrições abertas - Vagas limitadas</p>
             </div>
 
@@ -226,11 +226,41 @@
     <!-- Footer (carregado dinamicamente) -->
     <div data-component="footer"></div>
 
+    <!-- Modal Formulário -->
+    <div class="modal-overlay" id="formModal">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Fechar">&times;</button>
+            <h2>Faça parte da comunidade</h2>
+            <p>Preencha seus dados e entraremos em contato</p>
+            <form class="contato-rapido-form" id="contatoForm">
+                <input type="hidden" name="access_key" id="web3formsKey">
+                <input type="hidden" name="subject" value="Novo contato via site Hinis">
+                <input type="hidden" name="from_name" value="Site Hinis">
+                <input type="checkbox" name="botcheck" class="hidden" style="display:none;">
+                <input type="text" name="nome" placeholder="Nome completo" required aria-label="Nome completo">
+                <input type="email" name="email" placeholder="E-mail" required aria-label="E-mail">
+                <input type="tel" name="telefone" placeholder="Telefone" class="telefone-mask" required aria-label="Telefone">
+                <select name="programa" required aria-label="Programa de interesse">
+                    <option value="">Selecione um programa</option>
+                    <option value="Essentia">Essentia - Você, no seu tempo</option>
+                    <option value="Refugium">Refugium - De você, para você</option>
+                    <option value="Amicae" selected>Amicae - De você para elas. Delas para você</option>
+                    <option value="Outro">Outro assunto</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Enviar mensagem</button>
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAADFwO33Z_LmcjVsV" data-theme="light"></div>
+            </form>
+        </div>
+    </div>
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../js/config.js?v=1.0.0"></script>
     <script src="../js/utm-tracker.js?v=1.0.0"></script>
     <script src="../js/load-components.js?v=2.0.0"></script>
     <script src="../js/script.js?v=2.0.0"></script>
+    <script src="../js/form-handler.js?v=2.0.0"></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad" async defer></script>
 
     <!-- Schema.org structured data -->
     <script type="application/ld+json">
