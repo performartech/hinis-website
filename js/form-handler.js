@@ -303,7 +303,7 @@
                         email: dados.email,
                         telefone: dados.telefone,
                         programa: dados.programa,
-                        landing_page: utmData.landing_page || window.location.pathname,
+                        landing_page: window.location.href,
                         referrer: utmData.referrer || document.referrer || 'direct',
                         utm_source: utmData.utm_source || '',
                         utm_medium: utmData.utm_medium || '',
