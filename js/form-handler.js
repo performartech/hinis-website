@@ -20,6 +20,8 @@
 
     // Web3Forms API
     const WEB3FORMS_URL = 'https://api.web3forms.com/submit';
+    // Google Sheets API
+    const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbw347vHEbcZaXUXjBGb9RQgOK-Dbq6sS0uzcizjmq5UJRRjukxc4KuQ_iPWiR_DQRNM/exec';
     const WEB3FORMS_ACCESS_KEY = (typeof window !== 'undefined' && window.CONFIG)
         ? window.CONFIG.WEB3FORMS_ACCESS_KEY
         : null;
@@ -292,6 +294,36 @@
                     'success',
                     feedback
                 );
+
+                // Envia para Google Sheets (em paralelo, sem bloquear)
+                try {
+                    const utmData = (typeof window.HinisUTM !== 'undefined') ? window.HinisUTM.format() : {};
+                    const sheetsPayload = {
+                        data_hora: new Date().toLocaleString('pt-BR', {timeZone: 'America/Sao_Paulo'}),
+                        nome: dados.nome,
+                        email: dados.email,
+                        telefone: dados.telefone,
+                        programa: dados.programa,
+                        landing_page: utmData.landing_page || window.location.pathname,
+                        referrer: utmData.referrer || document.referrer || 'direct',
+                        utm_source: utmData.utm_source || '',
+                        utm_medium: utmData.utm_medium || '',
+                        utm_campaign: utmData.utm_campaign || '',
+                        utm_term: utmData.utm_term || '',
+                        utm_content: utmData.utm_content || '',
+                        gclid: utmData.gclid || '',
+                        fbclid: utmData.fbclid || ''
+                    };
+                    fetch(GOOGLE_SHEETS_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(sheetsPayload)
+                    });
+                    log('✓ Dados enviados para Google Sheets');
+                } catch (sheetsError) {
+                    log('Erro ao enviar para Google Sheets:', sheetsError);
+                }
 
                 // Envia evento para Google Analytics
                 if (typeof window.HinisUTM !== 'undefined') {

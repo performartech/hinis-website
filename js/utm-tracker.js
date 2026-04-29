@@ -15,7 +15,7 @@
     // CONFIGURAÇÃO
     // =========================================
 
-    const UTM_PARAMS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+    const UTM_PARAMS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid'];
     const STORAGE_KEY = 'hinis_utm_data';
     const SESSION_DURATION = 30 * 60 * 1000; // 30 minutos
 
@@ -110,11 +110,13 @@
         if (!utmData) return {};
 
         const formatted = {
-            utm_source: utmData.utm_source || 'não informado',
-            utm_medium: utmData.utm_medium || 'não informado',
-            utm_campaign: utmData.utm_campaign || 'não informado',
-            utm_term: utmData.utm_term || 'não informado',
-            utm_content: utmData.utm_content || 'não informado',
+            utm_source: utmData.utm_source || '',
+            utm_medium: utmData.utm_medium || '',
+            utm_campaign: utmData.utm_campaign || '',
+            utm_term: utmData.utm_term || '',
+            utm_content: utmData.utm_content || '',
+            gclid: utmData.gclid || '',
+            fbclid: utmData.fbclid || '',
             landing_page: utmData.landing_page || window.location.pathname,
             referrer: utmData.referrer || 'direct'
         };
