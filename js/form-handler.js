@@ -64,29 +64,25 @@
 
     const TURNSTILE_SITEKEY = '0x4AAAAAADFwO33Z_LmcjVsV';
     let turnstileWidgetId = null;
+    let turnstileRendered = false;
 
     function renderTurnstile() {
+        if (turnstileRendered) return;
+
         const container = document.querySelector('#contatoForm .cf-turnstile');
         if (!container) return;
 
-        if (typeof turnstile === 'undefined') {
-            log('Turnstile API ainda não carregou, aguardando...');
-            return;
-        }
-
-        // Já renderizado
-        if (container.querySelector('iframe')) {
-            if (turnstileWidgetId === null) turnstileWidgetId = 0;
-            return;
-        }
+        if (typeof turnstile === 'undefined') return;
 
         try {
+            turnstileRendered = true;
             turnstileWidgetId = turnstile.render(container, {
                 sitekey: TURNSTILE_SITEKEY,
                 theme: 'light'
             });
             log('✓ Turnstile renderizado, widgetId:', turnstileWidgetId);
         } catch (e) {
+            turnstileRendered = false;
             log('Turnstile render error:', e);
         }
     }
