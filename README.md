@@ -2,7 +2,7 @@
 
 ## Sobre o Projeto
 
-Hinis é uma plataforma digital dedicada ao empoderamento feminino através do autocuidado e fortalecimento da autoestima. Criado pela Dra. Hexandra Hertel, cirurgiã plástica com mais de 20 anos de experiência, o projeto oferece uma abordagem integral que vai além da estética, focando no bem-estar emocional e físico das mulheres.
+Hinis é uma plataforma digital dedicada ao empoderamento feminino através do autocuidado e fortalecimento da autoestima. Criada pela Dra. Hexandra Hertel, cirurgiã plástica com mais de 20 anos de experiência, o projeto oferece uma abordagem integral que vai além da estética, focando no bem-estar emocional e físico das mulheres.
 
 **Site**: https://hinis.com.br
 
@@ -37,7 +37,8 @@ Elevar a autoestima feminina respeitando o tempo, a história e o corpo de cada 
 - **Google Fonts** - Playfair Display + Montserrat
 - **Lucide Icons** - Ícones SVG via CDN
 - **Web3Forms** - Envio de formulários via API REST
-- **Cloudflare Turnstile** - Proteção contra spam nos formulários
+- **Cloudflare Turnstile** - Proteção contra spam (validação frontend)
+- **Google Sheets** - Armazenamento de leads via Apps Script
 - **Google Analytics 4** - Monitoramento de conversões
 - **Cloudflare Pages** - Hospedagem e CDN
 
@@ -63,34 +64,39 @@ Hinis/
 │   └── styles.css              # Estilos globais
 ├── js/
 │   ├── config.js               # Access key Web3Forms
-│   ├── script.js               # Menu, scroll, FAQ, carrossel
+│   ├── script.js               # Menu, scroll, FAQ, carrossel, modal popup
 │   ├── form-handler.js         # Envio e validação do formulário
 │   ├── load-components.js      # Carregador dinâmico de componentes
-│   ├── utm-tracker.js          # Rastreamento UTM
+│   ├── utm-tracker.js          # Rastreamento UTM, gclid e fbclid
 │   └── phone-protection.js     # Proteção de telefones (Base64)
 ├── assets/
 │   ├── logo/                   # Logotipos e favicons
 │   └── img/                    # Imagens do site
 ├── sitemap.xml                 # Mapa do site para SEO
-├── robots.txt                  # Diretrizes para crawlers
-└── UTM-TRACKING-GUIDE.md       # Guia de marketing UTM
+└── robots.txt                  # Diretrizes para crawlers
 ```
 
 ## Sistema de Formulários
 
 ### Arquitetura
 - **Frontend**: HTML5 + JavaScript (form-handler.js)
-- **Backend**: Web3Forms API (REST, JSON)
-- **Honeypot**: Campo `botcheck` oculto para proteção contra spam
+- **Email**: Web3Forms API (REST, JSON)
+- **Leads**: Google Sheets via Apps Script (envio paralelo)
+- **Anti-spam**: Cloudflare Turnstile (validação frontend) + campo honeypot
 - **Analytics**: Google Analytics 4 (eventos customizados)
 
+### Tipos de formulário
+- **Inline** — usado na homepage, contato e programas (componente `form-contato.html`)
+- **Popup modal** — usado em Refugium e Amicae, com programa pré-selecionado
+
 ### Funcionalidades
-- Envio via Web3Forms API (`https://api.web3forms.com/submit`)
+- Envio para Web3Forms API (email) e Google Sheets (lead) em paralelo
+- Cloudflare Turnstile como validação anti-bot no frontend
 - Validação de e-mail, telefone (mínimo 10 dígitos) e campos obrigatórios
 - Máscara automática de telefone (XX) XXXXX-XXXX
 - Rate limiting (2 envios por minuto)
 - Feedback visual de sucesso/erro com scroll automático
-- Integração com UTM tracking
+- Captura automática de UTMs, gclid, fbclid, landing page e referrer
 
 ### Campos
 | Campo | Tipo | Obrigatório |
@@ -100,6 +106,17 @@ Hinis/
 | Telefone | tel | Sim |
 | Programa | select | Sim |
 
+### Dados salvos na planilha
+| Coluna | Origem |
+|--------|--------|
+| Data/Hora | Gerada no envio (fuso São Paulo) |
+| Nome, Email, Telefone, Programa | Campos do formulário |
+| Landing Page | URL completa da página de conversão |
+| Referrer | Página anterior ou "direct" |
+| utm_source/medium/campaign/term/content | Parâmetros UTM da URL |
+| gclid | Google Ads click ID |
+| fbclid | Facebook/Meta click ID |
+
 ### Configuração
 A access key do Web3Forms está em `js/config.js`:
 ```javascript
@@ -108,13 +125,16 @@ const CONFIG = {
 };
 ```
 
+A URL do Google Sheets Apps Script está em `js/form-handler.js` na constante `GOOGLE_SHEETS_URL`.
+
 ## Componentes Reutilizáveis
 
 O projeto usa **arquitetura baseada em componentes** carregados via `load-components.js`:
 
 - **Header** - Navegação responsiva com menu hambúrguer e dropdown
 - **Footer** - Contato, links institucionais, copyright
-- **Formulário** - Componente único usado em index, programas e contato
+- **Formulário** - Componente inline usado em index, programas e contato
+- **Modal popup** - Formulário em popup nas páginas Refugium e Amicae (com programa pré-selecionado)
 
 Os componentes são carregados via `fetch()` assíncrono. Um fallback inline existe para protocolo `file://`.
 
@@ -128,11 +148,10 @@ Os componentes são carregados via `fetch()` assíncrono. Um fallback inline exi
 
 ## Rastreamento UTM
 
-O `utm-tracker.js` captura automaticamente parâmetros UTM da URL, persiste em `sessionStorage` por 30 minutos e injeta nos envios do formulário.
+O `utm-tracker.js` captura automaticamente parâmetros de marketing da URL, persiste em `sessionStorage` por 30 minutos e injeta nos envios do formulário.
 
-Parâmetros: `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content`, `landing_page`, `referrer`.
+Parâmetros capturados: `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content`, `gclid`, `fbclid`, `landing_page`, `referrer`.
 
-Guia completo para marketing: [UTM-TRACKING-GUIDE.md](UTM-TRACKING-GUIDE.md)
 
 ## Responsividade
 
