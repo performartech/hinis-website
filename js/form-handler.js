@@ -259,8 +259,7 @@
                 email: dados.email,
                 telefone: dados.telefone,
                 programa: dados.programa,
-                botcheck: '',
-                'cf-turnstile-response': turnstileToken
+                botcheck: ''
             };
 
             // Adiciona dados UTM se disponíveis
