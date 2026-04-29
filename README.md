@@ -34,6 +34,7 @@ Elevar a autoestima feminina respeitando o tempo, a história e o corpo de cada 
 - **Google Fonts** - Playfair Display + Montserrat
 - **Lucide Icons** - Ícones SVG via CDN
 - **Web3Forms** - Envio de formulários via API REST
+- **hCaptcha** - Proteção contra spam nos formulários
 - **Google Analytics 4** - Monitoramento de conversões
 - **Cloudflare Pages** - Hospedagem e CDN
 
@@ -82,7 +83,7 @@ Hinis/
 
 ### Funcionalidades
 - Envio via Web3Forms API (`https://api.web3forms.com/submit`)
-- Validação de e-mail (RFC 5322), telefone (mínimo 10 dígitos) e campos obrigatórios
+- Validação de e-mail, telefone (mínimo 10 dígitos) e campos obrigatórios
 - Máscara automática de telefone (XX) XXXXX-XXXX
 - Rate limiting (2 envios por minuto)
 - Feedback visual de sucesso/erro com scroll automático
@@ -168,6 +169,7 @@ cd hinis-website
 
 - **Website**: https://hinis.com.br
 - **E-mail**: contato@hinis.com.br
+- **Telefone**: (21) 2266-2474
 - **WhatsApp**: +55 21 99404-1648
 - **Instagram**: [@drahexandrahertel](https://www.instagram.com/drahexandrahertel/)
 
