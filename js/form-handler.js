@@ -68,19 +68,33 @@
         const container = document.querySelector('#contatoForm .h-captcha');
         if (!container) return;
 
-        // Evita renderizar duas vezes
-        if (container.querySelector('iframe')) return;
-
         // hCaptcha API pode não ter carregado ainda
         if (typeof hcaptcha === 'undefined') {
             log('hCaptcha API ainda não carregou, aguardando...');
             return;
         }
 
-        hcaptchaWidgetId = hcaptcha.render(container, {
-            sitekey: HCAPTCHA_SITEKEY
-        });
-        log('✓ hCaptcha renderizado, widgetId:', hcaptchaWidgetId);
+        // Se já foi renderizado (auto ou manual), capturar widgetId
+        if (container.querySelector('iframe')) {
+            // hCaptcha auto-renderizou via data-sitekey, capturar widgetId
+            if (hcaptchaWidgetId === null) {
+                hcaptchaWidgetId = 0; // primeiro widget na página
+                log('✓ hCaptcha já renderizado (auto), widgetId:', hcaptchaWidgetId);
+            }
+            return;
+        }
+
+        // Renderização explícita (para formulários carregados dinamicamente)
+        try {
+            hcaptchaWidgetId = hcaptcha.render(container, {
+                sitekey: HCAPTCHA_SITEKEY,
+                size: 'normal',
+                theme: 'light'
+            });
+            log('✓ hCaptcha renderizado (explícito), widgetId:', hcaptchaWidgetId);
+        } catch (e) {
+            log('hCaptcha render error:', e);
+        }
     }
 
     // Callback global chamada quando a API do hCaptcha carrega

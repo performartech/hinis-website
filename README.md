@@ -1,10 +1,13 @@
-# Hinis - Autoestima e Autocuidado Feminino
+# Hinis - Amor próprio incondicional
 
 ## Sobre o Projeto
 
 Hinis é uma plataforma digital dedicada ao empoderamento feminino através do autocuidado e fortalecimento da autoestima. Criado pela Dra. Hexandra Hertel, cirurgiã plástica com mais de 20 anos de experiência, o projeto oferece uma abordagem integral que vai além da estética, focando no bem-estar emocional e físico das mulheres.
 
 **Site**: https://hinis.com.br
+
+### Gênero da marca
+**Hinis é sempre feminino** — use "a Hinis", "da Hinis", "na Hinis". Nunca "o Hinis" ou "do Hinis".
 
 ### Missão
 Elevar a autoestima feminina respeitando o tempo, a história e o corpo de cada mulher, oferecendo caminhos práticos e acessíveis para o autocuidado integral.

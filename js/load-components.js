@@ -38,7 +38,7 @@
 
             <button type="submit" class="btn btn-primary">Enviar mensagem</button>
 
-            <div class="h-captcha"></div>
+            <div class="h-captcha" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2" data-theme="light" data-size="normal"></div>
         </form>
     `
 };

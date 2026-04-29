@@ -28,7 +28,14 @@
       "Bash(taskkill /PID 33220 /F)",
       "Bash(powershell -Command \"Stop-Process -Id 33220 -Force\")",
       "Bash(dir:*)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "WebSearch",
+      "WebFetch(domain:docs.web3forms.com)",
+      "Bash(sed -i 's/script\\\\.js?v=1\\\\.0\\\\.3/script.js?v=2.0.0/g' index.html contato.html programas.html quem-somos.html faq.html politica-privacidade.html)",
+      "Bash(sed -i 's/\\\\.\\\\.\\\\/js\\\\/script\\\\.js?v=1\\\\.0\\\\.3/..\\\\/js\\\\/script.js?v=2.0.0/g' programas/essentia.html programas/refugium.html programas/amicae.html)",
+      "Bash(sed -i 's/form-handler\\\\.js?v=1\\\\.0\\\\.5/form-handler.js?v=2.0.0/g' index.html contato.html programas.html)",
+      "Bash(sed -i 's/load-components\\\\.js?v=1\\\\.0\\\\.4/load-components.js?v=2.0.0/g' index.html contato.html programas.html quem-somos.html faq.html politica-privacidade.html)",
+      "Bash(sed -i 's/\\\\.\\\\.\\\\/js\\\\/load-components\\\\.js?v=1\\\\.0\\\\.4/..\\\\/js\\\\/load-components.js?v=2.0.0/g' programas/essentia.html programas/refugium.html programas/amicae.html)"
     ]
   }
 }

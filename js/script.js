@@ -334,34 +334,10 @@ window.addEventListener('load', handleOrientationChange);
 window.addEventListener('resize', debounce(handleOrientationChange, 200));
 window.addEventListener('orientationchange', handleOrientationChange);
 
-// Prevenir zoom duplo-toque em iOS (melhor UX)
-let lastTouchEnd = 0;
-document.addEventListener('touchend', function(event) {
-    const now = Date.now();
-    if (now - lastTouchEnd <= 300) {
-        event.preventDefault();
-    }
-    lastTouchEnd = now;
-}, { passive: false });
-
 // Performance: Reduzir animações em dispositivos de baixa performance
 if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) {
     document.documentElement.style.setProperty('--transition', 'all 0.15s ease');
 }
-
-// Feedback tátil para botões em dispositivos móveis
-const buttons = document.querySelectorAll('button, .btn, a[role="button"]');
-buttons.forEach(button => {
-    button.addEventListener('touchstart', function() {
-        this.style.opacity = '0.8';
-    }, { passive: true });
-
-    button.addEventListener('touchend', function() {
-        setTimeout(() => {
-            this.style.opacity = '';
-        }, 150);
-    }, { passive: true });
-});
 
 // =========================================
 // CARROSSEL DE DEPOIMENTOS
@@ -521,6 +497,7 @@ if (depoimentosCarousel && carouselIndicators.length > 0) {
         }, 250);
     });
 }
+
 
 // =========================================
 // LUCIDE ICONS INITIALIZATION
