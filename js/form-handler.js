@@ -1,8 +1,8 @@
 /**
  * HINIS - FORM HANDLER
  *
- * Gerencia o envio de TODOS os formulários de contato via Web3Forms API
- * Suporta: contatoForm (contato.html, index.html, programas.html)
+ * Gerencia o envio de TODOS os formulários de contato via Google Sheets Apps Script
+ * Suporta: contatoForm (contato.html, index.html, programas.html, refugium.html, amicae.html)
  */
 
 (function() {
@@ -18,13 +18,7 @@
     const warn = (...args) => DEBUG_MODE && console.warn(...args);
     const error = (...args) => console.error(...args);
 
-    // Web3Forms API
-    const WEB3FORMS_URL = 'https://api.web3forms.com/submit';
-    // Google Sheets API
     const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbw347vHEbcZaXUXjBGb9RQgOK-Dbq6sS0uzcizjmq5UJRRjukxc4KuQ_iPWiR_DQRNM/exec';
-    const WEB3FORMS_ACCESS_KEY = (typeof window !== 'undefined' && window.CONFIG)
-        ? window.CONFIG.WEB3FORMS_ACCESS_KEY
-        : null;
 
 
     // =========================================
@@ -98,19 +92,13 @@
     // =========================================
 
     function initializeForm() {
-        log('=== INICIALIZANDO FORM HANDLER (Web3Forms) ===');
+        log('=== INICIALIZANDO FORM HANDLER ===');
 
         const contatoForm = document.getElementById('contatoForm');
 
         if (contatoForm) {
             log('✓ Formulário encontrado:', contatoForm);
             contatoForm.addEventListener('submit', handleFormSubmit);
-
-            // Injeta a access key no campo hidden
-            const keyField = contatoForm.querySelector('#web3formsKey');
-            if (keyField && WEB3FORMS_ACCESS_KEY) {
-                keyField.value = WEB3FORMS_ACCESS_KEY;
-            }
 
             // Renderiza Turnstile (se API já carregou)
             renderTurnstile();
@@ -144,6 +132,7 @@
 
         const form = event.target;
         const submitButton = form.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton ? submitButton.textContent : 'Enviar mensagem';
 
         // Busca ou cria elemento de feedback
         let feedback = form.querySelector('.form-feedback');
@@ -169,17 +158,6 @@
                 return;
             }
 
-            // Valida access key
-            if (!WEB3FORMS_ACCESS_KEY || WEB3FORMS_ACCESS_KEY === 'YOUR_ACCESS_KEY_HERE') {
-                showFeedback(
-                    'Erro de configuração. Por favor, entre em contato pelo WhatsApp.',
-                    'error',
-                    feedback
-                );
-                error('Web3Forms access key não configurada');
-                return;
-            }
-
             // Valida Turnstile
             let turnstileToken = '';
             if (typeof turnstile !== 'undefined' && turnstileWidgetId !== null) {
@@ -196,7 +174,6 @@
 
             // Desabilita botão e mostra loading
             submitButton.disabled = true;
-            const originalButtonText = submitButton.textContent;
             submitButton.textContent = 'Enviando...';
             feedback.style.display = 'none';
 
@@ -217,7 +194,7 @@
                     feedback
                 );
                 submitButton.disabled = false;
-                submitButton.textContent = 'Enviar mensagem';
+                submitButton.textContent = originalButtonText;
                 return;
             }
 
@@ -229,7 +206,7 @@
                     feedback
                 );
                 submitButton.disabled = false;
-                submitButton.textContent = 'Enviar mensagem';
+                submitButton.textContent = originalButtonText;
                 return;
             }
 
@@ -242,110 +219,63 @@
                     feedback
                 );
                 submitButton.disabled = false;
-                submitButton.textContent = 'Enviar mensagem';
+                submitButton.textContent = originalButtonText;
                 return;
             }
 
-            // Monta payload para Web3Forms
-            const payload = {
-                access_key: WEB3FORMS_ACCESS_KEY,
-                subject: 'Novo contato via site Hinis',
-                from_name: 'Site Hinis',
+            // Monta payload para Google Sheets
+            const utmData = (typeof window.HinisUTM !== 'undefined') ? window.HinisUTM.format() : {};
+            const sheetsPayload = {
+                data_hora: new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
                 nome: dados.nome,
                 email: dados.email,
                 telefone: dados.telefone,
                 programa: dados.programa,
-                botcheck: ''
+                landing_page: window.location.href,
+                referrer: utmData.referrer || document.referrer || 'direct',
+                utm_source: utmData.utm_source || '',
+                utm_medium: utmData.utm_medium || '',
+                utm_campaign: utmData.utm_campaign || '',
+                utm_term: utmData.utm_term || '',
+                utm_content: utmData.utm_content || '',
+                gclid: utmData.gclid || '',
+                fbclid: utmData.fbclid || ''
             };
 
-            // Adiciona dados UTM se disponíveis
-            if (typeof window.HinisUTM !== 'undefined') {
-                const utmData = window.HinisUTM.format();
-                Object.assign(payload, utmData);
-                log('✓ Dados UTM adicionados ao envio:', utmData);
-            }
+            log('Enviando dados para Google Sheets:', sheetsPayload);
 
-            log('Enviando dados para Web3Forms:', payload);
-
-            // Envia para Web3Forms API
-            const response = await fetch(WEB3FORMS_URL, {
+            // Envia para Google Sheets (no-cors — resposta opaca, tratamos como sucesso se não houver erro de rede)
+            await fetch(GOOGLE_SHEETS_URL, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(payload)
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(sheetsPayload)
             });
 
-            const result = await response.json();
-            log('Resposta Web3Forms:', result);
+            log('✓ Dados enviados para Google Sheets');
 
-            if (result.success) {
-                // Registra envio para Rate Limiting
-                recordSubmissionAttempt();
+            // Registra envio para Rate Limiting
+            recordSubmissionAttempt();
 
-                showFeedback(
-                    'Mensagem enviada com sucesso! Retornaremos em breve.',
-                    'success',
-                    feedback
-                );
+            showFeedback(
+                'Mensagem enviada com sucesso! Retornaremos em breve.',
+                'success',
+                feedback
+            );
 
-                // Envia para Google Sheets (em paralelo, sem bloquear)
-                try {
-                    const utmData = (typeof window.HinisUTM !== 'undefined') ? window.HinisUTM.format() : {};
-                    const sheetsPayload = {
-                        data_hora: new Date().toLocaleString('pt-BR', {timeZone: 'America/Sao_Paulo'}),
-                        nome: dados.nome,
-                        email: dados.email,
-                        telefone: dados.telefone,
-                        programa: dados.programa,
-                        landing_page: window.location.href,
-                        referrer: utmData.referrer || document.referrer || 'direct',
-                        utm_source: utmData.utm_source || '',
-                        utm_medium: utmData.utm_medium || '',
-                        utm_campaign: utmData.utm_campaign || '',
-                        utm_term: utmData.utm_term || '',
-                        utm_content: utmData.utm_content || '',
-                        gclid: utmData.gclid || '',
-                        fbclid: utmData.fbclid || ''
-                    };
-                    fetch(GOOGLE_SHEETS_URL, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(sheetsPayload)
-                    });
-                    log('✓ Dados enviados para Google Sheets');
-                } catch (sheetsError) {
-                    log('Erro ao enviar para Google Sheets:', sheetsError);
-                }
+            // Envia evento para Google Analytics
+            if (typeof window.HinisUTM !== 'undefined') {
+                window.HinisUTM.sendEvent('form_submission', {
+                    form_type: dados.programa ? 'contato_com_programa' : 'contato_rapido',
+                    programa_selecionado: dados.programa || 'não informado'
+                });
+            }
 
-                // Envia evento para Google Analytics
-                if (typeof window.HinisUTM !== 'undefined') {
-                    window.HinisUTM.sendEvent('form_submission', {
-                        form_type: dados.programa ? 'contato_com_programa' : 'contato_rapido',
-                        programa_selecionado: dados.programa || 'não informado'
-                    });
-                }
+            form.reset();
 
-                form.reset();
-
-                // Reinjeta a access key após reset
-                const keyField = form.querySelector('#web3formsKey');
-                if (keyField) {
-                    keyField.value = WEB3FORMS_ACCESS_KEY;
-                }
-
-                // Reseta Turnstile após envio
-                if (typeof turnstile !== 'undefined' && turnstileWidgetId !== null) {
-                    turnstile.reset(turnstileWidgetId);
-                }
-            } else {
-                showFeedback(
-                    result.message || 'Erro ao enviar mensagem. Tente novamente ou entre em contato pelo WhatsApp.',
-                    'error',
-                    feedback
-                );
+            // Reseta Turnstile após envio
+            if (typeof turnstile !== 'undefined' && turnstileWidgetId !== null) {
+                turnstile.reset(turnstileWidgetId);
             }
 
             submitButton.disabled = false;
@@ -361,7 +291,7 @@
             );
 
             submitButton.disabled = false;
-            submitButton.textContent = originalButtonText;
+            submitButton.textContent = originalButtonText || 'Enviar mensagem';
         }
     }
 

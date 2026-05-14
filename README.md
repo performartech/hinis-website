@@ -16,8 +16,9 @@ Elevar a autoestima feminina respeitando o tempo, a história e o corpo de cada 
 
 ### 1. **Essentia** - Você, no seu tempo
 - Foco: Autocuidado integrado à rotina diária
-- Formato: Digital com mentoria
-- Componentes: Vídeos curtos, exercícios práticos, planner físico, mentoria individualizada
+- Formato: Digital (acesso vitalício, duração sugerida de 8 semanas)
+- Componentes: Conteúdos em vídeo, exercícios versáteis, book digital
+- Venda: Hotmart (`https://hotmart.com/pt-br/marketplace/produtos/essentia-voce-no-seu-tempo/M104765364P`)
 
 ### 2. **Refugium** - De você, para você
 - Foco: Experiência imersiva e sensorial
@@ -36,10 +37,10 @@ Elevar a autoestima feminina respeitando o tempo, a história e o corpo de cada 
 - **JavaScript (Vanilla)** - Interatividade sem dependências externas
 - **Google Fonts** - Playfair Display + Montserrat
 - **Lucide Icons** - Ícones SVG via CDN
-- **Web3Forms** - Envio de formulários via API REST
 - **Cloudflare Turnstile** - Proteção contra spam (validação frontend)
 - **Google Sheets** - Armazenamento de leads via Apps Script
 - **Google Analytics 4** - Monitoramento de conversões
+- **Hotmart** - Plataforma de venda do programa Essentia
 - **Cloudflare Pages** - Hospedagem e CDN
 
 ## Estrutura do Projeto
@@ -80,9 +81,8 @@ Hinis/
 
 ### Arquitetura
 - **Frontend**: HTML5 + JavaScript (form-handler.js)
-- **Email**: Web3Forms API (REST, JSON)
-- **Leads**: Google Sheets via Apps Script (envio paralelo)
-- **Anti-spam**: Cloudflare Turnstile (validação frontend) + campo honeypot
+- **Leads**: Google Sheets via Apps Script (único destino de envio)
+- **Anti-spam**: Cloudflare Turnstile (validação frontend)
 - **Analytics**: Google Analytics 4 (eventos customizados)
 
 ### Tipos de formulário
@@ -90,7 +90,7 @@ Hinis/
 - **Popup modal** — usado em Refugium e Amicae, com programa pré-selecionado
 
 ### Funcionalidades
-- Envio para Web3Forms API (email) e Google Sheets (lead) em paralelo
+- Envio para Google Sheets via Apps Script
 - Cloudflare Turnstile como validação anti-bot no frontend
 - Validação de e-mail, telefone (mínimo 10 dígitos) e campos obrigatórios
 - Máscara automática de telefone (XX) XXXXX-XXXX
@@ -118,13 +118,6 @@ Hinis/
 | fbclid | Facebook/Meta click ID |
 
 ### Configuração
-A access key do Web3Forms está em `js/config.js`:
-```javascript
-const CONFIG = {
-    WEB3FORMS_ACCESS_KEY: 'sua-access-key-aqui'
-};
-```
-
 A URL do Google Sheets Apps Script está em `js/form-handler.js` na constante `GOOGLE_SHEETS_URL`.
 
 ## Componentes Reutilizáveis
@@ -194,6 +187,14 @@ cd hinis-website
 - **Telefone**: (21) 2266-2474
 - **WhatsApp**: +55 21 99404-1648
 - **Instagram**: [@drahexandrahertel](https://www.instagram.com/drahexandrahertel/)
+
+## Pendências conhecidas
+
+- **OG image do Amicae quebrada**: `programas/amicae.html` referencia `assets/img/Amicae - retrato.png` que não existe. O arquivo correto é `BFF - retrato.png`.
+- **Número de telefone inconsistente**: `politica-privacidade.html` usa +55 21 98860-2474 (ofuscado em Base64 `KzU1MjE5ODg2MDI0NzQ=`) enquanto o restante do site usa +55 21 99404-1648. Verificar qual é o correto.
+- **Placeholder em produção**: `politica-privacidade.html` tem `[Endereço da sede]` como texto literal na seção do DPO.
+- **Telefone exposto no FAQ**: `faq.html` tem o número WhatsApp hardcoded no href (`wa.me/5521994041648`) sem usar o sistema de proteção Base64 (`data-phone` + `phone-protection.js`).
+- **Imagem órfã**: `assets/img/Hinis-home-retrato.png` existe mas não é referenciada em nenhuma página.
 
 ---
 
