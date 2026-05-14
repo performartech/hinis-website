@@ -271,6 +271,29 @@
                 });
             }
 
+            // Push para GTM dataLayer — Conversões Otimizadas (Google Ads Enhanced Conversions + Meta Advanced Matching)
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                event: 'generate_lead',
+                user_data: {
+                    email_address: dados.email.toLowerCase().trim(),
+                    phone_number: '+55' + telefoneSomenteNumeros,
+                    first_name: dados.nome.split(' ')[0].toLowerCase().trim(),
+                    last_name: dados.nome.split(' ').slice(1).join(' ').toLowerCase().trim()
+                },
+                lead_data: {
+                    programa: dados.programa,
+                    landing_page: window.location.href,
+                    utm_source: utmData.utm_source || '',
+                    utm_medium: utmData.utm_medium || '',
+                    utm_campaign: utmData.utm_campaign || '',
+                    utm_term: utmData.utm_term || '',
+                    utm_content: utmData.utm_content || '',
+                    gclid: utmData.gclid || '',
+                    fbclid: utmData.fbclid || ''
+                }
+            });
+
             form.reset();
 
             // Reseta Turnstile após envio
