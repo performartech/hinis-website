@@ -43,9 +43,9 @@
  * e ajusta paths automaticamente
  */
 function getBasePath() {
-    const path = window.location.pathname;
-    const isInSubfolder = path.includes('/programas/');
-    return isInSubfolder ? '../' : '';
+    const parts = window.location.pathname.split('/').filter(Boolean);
+    const depth = Math.max(0, parts.length - 1);
+    return depth > 0 ? '../'.repeat(depth) : '';
 }
 
 /**
@@ -57,14 +57,8 @@ function adjustPaths(html, basePath) {
     // Ajustar src de imagens
     html = html.replace(/src="assets\//g, `src="${basePath}assets/`);
 
-    // Ajustar href de links (exceto âncoras #)
+    // Ajustar href de links (exceto âncoras # e URLs absolutas)
     html = html.replace(/href="(?!#|https?:\/\/|mailto:|tel:)([^"]*)"/g, (match, path) => {
-        if (path.startsWith('programas/')) {
-            // Se já começa com programas/ e estamos em subpasta,
-            // extrair apenas o nome do arquivo
-            const fileName = path.split('/').pop();
-            return `href="${fileName}"`;
-        }
         return `href="${basePath}${path}"`;
     });
 

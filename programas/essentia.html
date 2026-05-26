@@ -40,7 +40,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <title>Essentia - Hinis</title>
     <link rel="icon" type="image/png" href="../assets/logo/Ativo-1.png">
-    <link rel="stylesheet" href="../css/styles.css?v=2.1.0">
+    <link rel="stylesheet" href="../css/styles.css?v=2.5.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -58,7 +58,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <section class="hero hero-programas hero-essentia">
         <div class="hero-content">
             <div class="container">
-                <span class="programa-badge">Mude com simplicidade</span>
+                <a href="#cta" class="programa-badge-link"><span class="programa-badge">Mude com simplicidade</span></a>
                 <h1 class="hero-title">Essentia</h1>
                 <p class="hero-subtitle">Você, no seu tempo</p>
             </div>
@@ -136,10 +136,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
 
             <!-- CTA -->
-            <div class="cta-final">
+            <div class="cta-final" id="cta">
                 <h2>Comece sua jornada hoje</h2>
                 <p>Transforme sua relação com o espelho e consigo mesma</p>
-                <a href="https://hotmart.com/pt-br/marketplace/produtos/essentia-voce-no-seu-tempo/M104765364P" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">Cuide de você como ninguém mais</a>
+                <a onclick="return false;" href="https://pay.hotmart.com/M104765364P?checkoutMode=2" class="btn btn-primary btn-large hotmart-fb hotmart__button-checkout">Cuide de você como ninguém mais</a>
                 <p class="cta-info">Acesso imediato após a inscrição</p>
             </div>
 
@@ -173,8 +173,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="../js/utm-tracker.js?v=1.0.0"></script>
-    <script src="../js/load-components.js?v=2.0.0"></script>
+    <script src="../js/load-components.js?v=2.1.0"></script>
     <script src="../js/script.js?v=2.0.0"></script>
+
+    <!-- Hotmart Lightbox -->
+    <script type="text/javascript">
+        function importHotmart() {
+            var imported = document.createElement('script');
+            imported.src = 'https://static.hotmart.com/checkout/widget.min.js';
+            document.head.appendChild(imported);
+        }
+        importHotmart();
+    </script>
 
     <!-- Schema.org structured data -->
     <script type="application/ld+json">

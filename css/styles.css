@@ -1090,6 +1090,25 @@ section {
     color: var(--secondary-color);
 }
 
+.footer-legal {
+    padding: var(--spacing-sm) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+}
+
+.footer-disclaimer {
+    color: #909090;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    max-width: 720px;
+    margin: 0 auto 0.5rem;
+}
+
+.footer-company {
+    color: #707070;
+    font-size: 0.72rem;
+}
+
 .footer-bottom {
     text-align: center;
     padding-top: var(--spacing-sm);
@@ -1150,6 +1169,10 @@ section {
     z-index: 2;
 }
 
+.hero-programas .hero-title {
+    margin-bottom: var(--spacing-xs);
+}
+
 /* Backgrounds específicos por programa */
 .hero-essentia {
     background-image: url('../assets/img/Essencia - retrato.png');
@@ -1168,7 +1191,7 @@ section {
 }
 
 .hero-amicae {
-    background-image: url('../assets/img/BFF - retrato.png');
+    background-image: url('../assets/img/Amicae - retrato.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -1292,6 +1315,21 @@ section {
 
 .programa-badge.community {
     background-color: var(--primary-color);
+}
+
+.programa-badge.success {
+    background-color: #27ae60;
+}
+
+.programa-badge-link {
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.programa-badge-link:hover .programa-badge {
+    opacity: 0.85;
+    transition: opacity 0.2s;
 }
 
 .programa-header-text h2 {
@@ -1574,7 +1612,7 @@ section {
     }
 
     .hero-amicae {
-        background-image: url('../assets/img/BFF - retrato.png') !important;
+        background-image: url('../assets/img/Amicae - retrato.png') !important;
         background-size: cover !important;
         background-position: center !important;
         background-attachment: scroll !important;

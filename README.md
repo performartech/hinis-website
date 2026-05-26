@@ -18,7 +18,9 @@ Elevar a autoestima feminina respeitando o tempo, a história e o corpo de cada 
 - Foco: Autocuidado integrado à rotina diária
 - Formato: Digital (acesso vitalício, duração sugerida de 8 semanas)
 - Componentes: Conteúdos em vídeo, exercícios versáteis, book digital
-- Venda: Hotmart (`https://hotmart.com/pt-br/marketplace/produtos/essentia-voce-no-seu-tempo/M104765364P`)
+- Venda: Hotmart Lightbox (checkout transparente embutido no site via widget)
+- Produto Hotmart: `M104765364P`
+- Pós-compra: redireciona para `/programas/essentia/bem-vinda` com evento `purchase` no dataLayer
 
 ### 2. **Refugium** - De você, para você
 - Foco: Experiência imersiva e sensorial
@@ -39,8 +41,9 @@ Elevar a autoestima feminina respeitando o tempo, a história e o corpo de cada 
 - **Lucide Icons** - Ícones SVG via CDN
 - **Cloudflare Turnstile** - Proteção contra spam (validação frontend)
 - **Google Sheets** - Armazenamento de leads via Apps Script
-- **Google Analytics 4** - Monitoramento de conversões
-- **Hotmart** - Plataforma de venda do programa Essentia
+- **Google Tag Manager** - Gerenciamento de tags (GTM-WMKVWGKF)
+- **Google Analytics 4** - Monitoramento de tráfego e conversões (G-QEBQDXDXLV)
+- **Hotmart** - Plataforma de venda do programa Essentia (Lightbox embutido)
 - **Cloudflare Pages** - Hospedagem e CDN
 
 ## Estrutura do Projeto
@@ -56,7 +59,9 @@ Hinis/
 ├── programas/
 │   ├── essentia.html           # Programa Essentia
 │   ├── refugium.html           # Programa Refugium
-│   └── amicae.html             # Programa Amicae
+│   ├── amicae.html             # Programa Amicae
+│   └── essentia/
+│       └── bem-vinda.html      # Página de obrigado pós-compra (noindex)
 ├── components/
 │   ├── header.html             # Navegação reutilizável
 │   ├── footer.html             # Rodapé reutilizável
@@ -64,7 +69,7 @@ Hinis/
 ├── css/
 │   └── styles.css              # Estilos globais
 ├── js/
-│   ├── config.js               # Access key Web3Forms
+│   ├── config.js               # Arquivo vazio (não referenciar nas páginas HTML)
 │   ├── script.js               # Menu, scroll, FAQ, carrossel, modal popup
 │   ├── form-handler.js         # Envio e validação do formulário
 │   ├── load-components.js      # Carregador dinâmico de componentes
@@ -83,7 +88,7 @@ Hinis/
 - **Frontend**: HTML5 + JavaScript (form-handler.js)
 - **Leads**: Google Sheets via Apps Script (único destino de envio)
 - **Anti-spam**: Cloudflare Turnstile (validação frontend)
-- **Analytics**: Google Analytics 4 (eventos customizados)
+- **Analytics**: Google Analytics 4 + GTM (eventos customizados, Enhanced Conversions e Meta Advanced Matching via dataLayer)
 
 ### Tipos de formulário
 - **Inline** — usado na homepage, contato e programas (componente `form-contato.html`)
@@ -125,9 +130,10 @@ A URL do Google Sheets Apps Script está em `js/form-handler.js` na constante `G
 O projeto usa **arquitetura baseada em componentes** carregados via `load-components.js`:
 
 - **Header** - Navegação responsiva com menu hambúrguer e dropdown
-- **Footer** - Contato, links institucionais, copyright
+- **Footer** - Links institucionais, redes sociais, disclaimer legal, dados empresariais (Razão Social, CNPJ, endereço), copyright
 - **Formulário** - Componente inline usado em index, programas e contato
 - **Modal popup** - Formulário em popup nas páginas Refugium e Amicae (com programa pré-selecionado)
+- **Badge do hero clicável** - Nas 3 páginas de programa, o badge no topo da hero leva diretamente à seção de conversão (`#cta`)
 
 Os componentes são carregados via `fetch()` assíncrono. Um fallback inline existe para protocolo `file://`.
 
@@ -184,15 +190,13 @@ cd hinis-website
 
 - **Website**: https://hinis.com.br
 - **E-mail**: contato@hinis.com.br
-- **Telefone**: (21) 2266-2474
+- **Telefone**: (21) 2244-2474
 - **WhatsApp**: +55 21 99404-1648
 - **Instagram**: [@drahexandrahertel](https://www.instagram.com/drahexandrahertel/)
 
 ## Pendências conhecidas
 
-- **OG image do Amicae quebrada**: `programas/amicae.html` referencia `assets/img/Amicae - retrato.png` que não existe. O arquivo correto é `BFF - retrato.png`.
 - **Número de telefone inconsistente**: `politica-privacidade.html` usa +55 21 98860-2474 (ofuscado em Base64 `KzU1MjE5ODg2MDI0NzQ=`) enquanto o restante do site usa +55 21 99404-1648. Verificar qual é o correto.
-- **Placeholder em produção**: `politica-privacidade.html` tem `[Endereço da sede]` como texto literal na seção do DPO.
 - **Telefone exposto no FAQ**: `faq.html` tem o número WhatsApp hardcoded no href (`wa.me/5521994041648`) sem usar o sistema de proteção Base64 (`data-phone` + `phone-protection.js`).
 - **Imagem órfã**: `assets/img/Hinis-home-retrato.png` existe mas não é referenciada em nenhuma página.
 
