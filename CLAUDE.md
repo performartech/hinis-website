@@ -103,6 +103,18 @@ Números em uso:
 
 Nas 3 páginas de programa, o badge do hero é um link (`<a href="#cta" class="programa-badge-link">`) que faz scroll até a seção de conversão. O `.cta-final` de cada página tem `id="cta"` — não remover sem atualizar o `href` do badge.
 
+### Landing page de vendas — Essentia
+
+- Caminho: `lp/essentia.html` (1 nível — usa `../` para todos os paths)
+- `noindex, nofollow` — tráfego pago, não indexar
+- **Sem header/footer de componentes** — layout autônomo para manter foco na conversão
+- Header mínimo (logo apenas, sem links de navegação)
+- Footer mínimo inline (disclaimer legal + dados da empresa)
+- Estilos LP em bloco `<style>` inline na própria página — não adicionar ao `styles.css`
+- 3 CTAs Hotmart Lightbox (hero, seção intermediária, CTA final com `id="cta"`)
+- Seção de depoimentos com placeholders — **substituir por depoimentos reais antes de divulgar**
+- Inclui `utm-tracker.js` e `script.js` (FAQ); não inclui `load-components.js` nem `phone-protection.js`
+
 ### Página de obrigado — Essentia
 
 - Caminho: `programas/essentia/bem-vinda.html` (2 níveis — usa `../../` para todos os paths)

@@ -62,6 +62,8 @@ Hinis/
 │   ├── amicae.html             # Programa Amicae
 │   └── essentia/
 │       └── bem-vinda.html      # Página de obrigado pós-compra (noindex)
+├── lp/
+│   └── essentia.html           # Landing page de vendas Essentia (noindex, sem nav)
 ├── components/
 │   ├── header.html             # Navegação reutilizável
 │   ├── footer.html             # Rodapé reutilizável
