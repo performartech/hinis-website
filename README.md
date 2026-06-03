@@ -7,7 +7,7 @@ Hinis é uma plataforma digital dedicada ao empoderamento feminino através do a
 **Site**: https://hinis.com.br
 
 ### Gênero da marca
-**Hinis é sempre feminino** — use "a Hinis", "da Hinis", "na Hinis". Nunca "o Hinis" ou "do Hinis".
+**Hinis é sempre feminino** — use "a Hinis", "da Hinis", "na Hinis", "pela Hinis". Nunca "o Hinis", "do Hinis" ou "no Hinis". A concordância verbal e adjetival também deve ser feminina: "a Hinis está comprometida" (não "comprometido"), "a Hinis nasceu" (não "o Hinis nasceu").
 
 ### Missão
 Elevar a autoestima feminina respeitando o tempo, a história e o corpo de cada mulher, oferecendo caminhos práticos e acessíveis para o autocuidado integral.
@@ -24,7 +24,7 @@ Elevar a autoestima feminina respeitando o tempo, a história e o corpo de cada 
 
 ### 2. **Refugium** - De você, para você
 - Foco: Experiência imersiva e sensorial
-- Formato: Retiro presencial (turmas anuais, grupos pequenos)
+- Formato: Retiro presencial (turmas semestrais, grupos pequenos)
 - Componentes: Experiências sensoriais, acompanhamento especializado, práticas transformadoras
 
 ### 3. **Amicae** - De você para elas. Delas para você

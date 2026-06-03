@@ -19,7 +19,7 @@ Documentos de brand em `docs/`. Ao escrever copy, consultar:
 
 ## Regras da marca
 
-- **Hinis é sempre feminino:** "a Hinis", "da Hinis", "na Hinis" — nunca "o Hinis"
+- **Hinis é sempre feminino:** "a Hinis", "da Hinis", "na Hinis", "na Hinis", "pela Hinis" — nunca "o Hinis", "do Hinis", "no Hinis". A concordância verbal e adjetival também deve seguir o feminino: "a Hinis está comprometida" (não "comprometido"), "a Hinis nasceu" (não "o Hinis nasceu").
 - **Tom:** acolhedor, direto, sem culpa, sem exageros, respeitoso com o tempo e o corpo de cada mulher
 - **Público-alvo:** mulheres de 30–60 anos em alta sobrecarga familiar ou profissional
 
