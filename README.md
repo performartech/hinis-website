@@ -63,7 +63,9 @@ Hinis/
 │   └── essentia/
 │       └── bem-vinda.html      # Página de obrigado pós-compra (noindex)
 ├── lp/
-│   └── essentia.html           # Landing page de vendas Essentia (noindex, sem nav)
+│   ├── essentia.html           # Landing page de vendas Essentia v1 (noindex, sem nav)
+│   ├── essentia-v2.html        # LP v2 — otimizada para conversão, CTAs âncora para #investimento
+│   └── essentia-v3.html        # LP v3 — hero em 2 colunas com card de preço à direita
 ├── components/
 │   ├── header.html             # Navegação reutilizável
 │   ├── footer.html             # Rodapé reutilizável

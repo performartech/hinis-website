@@ -103,17 +103,43 @@ Números em uso:
 
 Nas 3 páginas de programa, o badge do hero é um link (`<a href="#cta" class="programa-badge-link">`) que faz scroll até a seção de conversão. O `.cta-final` de cada página tem `id="cta"` — não remover sem atualizar o `href` do badge.
 
-### Landing page de vendas — Essentia
+### Landing pages de vendas — Essentia
 
-- Caminho: `lp/essentia.html` (1 nível — usa `../` para todos os paths)
+Todas as LPs do Essentia compartilham:
+- Caminho em `lp/` (1 nível — usa `../` para todos os paths)
 - `noindex, nofollow` — tráfego pago, não indexar
 - **Sem header/footer de componentes** — layout autônomo para manter foco na conversão
-- Header mínimo (logo apenas, sem links de navegação)
-- Footer mínimo inline (disclaimer legal + dados da empresa)
-- Estilos LP em bloco `<style>` inline na própria página — não adicionar ao `styles.css`
-- 3 CTAs Hotmart Lightbox (hero, seção intermediária, CTA final com `id="cta"`)
-- Seção de depoimentos com placeholders — **substituir por depoimentos reais antes de divulgar**
+- Header mínimo (logo apenas) + footer mínimo inline (disclaimer legal + dados da empresa)
+- Estilos em bloco `<style>` inline na própria página — não adicionar ao `styles.css`
 - Inclui `utm-tracker.js` e `script.js` (FAQ); não inclui `load-components.js` nem `phone-protection.js`
+
+#### `lp/essentia.html` — v1 (original)
+- 3 CTAs Hotmart Lightbox (hero, seção intermediária, CTA final com `id="cta"`)
+- Depoimentos reais (sem nomes dos autores)
+
+#### `lp/essentia-v2.html` — v2 (otimizada para conversão)
+- Framework AIDA: problema → transformação → autoridade → mecanismo → value stack → temas → para quem → depoimentos → **preço → FAQ → CTA final**
+- **Padrão de CTA:** todos os botões são âncoras para `#investimento` — **apenas o botão dentro da seção `#investimento` abre o Hotmart Lightbox**
+- Seção `#investimento` posicionada após depoimentos (prova social) e antes do FAQ (última objeção)
+- Sticky CTA mobile (aparece após rolar além do hero)
+- Numbers bar (dark background com 4 métricas)
+
+#### `lp/essentia-v3.html` — v3 (hero com card de preço)
+- Idêntica à v2 com uma diferença estrutural no hero: **layout em 2 colunas**
+  - Esquerda (`1fr`): texto do hero
+  - Direita (`minmax(320px, 460px)`): card de investimento com botão Hotmart Lightbox
+- O card do hero usa os mesmos estilos base `.lp-preco-*` do card da seção `#investimento`
+- **⚠️ Atenção CSS:** usar `.lp-hero-content p` (não `.lp-hero p`) para estilos de texto do hero — evita vazamento de `color` e `font-size` para dentro do card
+- `.lp-hero-card` sobrescreve **apenas cores** (herdadas do contexto escuro do hero); métricas de espaçamento e tipografia vêm dos estilos base
+
+#### Componente de preço `.lp-preco-box` (v2 e v3)
+Card reutilizável compartilhado por todas as ocorrências nas LPs. Ao editar a aparência, editar os estilos base `.lp-preco-*` — não criar overrides por seção. Estrutura:
+- `.lp-preco-inclui` + `.lp-preco-inclui-list` — lista de itens inclusos (bullets centralizados com `width: fit-content; margin: 0 auto`)
+- `.lp-preco-parcela` — preço em destaque (fonte `4.5rem`, família secondary)
+- `.lp-preco-parcela-info` — parcelamento
+- `.lp-preco-avista` — valor à vista
+- `.lp-preco-comparacao` — comparação de valor (`0.6rem`)
+- `.lp-preco-garantia` — linha de garantia com ícone
 
 ### Página de obrigado — Essentia
 
