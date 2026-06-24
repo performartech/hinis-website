@@ -113,7 +113,7 @@ Todas as LPs do Essentia compartilham:
 - Estilos em bloco `<style>` inline na própria página — não adicionar ao `styles.css`
 - Inclui `utm-tracker.js` e `script.js` (FAQ); não inclui `load-components.js` nem `phone-protection.js`
 
-#### `lp/essentia.html` — v1 (original)
+#### `lp/essentia-v0.html` — v0 (original, legado)
 - 3 CTAs Hotmart Lightbox (hero, seção intermediária, CTA final com `id="cta"`)
 - Depoimentos reais (sem nomes dos autores)
 
@@ -124,7 +124,7 @@ Todas as LPs do Essentia compartilham:
 - Sticky CTA mobile (aparece após rolar além do hero)
 - Numbers bar (dark background com 4 métricas)
 
-#### `lp/essentia-v3.html` — v3 (hero com card de preço)
+#### `lp/essentia.html` — v3 (versão principal atual)
 - Idêntica à v2 com uma diferença estrutural no hero: **layout em 2 colunas**
   - Esquerda (`1fr`): texto do hero
   - Direita (`minmax(320px, 460px)`): card de investimento com botão Hotmart Lightbox
