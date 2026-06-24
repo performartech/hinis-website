@@ -27,14 +27,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="dns-prefetch" href="https://unpkg.com">
     <style>
-        /* =============================================
-           LANDING PAGE ESSENTIA — estilos específicos
-           ============================================= */
+        /* ============================================================
+           LANDING PAGE ESSENTIA V2
+           ============================================================ */
 
-        /* Previne linha branca lateral no mobile (html não herda overflow-x do body) */
         html { overflow-x: hidden; }
 
-        /* Header mínimo — logo apenas, sem navegação */
+        /* ── Header mínimo ── */
         .lp-header {
             background: var(--dark-color);
             padding: 0.85rem 2rem;
@@ -46,7 +45,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }
         .lp-logo { height: 34px; }
 
-        /* ── Hero ──────────────────────────────────── */
+        /* ── Hero ── */
         .lp-hero {
             min-height: 92vh;
             display: flex;
@@ -63,17 +62,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             inset: 0;
             background: linear-gradient(
                 105deg,
-                rgba(30,32,45,0.88) 0%,
-                rgba(30,32,45,0.55) 55%,
+                rgba(30,32,45,0.93) 0%,
+                rgba(30,32,45,0.6) 55%,
                 rgba(30,32,45,0.2) 100%
             );
         }
-        .lp-hero-content {
+        .lp-hero-inner {
             position: relative;
             z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr minmax(320px, 460px);
+            gap: 2.5rem;
+            align-items: center;
+            padding: var(--spacing-md);
+            width: 100%;
+        }
+        .lp-hero-content {
             color: var(--white);
-            max-width: 640px;
-            padding: var(--spacing-md) var(--spacing-md);
+            min-width: 0;
+        }
+        .lp-hero-card {
+            min-width: 0;
+        }
+        .lp-hero-card .lp-preco-box {
+            max-width: 100%;
         }
         .lp-hero-badge {
             display: inline-block;
@@ -94,29 +106,36 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             color: var(--white);
             margin-bottom: var(--spacing-sm);
         }
-        .lp-hero p {
+        .lp-hero-content p {
             font-size: clamp(1rem, 1.8vw, 1.15rem);
             color: rgba(255,255,255,0.85);
             margin-bottom: var(--spacing-md);
             line-height: 1.65;
-            max-width: 520px;
+            max-width: 540px;
         }
         .lp-hero-content .btn {
             display: block;
             width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
         }
         .lp-hero-meta {
             font-size: clamp(0.55rem, 2vw, 0.82rem);
             color: rgba(255,255,255,0.5);
             margin-top: 0.85rem;
             letter-spacing: 0.3px;
-            text-align: center;
             white-space: nowrap;
         }
 
-        /* ── Faixa de credibilidade ─────────────────── */
+        /* ── Card de preço dentro do hero (v3) — apenas correções de cor ── */
+        .lp-hero-card .lp-preco-box { box-shadow: 0 4px 24px rgba(0,0,0,0.3); }
+        .lp-hero-card p { color: var(--text-light); }
+        .lp-hero-card .lp-preco-inclui h4 { color: var(--text-light); }
+        .lp-hero-card .lp-preco-inclui-list li { color: var(--text-color); font-size: 0.8rem; }
+        .lp-hero-card .lp-preco-label { color: var(--text-light); }
+        .lp-hero-card .lp-preco-parcela { color: var(--dark-color); }
+        .lp-hero-card .lp-preco-avista strong { color: var(--dark-color); }
+        .lp-hero-card .lp-preco-garantia { color: var(--text-light); }
+
+        /* ── Strip credibilidade ── */
         .lp-strip {
             background: var(--primary-color);
             color: white;
@@ -128,7 +147,34 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             line-height: 1.5;
         }
 
-        /* ── Seções ─────────────────────────────────── */
+        /* ── Números / Stats ── */
+        .lp-numeros {
+            background: var(--dark-color);
+            padding: 2rem var(--spacing-md);
+        }
+        .lp-numeros-grid {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+        .lp-numero-item { text-align: center; }
+        .lp-numero-valor {
+            font-family: var(--font-secondary);
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            line-height: 1;
+            display: block;
+        }
+        .lp-numero-label {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.5);
+            margin-top: 0.4rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* ── Seções ── */
         .lp-secao {
             padding: var(--spacing-lg) 0;
         }
@@ -150,15 +196,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             line-height: 1.75;
             margin-bottom: 1.25rem;
         }
+        .lp-secao-cta {
+            text-align: center;
+            margin-top: var(--spacing-md);
+        }
 
-        /* ── Problema ───────────────────────────────── */
+        /* ── Problema ── */
         .lp-problema-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
-        }
-        @media (max-width: 600px) {
-            .lp-problema-grid { grid-template-columns: 1fr; }
         }
         .lp-problema-item {
             background: white;
@@ -183,7 +230,66 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             line-height: 1.55;
         }
 
-        /* ── CTA intermediário e final ──────────────── */
+        /* ── Transformação antes/depois ── */
+        .lp-transformacao-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .lp-antes, .lp-depois {
+            border-radius: 12px;
+            padding: 1.75rem;
+        }
+        .lp-antes {
+            background: #fff7f7;
+            border: 2px solid #fca5a5;
+        }
+        .lp-depois {
+            background: #f6fef9;
+            border: 2px solid var(--secondary-color);
+        }
+        .lp-transformacao-header {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.25rem;
+        }
+        .lp-antes .lp-transformacao-header { color: #dc2626; }
+        .lp-depois .lp-transformacao-header { color: var(--primary-color); }
+        .lp-transformacao-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .lp-transformacao-list li {
+            font-size: 0.93rem;
+            line-height: 1.6;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.07);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.65rem;
+            color: var(--text-color);
+        }
+        .lp-transformacao-list li:last-child { border-bottom: none; }
+        .lp-antes li::before {
+            content: '✕';
+            color: #dc2626;
+            font-weight: 700;
+            flex-shrink: 0;
+            font-size: 0.8rem;
+            margin-top: 3px;
+        }
+        .lp-depois li::before {
+            content: '✓';
+            color: var(--primary-color);
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* ── CTA dark ── */
         .lp-cta-dark {
             background: var(--dark-color);
             padding: var(--spacing-lg) var(--spacing-md);
@@ -206,57 +312,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             font-size: 0.82rem;
         }
 
-        /* ── Garantia ────────────────────────────────── */
-        .lp-garantia {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            background: white;
-            border: 2px solid var(--secondary-color);
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            max-width: 560px;
-            margin: var(--spacing-md) auto 0;
-            text-align: left;
-        }
-        .lp-garantia-icon {
-            color: var(--primary-color);
-            flex-shrink: 0;
-            width: 44px;
-            height: 44px;
-        }
-        .lp-garantia h4 {
-            color: var(--dark-color);
-            font-size: 1rem;
-            margin-bottom: 0.25rem;
-        }
-        .lp-garantia p {
-            color: var(--text-light);
-            font-size: 0.88rem;
-            line-height: 1.55;
-        }
-
-        /* ── Sobre a Dra. ─────────────────────────────── */
+        /* ── Dra. Hexandra ── */
         .lp-dra-grid {
             display: grid;
             grid-template-columns: 200px 1fr;
             gap: var(--spacing-md);
             align-items: center;
-        }
-        .lp-dra-foto-placeholder {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            background: var(--secondary-color);
-            border: 4px solid var(--light-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-        .lp-dra-foto-placeholder svg {
-            width: 64px;
-            height: 64px;
         }
         .lp-dra-foto {
             width: 180px;
@@ -287,69 +348,68 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             font-size: 0.98rem;
         }
 
-        /* ── Depoimentos ──────────────────────────────── */
-        .lp-depoimentos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-        .lp-depoimento {
+        /* ── Mecanismo único ── */
+        .lp-mecanismo-box {
             background: white;
-            padding: 2rem 1.5rem 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.07);
-            position: relative;
+            border: 1px solid rgba(0,0,0,0.07);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 0 12px 12px 0;
+            padding: 2rem 2.5rem;
+            max-width: 760px;
+            margin: 0 auto;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
         }
-        .lp-depoimento::before {
-            content: '\201C';
+        .lp-mecanismo-box h3 {
             font-family: var(--font-secondary);
-            font-size: 5rem;
-            color: var(--secondary-color);
-            position: absolute;
-            top: -0.75rem;
-            left: 1.2rem;
-            line-height: 1;
+            font-size: 1.35rem;
+            color: var(--dark-color);
+            margin-bottom: 0.85rem;
         }
-        .lp-depoimento p {
-            font-style: italic;
+        .lp-mecanismo-box p {
             color: var(--text-color);
-            line-height: 1.65;
-            margin-bottom: 0;
-            font-size: 0.97rem;
+            line-height: 1.78;
+            font-size: 0.98rem;
+            margin: 0;
         }
-        .lp-depoimento-autora {
-            font-size: 0.84rem;
-            font-weight: 600;
+
+        /* ── Value Stack ── */
+        .lp-value-stack {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.85rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .lp-stack-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            padding: 1.25rem 1.5rem;
+            background: white;
+            border-radius: 10px;
+            border: 1px solid rgba(0,0,0,0.07);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .lp-stack-icon {
             color: var(--primary-color);
+            width: 26px;
+            height: 26px;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+        .lp-stack-content h4 {
+            font-size: 1rem;
+            color: var(--dark-color);
+            margin-bottom: 0.2rem;
+        }
+        .lp-stack-content p {
+            font-size: 0.88rem;
+            color: var(--text-light);
+            line-height: 1.55;
+            margin: 0;
         }
 
-        /* ── Footer LP ────────────────────────────────── */
-        .lp-footer {
-            background: #1a1c25;
-            color: #707070;
-            text-align: center;
-            padding: 2rem 1.5rem;
-            line-height: 1.85;
-        }
-        .lp-footer-disclaimer {
-            font-size: 0.73rem;
-            color: #808080;
-            max-width: 700px;
-            margin: 0 auto 0.9rem;
-            line-height: 1.7;
-        }
-        .lp-footer-empresa {
-            font-size: 0.72rem;
-        }
-        .lp-footer a {
-            color: #909090;
-            text-decoration: underline;
-        }
-        .lp-footer a:hover {
-            color: var(--secondary-color);
-        }
-
-        /* ── Temas (substituição do layout padrão da LP) ─── */
+        /* ── Temas ── */
         .lp-temas-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -372,43 +432,291 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             line-height: 1.3;
             transition: border-color 0.2s, transform 0.15s;
         }
-        .lp-tema-card:hover {
-            border-color: var(--primary-color);
-            transform: translateY(-2px);
-        }
+        .lp-tema-card:hover { border-color: var(--primary-color); transform: translateY(-2px); }
         .lp-tema-card:nth-child(4),
-        .lp-tema-card:nth-child(5) {
-            grid-column: span 3;
+        .lp-tema-card:nth-child(5) { grid-column: span 3; }
+        .lp-tema-icon { color: var(--primary-color); width: 28px; height: 28px; flex-shrink: 0; }
+        .lp-tema-card strong { display: block; font-size: 0.95rem; color: var(--dark-color); }
+        .lp-tema-card p { font-size: 0.85rem; color: var(--text-light); line-height: 1.6; font-weight: 400; margin: 0; }
+
+        /* ── Para quem é ── */
+        .lp-para-quem-v2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
         }
-        .lp-tema-icon {
-            color: var(--primary-color);
-            width: 28px;
-            height: 28px;
-            flex-shrink: 0;
-        }
-        .lp-tema-card strong {
-            display: block;
+        .lp-para-quem-item {
+            background: white;
+            border: 1px solid var(--secondary-color);
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
             font-size: 0.95rem;
-            color: var(--dark-color);
+            color: var(--text-color);
+            line-height: 1.55;
         }
-        .lp-tema-card p {
-            font-size: 0.85rem;
+        .lp-check {
+            color: var(--primary-color);
+            font-weight: 700;
+            flex-shrink: 0;
+            font-size: 1.1rem;
+        }
+        .lp-nao-para-quem {
+            margin-top: var(--spacing-md);
+            padding: 1.5rem 2rem;
+            background: rgba(0,0,0,0.03);
+            border-radius: 12px;
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .lp-nao-para-quem h3 {
+            font-size: 0.8rem;
+            font-weight: 700;
             color: var(--text-light);
-            line-height: 1.6;
-            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 0.75rem;
+        }
+        .lp-nao-list {
+            list-style: none;
+            padding: 0;
             margin: 0;
         }
-        .lp-secao-cta {
-            text-align: center;
-            margin-top: var(--spacing-md);
+        .lp-nao-list li {
+            padding: 0.35rem 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
         }
-        .lp-secao--right h2,
-        .lp-secao--right .lp-intro {
-            text-align: right;
-            margin-left: auto;
+        .lp-nao-list li::before {
+            content: '—';
+            flex-shrink: 0;
+            opacity: 0.4;
         }
 
-        /* ── Responsividade ────────────────────────────── */
+        /* ── Depoimentos ── */
+        .lp-depoimentos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .lp-depoimento {
+            background: white;
+            padding: 2rem 1.5rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+            position: relative;
+        }
+        .lp-depoimento::before {
+            content: '\201C';
+            font-family: var(--font-secondary);
+            font-size: 5rem;
+            color: var(--secondary-color);
+            position: absolute;
+            top: -0.75rem;
+            left: 1.2rem;
+            line-height: 1;
+        }
+        .lp-stars {
+            display: block;
+            color: #f59e0b;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            margin-bottom: 0.75rem;
+        }
+        .lp-depoimento p {
+            font-style: italic;
+            color: var(--text-color);
+            line-height: 1.65;
+            margin-bottom: 0;
+            font-size: 0.97rem;
+        }
+
+        /* ── Garantia destacada ── */
+        .lp-garantia-destaque {
+            background: white;
+            border: 3px solid var(--primary-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .lp-garantia-icon-lg {
+            width: 64px;
+            height: 64px;
+            color: var(--primary-color);
+        }
+        .lp-garantia-destaque h3 {
+            font-family: var(--font-secondary);
+            font-size: 1.55rem;
+            color: var(--dark-color);
+            margin: 0.75rem 0 0.5rem;
+        }
+        .lp-garantia-destaque p {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 0.97rem;
+            margin: 0;
+        }
+
+        /* ── Footer ── */
+        .lp-footer {
+            background: #1a1c25;
+            color: #707070;
+            text-align: center;
+            padding: 2rem 1.5rem;
+            line-height: 1.85;
+        }
+        .lp-footer-disclaimer {
+            font-size: 0.73rem;
+            color: #808080;
+            max-width: 700px;
+            margin: 0 auto 0.9rem;
+            line-height: 1.7;
+        }
+        .lp-footer-empresa { font-size: 0.72rem; }
+        .lp-footer a { color: #909090; text-decoration: underline; }
+        .lp-footer a:hover { color: var(--secondary-color); }
+
+        /* ── Investimento / Preço ── */
+        .lp-investimento {
+            padding: 2.5rem 0;
+            background: var(--dark-color);
+        }
+        .lp-investimento h2 {
+            font-family: var(--font-secondary);
+            font-size: clamp(1.35rem, 3vw, 1.9rem);
+            color: var(--white);
+            margin-bottom: 1.25rem;
+            text-align: center;
+        }
+        .lp-preco-box {
+            background: white;
+            border-radius: 16px;
+            padding: 1.1rem 1.35rem;
+            max-width: 460px;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0 8px 48px rgba(0,0,0,0.35);
+        }
+        .lp-preco-inclui {
+            margin-bottom: 0.7rem;
+            padding-bottom: 0.7rem;
+            border-bottom: 1px solid var(--light-color);
+        }
+        .lp-preco-inclui h4 {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-light);
+            margin-bottom: 0.85rem;
+        }
+        .lp-preco-inclui-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto;
+            display: flex;
+            width: fit-content;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        .lp-preco-inclui-list li {
+            font-size: 0.95rem;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            text-align: left;
+        }
+        .lp-preco-inclui-list li::before {
+            content: '✓';
+            color: var(--primary-color);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .lp-preco-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-light);
+            margin-bottom: 0.2rem;
+        }
+        .lp-preco-parcela {
+            font-family: var(--font-secondary);
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            line-height: 1;
+            margin-bottom: 0.65rem;
+        }
+        .lp-preco-parcela sup {
+            font-size: 1rem;
+            vertical-align: super;
+            font-family: var(--font-primary);
+        }
+        .lp-preco-parcela-info {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 0.4rem;
+        }
+        .lp-preco-avista {
+            font-size: 0.87rem;
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--light-color);
+        }
+        .lp-preco-avista strong { color: var(--dark-color); }
+        .lp-preco-comparacao {
+            font-size: 0.6rem;
+            color: var(--text-light);
+            margin-top: 0.45rem;
+            line-height: 1.55;
+        }
+        .lp-preco-garantia {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.65rem;
+            padding-top: 0.65rem;
+            border-top: 1px solid var(--light-color);
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+        .lp-preco-garantia-icon {
+            color: var(--primary-color);
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        /* ── Sticky CTA Mobile ── */
+        .lp-sticky-cta {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 200;
+            background: var(--dark-color);
+            padding: 0.9rem 1.5rem;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+            transform: translateY(100%);
+            transition: transform 0.35s ease;
+        }
+        .lp-sticky-cta.visible { transform: translateY(0); }
+        .lp-sticky-cta a { display: block; text-align: center; width: 100%; }
+
+        /* ── Responsividade ── */
         @media (max-width: 768px) {
             .lp-hero {
                 min-height: 72vh;
@@ -424,44 +732,40 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     rgba(30,32,45,0.15) 100%
                 );
             }
+            .lp-hero-inner {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 2.5rem var(--spacing-md);
+            }
             .lp-hero-content {
                 display: flex;
                 flex-direction: column;
                 text-align: center;
-                max-width: 100%;
                 width: 100%;
-                padding: 3rem var(--spacing-md) 2.5rem;
             }
-            .lp-hero-badge {
-                align-self: center;
-            }
-            .lp-hero-content .btn {
-                margin-top: auto;
-            }
-            .lp-hero-meta {
-                margin-top: 0.85rem;
-            }
+            .lp-hero-badge { align-self: center; }
+            .lp-hero-content .btn { margin-top: auto; align-self: center; }
+            .lp-hero-meta { margin-top: 0.85rem; white-space: normal; }
             .lp-hero p { max-width: 100%; }
-            .lp-dra-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .lp-dra-foto,
-            .lp-dra-foto-placeholder { margin: 0 auto; }
-            .lp-garantia {
-                flex-direction: column;
-                text-align: center;
-            }
+            .lp-hero-card { width: 100%; }
+            .lp-dra-grid { grid-template-columns: 1fr; text-align: center; }
+            .lp-dra-foto { margin: 0 auto; }
+            .lp-transformacao-grid { grid-template-columns: 1fr; }
+            .lp-para-quem-v2 { grid-template-columns: 1fr; }
+            .lp-numeros-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; }
+            .lp-mecanismo-box { border-radius: 12px; padding: 1.5rem; }
+            .lp-garantia-destaque { padding: 1.75rem 1.25rem; }
+            .lp-nao-para-quem { padding: 1.25rem; }
+            .lp-value-stack { max-width: 100%; grid-template-columns: 1fr; }
+            .lp-sticky-cta { display: block; }
         }
         @media (max-width: 600px) {
-            .lp-temas-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .lp-problema-grid { grid-template-columns: 1fr; }
+            .lp-temas-grid { grid-template-columns: repeat(2, 1fr); }
             .lp-tema-card,
             .lp-tema-card:nth-child(4),
-            .lp-tema-card:nth-child(5) {
-                grid-column: span 1;
-            }
+            .lp-tema-card:nth-child(5) { grid-column: span 1; }
+            .lp-numeros-grid { gap: 1.5rem; }
         }
     </style>
 </head>
@@ -471,32 +775,82 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <!-- Header mínimo — sem navegação para manter foco na conversão -->
+    <!-- Header mínimo -->
     <header class="lp-header">
         <img src="../assets/logo/Hinis-logo2.png" alt="Hinis" class="lp-logo">
     </header>
 
-    <!-- ── HERO ───────────────────────────────────────────── -->
+    <!-- ── HERO ───────────────────────────────────────────────── -->
     <section class="lp-hero">
-        <div class="lp-hero-content container">
-            <span class="lp-hero-badge">De onde estiver</span>
-            <h1>O autocuidado que cabe na sua vida</h1>
-            <p>Um caminho prático para você se cuidar de verdade, sem romper a rotina, sem exageros e sem culpa. No seu tempo.</p>
-            <a onclick="return false;"
-               href="https://pay.hotmart.com/M104765364P?checkoutMode=2"
-               class="btn btn-primary btn-large hotmart-fb hotmart__button-checkout">
-               Quero começar agora
-            </a>
-            <p class="lp-hero-meta">Acesso imediato &nbsp;·&nbsp; Programa digital &nbsp;·&nbsp; Pelo tempo que precisar</p>
+        <div class="lp-hero-inner container">
+            <div class="lp-hero-content">
+                <span class="lp-hero-badge">Programa Digital &nbsp;·&nbsp; Acesso Imediato</span>
+                <h1>Você cuida de todo mundo.<br>Chegou a hora de cuidar de você.</h1>
+                <p>O Essentia é um programa digital de autocuidado para mulheres com agendas cheias. Prático, gentil e feito para encaixar na sua vida — sem culpa, sem exageros.</p>
+                <p class="lp-hero-meta">Acesso imediato &nbsp;·&nbsp; De onde estiver &nbsp;·&nbsp; 7 dias de garantia</p>
+            </div>
+            <div class="lp-hero-card">
+                <div class="lp-preco-box">
+                    <div class="lp-preco-inclui">
+                        <h4>Programa Essentia</h4>
+                        <ul class="lp-preco-inclui-list">
+                            <li>8 módulos em vídeo</li>
+                            <li>Exercícios versáteis — sem equipamentos</li>
+                            <li>Book digital de autoconhecimento</li>
+                            <li>Acesso vitalício — sem prazo</li>
+                        </ul>
+                    </div>
+                    <p class="lp-preco-label">A partir de</p>
+                    <div class="lp-preco-parcela">
+                        <sup>R$</sup> 32<sup>,27</sup>
+                    </div>
+                    <p class="lp-preco-parcela-info">por mês &nbsp;·&nbsp; 12 parcelas sem juros</p>
+                    <p class="lp-preco-avista">ou <strong>R$ 312,00</strong> à vista</p>
+                    <a onclick="return false;"
+                       href="https://pay.hotmart.com/M104765364P?checkoutMode=2"
+                       class="btn btn-primary btn-large hotmart-fb hotmart__button-checkout">
+                       Quero começar agora
+                    </a>
+                    <p class="lp-preco-comparacao">Você paga uma vez. Acessa para sempre.</p>
+                    <div class="lp-preco-garantia">
+                        <i data-lucide="shield-check" class="lp-preco-garantia-icon" aria-hidden="true"></i>
+                        7 dias de garantia total · reembolso sem perguntas
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- ── CREDIBILIDADE ──────────────────────────────────── -->
+    <!-- ── STRIP CREDIBILIDADE ────────────────────────────────── -->
     <div class="lp-strip">
-        Um programa digital criado pela Dra. Hexandra Hertel, cirurgiã plástica com mais de 20 anos de experiência clínica atendendo mulheres como você
+        Um programa criado pela Dra. Hexandra Hertel, cirurgiã plástica com mais de 20 anos de experiência atendendo mulheres como você
     </div>
 
-    <!-- ── PROBLEMA ───────────────────────────────────────── -->
+    <!-- ── NÚMEROS ────────────────────────────────────────────── -->
+    <div class="lp-numeros">
+        <div class="container">
+            <div class="lp-numeros-grid">
+                <div class="lp-numero-item">
+                    <span class="lp-numero-valor">8</span>
+                    <span class="lp-numero-label">módulos práticos</span>
+                </div>
+                <div class="lp-numero-item">
+                    <span class="lp-numero-valor">20+</span>
+                    <span class="lp-numero-label">anos de experiência clínica</span>
+                </div>
+                <div class="lp-numero-item">
+                    <span class="lp-numero-valor">7</span>
+                    <span class="lp-numero-label">dias de garantia total</span>
+                </div>
+                <div class="lp-numero-item">
+                    <span class="lp-numero-valor">∞</span>
+                    <span class="lp-numero-label">acesso sem prazo</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── PROBLEMA ───────────────────────────────────────────── -->
     <section class="lp-secao-alt">
         <div class="container">
             <h2>Você se reconhece aqui?</h2>
@@ -521,58 +875,103 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
     </section>
 
-    <!-- ── SOLUÇÃO ─────────────────────────────────────────── -->
-    <section class="lp-secao lp-secao--right">
+    <!-- ── TRANSFORMAÇÃO ANTES/DEPOIS ────────────────────────── -->
+    <section class="lp-secao">
         <div class="container">
-            <h2>O Essentia nasceu para isso</h2>
-            <p class="lp-intro">
-                Com mais de 20 anos de experiência clínica e de estudos aprofundados em autocuidado, a Dra. Hexandra Hertel organizou um caminho que realmente funciona para mulheres com agendas cheias. Não é mais uma lista de hábitos impossíveis. É um programa que respeita o seu tempo, a sua história e o seu corpo.
-            </p>
-            <p class="lp-intro">
-                O Essentia é o coração da Hinis. Pequenos gestos, feitos com constância, que mudam a forma como você se vê e como você vive.
-            </p>
-            <div class="lp-secao-cta">
-                <a onclick="return false;"
-                   href="https://pay.hotmart.com/M104765364P?checkoutMode=2"
-                   class="btn btn-primary hotmart-fb hotmart__button-checkout">
-                   Quero o Essentia
-                </a>
+            <h2>E se fosse diferente?</h2>
+            <div class="lp-transformacao-grid">
+                <div class="lp-antes">
+                    <div class="lp-transformacao-header">Sem a rotina do Essentia</div>
+                    <ul class="lp-transformacao-list">
+                        <li>Saber que deveria se cuidar mais, mas não saber por onde começar</li>
+                        <li>A culpa de colocar você em último lugar, de novo e de novo</li>
+                        <li>Criar rotinas de cuidado e abandoná-las depois de uma semana</li>
+                        <li>Olhar no espelho e sentir uma distância entre você e quem você quer ser</li>
+                    </ul>
+                </div>
+                <div class="lp-depois">
+                    <div class="lp-transformacao-header">Com o Essentia</div>
+                    <ul class="lp-transformacao-list">
+                        <li>Uma rotina de autocuidado que cabe no seu dia, sem exigir horas livres</li>
+                        <li>Cuidar de você sem culpa — porque você aprendeu que isso não é egoísmo</li>
+                        <li>Hábitos simples que se encaixam no que você já faz, e que você consegue manter</li>
+                        <li>Uma relação mais gentil e consciente com o seu corpo e com a sua própria imagem</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- ── O QUE ESTÁ INCLUÍDO ────────────────────────────── -->
+    <!-- ── AUTORIDADE — Dra. Hexandra ────────────────────────── -->
+    <section class="lp-secao-alt">
+        <div class="container">
+            <div class="lp-dra-grid">
+                <img src="../assets/img/Hexandra-58-scaled.jpg" alt="Dra. Hexandra Hertel" class="lp-dra-foto" loading="lazy">
+                <div class="lp-dra-texto">
+                    <h3>Dra. Hexandra Hertel</h3>
+                    <p class="lp-dra-cargo">Cirurgiã Plástica &nbsp;·&nbsp; Criadora da Hinis</p>
+                    <p>Com mais de 20 anos de experiência clínica, a Dra. Hexandra percebeu que muitas mulheres chegavam ao consultório buscando mudanças externas quando, na verdade, precisavam se reconectar consigo mesmas.</p>
+                    <p>Desse entendimento nasceu a Hinis. O Essentia foi o primeiro passo: um programa que leva o que ela aprendeu em décadas de escuta e cuidado para o dia a dia de qualquer mulher. Sem exigências impossíveis. Sem culpa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── MECANISMO ÚNICO ────────────────────────────────────── -->
+    <section class="lp-secao">
+        <div class="container">
+            <h2>Por que o Essentia funciona<br>quando o resto não funcionou</h2>
+            <div class="lp-mecanismo-box">
+                <h3>A maioria das rotinas de autocuidado falha não por falta de força de vontade.</h3>
+                <p>Falha porque foram criadas para pessoas com tempo livre — e você não tem. O Essentia foi criado ao contrário: parte do tempo que você já tem, dos gestos que você já faz, do corpo que você já carrega. Vai construindo, aos poucos, uma relação nova com tudo isso. Sem exigir perfeição. Sem te cobrar o que não é possível para a sua vida real.</p>
+            </div>
+            <div class="lp-secao-cta">
+                <a href="#investimento" class="btn btn-primary">Quero o Essentia</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── O QUE ESTÁ INCLUÍDO — VALUE STACK ─────────────────── -->
     <section class="lp-secao-alt">
         <div class="container">
             <h2>O que você vai encontrar</h2>
-            <div class="componentes-grid">
-                <div class="componente-item">
-                    <i data-lucide="video" class="componente-icon" aria-hidden="true"></i>
-                    <h3>Conteúdos em vídeo</h3>
-                    <p>Práticas guiadas, diretas e simples que cabem na sua rotina. Sem precisar separar horas do seu dia.</p>
+            <div class="lp-value-stack">
+                <div class="lp-stack-item">
+                    <i data-lucide="video" class="lp-stack-icon" aria-hidden="true"></i>
+                    <div class="lp-stack-content">
+                        <h4>Módulos em vídeo</h4>
+                        <p>Práticas guiadas, diretas e simples que cabem na sua rotina. Sem precisar separar horas do seu dia para assistir.</p>
+                    </div>
                 </div>
-                <div class="componente-item">
-                    <i data-lucide="file-text" class="componente-icon" aria-hidden="true"></i>
-                    <h3>Exercícios versáteis</h3>
-                    <p>Atividades que podem ser feitas em qualquer lugar, sem equipamentos e sem horários fixos</p>
+                <div class="lp-stack-item">
+                    <i data-lucide="activity" class="lp-stack-icon" aria-hidden="true"></i>
+                    <div class="lp-stack-content">
+                        <h4>Exercícios versáteis</h4>
+                        <p>Atividades que podem ser feitas em qualquer lugar, sem equipamentos e sem horários fixos. Feitas para encaixar na sua vida, não o contrário.</p>
+                    </div>
                 </div>
-                <div class="componente-item">
-                    <i data-lucide="book-open" class="componente-icon" aria-hidden="true"></i>
-                    <h3>Book digital</h3>
-                    <p>Material pensado para aprofundar o seu autoconhecimento, no seu próprio ritmo.</p>
+                <div class="lp-stack-item">
+                    <i data-lucide="book-open" class="lp-stack-icon" aria-hidden="true"></i>
+                    <div class="lp-stack-content">
+                        <h4>Book digital</h4>
+                        <p>Material para aprofundar o seu autoconhecimento no seu próprio ritmo. Para ler quando quiser, quantas vezes quiser.</p>
+                    </div>
+                </div>
+                <div class="lp-stack-item">
+                    <i data-lucide="infinity" class="lp-stack-icon" aria-hidden="true"></i>
+                    <div class="lp-stack-content">
+                        <h4>Acesso sem prazo</h4>
+                        <p>Você paga uma vez e acessa pelo tempo que precisar. Sem corrida contra o relógio, sem ansiedade de "terminar". No seu ritmo.</p>
+                    </div>
                 </div>
             </div>
             <div class="lp-secao-cta">
-                <a onclick="return false;"
-                   href="https://pay.hotmart.com/M104765364P?checkoutMode=2"
-                   class="btn btn-primary hotmart-fb hotmart__button-checkout">
-                   Quero começar agora
-                </a>
+                <a href="#investimento" class="btn btn-primary">Quero começar agora</a>
             </div>
         </div>
     </section>
 
-    <!-- ── TEMAS ───────────────────────────────────────────── -->
+    <!-- ── TEMAS ───────────────────────────────────────────────── -->
     <section class="lp-secao">
         <div class="container">
             <h2>Temas que vamos trabalhar juntas</h2>
@@ -606,82 +1005,116 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
     </section>
 
-    <!-- ── PARA QUEM É ─────────────────────────────────────── -->
+    <!-- ── PARA QUEM É ────────────────────────────────────────── -->
     <section class="lp-secao-alt">
         <div class="container">
-            <h2>Para quem é o Essentia</h2>
-            <div class="para-quem-grid">
-                <div class="para-quem-card">
-                    <p>Mulheres sobrecarregadas, com dificuldade de inserir o autocuidado na rotina sem se sentir culpada</p>
+            <h2>O Essentia é para você se...</h2>
+            <div class="lp-para-quem-v2">
+                <div class="lp-para-quem-item">
+                    <span class="lp-check">✓</span>
+                    Você se sente sobrecarregada e não sabe como encaixar o autocuidado na rotina sem se sentir culpada
                 </div>
-                <div class="para-quem-card">
-                    <p>Mulheres que já tentaram se cuidar melhor, mas tiveram pouco ou nenhum progresso com métodos tradicionais</p>
+                <div class="lp-para-quem-item">
+                    <span class="lp-check">✓</span>
+                    Já tentou criar rotinas de cuidado antes e não conseguiu manter por muito tempo
+                </div>
+                <div class="lp-para-quem-item">
+                    <span class="lp-check">✓</span>
+                    Você quer uma relação mais gentil com o seu corpo e com a sua própria imagem
+                </div>
+                <div class="lp-para-quem-item">
+                    <span class="lp-check">✓</span>
+                    Quer aprender a se cuidar de dentro para fora, com bases reais e sem exageros
                 </div>
             </div>
+            <div class="lp-nao-para-quem">
+                <h3>Não é para você se</h3>
+                <ul class="lp-nao-list">
+                    <li>Você espera resultados instantâneos sem nenhum comprometimento</li>
+                    <li>Você busca uma solução externa e definitiva para o que sente por dentro</li>
+                    <li>Você não está disposta a olhar para si mesma com honestidade e gentileza</li>
+                </ul>
+            </div>
             <div class="lp-secao-cta">
-                <a onclick="return false;"
-                   href="https://pay.hotmart.com/M104765364P?checkoutMode=2"
-                   class="btn btn-primary hotmart-fb hotmart__button-checkout">
-                   Quero começar agora
-                </a>
+                <a href="#investimento" class="btn btn-primary">Quero começar agora</a>
             </div>
         </div>
     </section>
 
-    <!-- ── CTA INTERMEDIÁRIO ───────────────────────────────── -->
+    <!-- ── CTA INTERMEDIÁRIO ───────────────────────────────────── -->
     <div class="lp-cta-dark">
         <div class="container">
-            <h2>Pronta para começar?</h2>
+            <h2>Pronta para dar esse passo?</h2>
             <p>Acesso imediato. No seu ritmo. Pelo tempo que precisar.</p>
-            <a onclick="return false;"
-               href="https://pay.hotmart.com/M104765364P?checkoutMode=2"
-               class="btn btn-primary btn-large hotmart-fb hotmart__button-checkout">
-               Quero o Essentia agora
-            </a>
+            <a href="#investimento" class="btn btn-primary btn-large">Quero o Essentia agora</a>
+            <p class="lp-cta-meta">Acesso imediato &nbsp;·&nbsp; Garantia de 7 dias &nbsp;·&nbsp; De onde estiver</p>
         </div>
     </div>
 
-    <!-- ── SOBRE A DRA. HEXANDRA ──────────────────────────── -->
+    <!-- ── DEPOIMENTOS ────────────────────────────────────────── -->
     <section class="lp-secao">
-        <div class="container">
-            <div class="lp-dra-grid">
-                <img src="../assets/img/Hexandra-58-scaled.jpg" alt="Dra. Hexandra Hertel" class="lp-dra-foto" loading="lazy">
-                <div class="lp-dra-texto">
-                    <h3>Dra. Hexandra Hertel</h3>
-                    <p class="lp-dra-cargo">Cirurgiã Plástica &nbsp;·&nbsp; Criadora da Hinis</p>
-                    <p>Com mais de 20 anos de experiência clínica, a Dra. Hexandra percebeu que muitas mulheres chegavam ao consultório buscando mudanças externas quando, na verdade, precisavam se reconectar consigo mesmas.</p>
-                    <p>Desse entendimento nasceu a Hinis. O Essentia foi o primeiro passo: um programa que leva o que ela aprendeu em décadas de escuta e cuidado para o dia a dia de qualquer mulher. Sem exigências impossíveis. Sem culpa.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ── DEPOIMENTOS ────────────────────────────────────── -->
-    <section class="lp-secao-alt">
         <div class="container">
             <h2>O que dizem as alunas</h2>
             <div class="lp-depoimentos-grid">
                 <div class="lp-depoimento">
+                    <span class="lp-stars">★★★★★</span>
                     <p>Achei os módulos bons de assistir e a linguagem da Dra. muito boa. Ela conseguiu de alguma forma entrar na minha mente e me fazer refletir como me vejo e como me deixo ser vista em público, seja com expressões faciais e corporais.</p>
                 </div>
                 <div class="lp-depoimento">
+                    <span class="lp-stars">★★★★★</span>
                     <p>O curso é ótimo, demonstra de maneira prática e rápida, atitudes simples do dia a dia que tem grande impacto no corpo em si de maneira geral.</p>
                 </div>
                 <div class="lp-depoimento">
+                    <span class="lp-stars">★★★★★</span>
                     <p>Consegui reproduzir facilmente e em público. O exercício do módulo 1, módulo 4 e módulo 6 já entraram com certeza na minha rotina!</p>
                 </div>
             </div>
             <div class="lp-secao-cta">
-                <a onclick="return false;"
-                   href="https://pay.hotmart.com/M104765364P?checkoutMode=2"
-                   class="btn btn-primary hotmart-fb hotmart__button-checkout">
-                   Quero começar agora
-                </a>
+                <a href="#investimento" class="btn btn-primary">Quero entrar para o Essentia</a>
             </div>
         </div>
     </section>
 
-    <!-- ── FAQ ────────────────────────────────────────────── -->
+    <!-- ── INVESTIMENTO ──────────────────────────────────────────
+         Posicionado após depoimentos (prova social já estabelecida)
+         e antes do FAQ (última barreira de objeções).
+         Garantia embutida no card para neutralizar o risco no momento
+         exato da decisão de compra.
+    ─────────────────────────────────────────────────────────── -->
+    <section class="lp-investimento" id="investimento">
+        <div class="container">
+            <h2>Seu investimento</h2>
+            <div class="lp-preco-box">
+                <div class="lp-preco-inclui">
+                    <h4>Programa Essentia</h4>
+                    <ul class="lp-preco-inclui-list">
+                        <li>8 módulos em vídeo</li>
+                        <li>Exercícios versáteis — sem equipamentos</li>
+                        <li>Book digital de autoconhecimento</li>
+                        <li>Acesso vitalício — sem prazo</li>
+                    </ul>
+                </div>
+                <p class="lp-preco-label">A partir de</p>
+                <div class="lp-preco-parcela">
+                    <sup>R$</sup> 32<sup>,27</sup>
+                </div>
+                <p class="lp-preco-parcela-info">por mês &nbsp;·&nbsp; 12 parcelas sem juros</p>
+                <p class="lp-preco-avista">ou <strong>R$ 312,00</strong> à vista</p>
+                <a onclick="return false;"
+                   href="https://pay.hotmart.com/M104765364P?checkoutMode=2"
+                   class="btn btn-primary btn-large hotmart-fb hotmart__button-checkout">
+                   Quero começar agora
+                </a>
+                <p class="lp-preco-comparacao">Menos de R$ 1 por dia.<br>Você paga uma vez. Acessa para sempre.</p>
+                <div class="lp-preco-garantia">
+                    <i data-lucide="shield-check" class="lp-preco-garantia-icon" aria-hidden="true"></i>
+                    7 dias de garantia total · reembolso sem perguntas
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FAQ ────────────────────────────────────────────────── -->
     <section class="lp-secao">
         <div class="container">
             <h2>Perguntas Frequentes</h2>
@@ -693,6 +1126,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     </button>
                     <div class="faq-answer">
                         <p>O Essentia foi pensado para mulheres com agendas cheias. Não existe um tempo mínimo obrigatório. Você avança no seu ritmo, quando e onde puder. Alguns exercícios levam menos de 10 minutos. Outros se integram naturalmente às atividades que você já faz.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Posso fazer pelo celular?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sim. O programa é totalmente acessível pelo celular, tablet ou computador. Você assiste às aulas e acessa os materiais de onde estiver, sem precisar instalar nenhum aplicativo.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -715,6 +1157,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 </div>
                 <div class="faq-item">
                     <button class="faq-question" aria-expanded="false">
+                        <span>O programa funciona para qualquer idade?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sim. O Essentia foi criado para mulheres de todas as fases da vida adulta. Os temas — consciência corporal, postura, respiração, envelhecimento facial e saúde íntima — são relevantes e aplicáveis em qualquer idade, com práticas adaptáveis à sua realidade.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
                         <span>Preciso ter experiência prévia com autocuidado?</span>
                         <span class="faq-icon">+</span>
                     </button>
@@ -733,37 +1184,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 </div>
             </div>
             <div class="lp-secao-cta">
-                <a onclick="return false;"
-                   href="https://pay.hotmart.com/M104765364P?checkoutMode=2"
-                   class="btn btn-primary hotmart-fb hotmart__button-checkout">
-                   Quero o Essentia agora
-                </a>
+                <a href="#investimento" class="btn btn-primary">Quero o Essentia agora</a>
             </div>
         </div>
     </section>
 
-    <!-- ── CTA FINAL ───────────────────────────────────────── -->
+    <!-- ── CTA FINAL ───────────────────────────────────────────── -->
     <section id="cta" class="lp-cta-dark">
         <div class="container">
-            <h2>Cuide de você como ninguém mais</h2>
-            <p>Comece hoje. No seu tempo. Do seu jeito.</p>
-            <a onclick="return false;"
-               href="https://pay.hotmart.com/M104765364P?checkoutMode=2"
-               class="btn btn-primary btn-large hotmart-fb hotmart__button-checkout">
-               Quero o Essentia agora
-            </a>
-            <p class="lp-cta-meta">Acesso imediato &nbsp;·&nbsp; Garantia de 7 dias</p>
-            <div class="lp-garantia">
-                <i data-lucide="shield-check" class="lp-garantia-icon" aria-hidden="true"></i>
-                <div>
-                    <h4>Garantia de 7 dias</h4>
-                    <p>Se por qualquer motivo o programa não for para você, devolvemos 100% do seu investimento. Sem perguntas, sem burocracia.</p>
-                </div>
-            </div>
+            <h2>Você passou tempo demais<br>cuidando de todo mundo.</h2>
+            <p>O Essentia é o passo que falta para colocar você no centro da sua própria história. Comece hoje, no seu tempo, do seu jeito.</p>
+            <a href="#investimento" class="btn btn-primary btn-large">Sim, quero cuidar de mim</a>
+            <p class="lp-cta-meta">Acesso imediato &nbsp;·&nbsp; De onde estiver &nbsp;·&nbsp; 7 dias de garantia</p>
         </div>
     </section>
 
-    <!-- ── FOOTER MÍNIMO ───────────────────────────────────── -->
+    <!-- ── FOOTER ──────────────────────────────────────────────── -->
     <footer class="lp-footer">
         <p class="lp-footer-disclaimer">Os programas oferecidos pela Hinis possuem caráter exclusivamente educacional e de desenvolvimento pessoal. Os conteúdos não configuram atendimento médico, psicoterapia ou tratamento de saúde de qualquer natureza, não substituindo a consulta com profissionais licenciados.</p>
         <p class="lp-footer-empresa">Hinis Serviços Médicos LTDA &nbsp;|&nbsp; CNPJ 64.572.073/0001-30 &nbsp;|&nbsp; Rua Bambina, 124, sl 04, Botafogo, Rio de Janeiro/RJ</p>
@@ -775,18 +1211,36 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </p>
     </footer>
 
+    <!-- ── STICKY CTA MOBILE ───────────────────────────────────── -->
+    <div class="lp-sticky-cta" id="lpStickyCta">
+        <a href="#investimento" class="btn btn-primary">Quero o Essentia →</a>
+    </div>
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="../js/utm-tracker.js?v=1.0.0"></script>
     <script src="../js/script.js?v=2.0.0"></script>
 
-    <!-- Hotmart Lightbox — carregar apenas o JS (nunca o CSS) -->
+    <!-- Hotmart Lightbox -->
     <script type="text/javascript">
         (function() {
             var s = document.createElement('script');
             s.src = 'https://static.hotmart.com/checkout/widget.min.js';
             document.head.appendChild(s);
         })();
+    </script>
+
+    <!-- Sticky CTA: aparece após rolar além do hero -->
+    <script>
+    (function() {
+        var sticky = document.getElementById('lpStickyCta');
+        var hero = document.querySelector('.lp-hero');
+        if (!sticky || !hero) return;
+        function check() {
+            sticky.classList.toggle('visible', hero.getBoundingClientRect().bottom < 0);
+        }
+        window.addEventListener('scroll', check, { passive: true });
+    })();
     </script>
 </body>
 </html>
