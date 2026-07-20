@@ -716,6 +716,121 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         .lp-sticky-cta.visible { transform: translateY(0); }
         .lp-sticky-cta a { display: block; text-align: center; width: 100%; }
 
+        /* ── VSL ── */
+        .lp-vsl {
+            padding: var(--spacing-lg) 0;
+            background: white;
+        }
+        .lp-vsl-grid {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            grid-template-rows: 1fr auto;
+            column-gap: 3rem;
+            align-items: start;
+        }
+        .lp-vsl-video {
+            grid-column: 1;
+            grid-row: 1 / 3;
+        }
+        .lp-vsl-content {
+            grid-column: 2;
+            grid-row: 1;
+        }
+        .lp-vsl-cta {
+            grid-column: 2;
+            grid-row: 2;
+            padding-top: 1.75rem;
+        }
+        .lp-vsl-video {
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.14);
+            background: var(--dark-color);
+        }
+        .lp-vsl-video video {
+            width: 100%;
+            display: block;
+            aspect-ratio: 9 / 16;
+        }
+        .lp-vsl-kicker {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            color: var(--primary-color);
+            margin-bottom: 0.65rem;
+        }
+        .lp-vsl-content h2 {
+            font-family: var(--font-secondary);
+            font-size: clamp(1.4rem, 2.5vw, 2rem);
+            color: var(--dark-color);
+            line-height: 1.25;
+            margin-bottom: 1rem;
+        }
+        .lp-vsl-content > p {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1.35rem;
+        }
+        .lp-vsl-points {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.75rem;
+        }
+        .lp-vsl-points li {
+            font-size: 0.95rem;
+            color: var(--text-color);
+            padding: 0.55rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            border-bottom: 1px solid rgba(0,0,0,0.07);
+            line-height: 1.5;
+        }
+        .lp-vsl-points li:last-child { border-bottom: none; }
+        .lp-vsl-points li::before {
+            content: '→';
+            color: var(--primary-color);
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .lp-vsl-cta .btn {
+            display: block;
+            width: fit-content;
+            margin: 0 auto;
+        }
+        .lp-vsl-player {
+            position: relative;
+            cursor: pointer;
+        }
+        .lp-vsl-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 72px;
+            height: 72px;
+            background: rgba(255,255,255,0.93);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 28px rgba(0,0,0,0.4);
+            transition: transform 0.2s;
+            pointer-events: none;
+        }
+        .lp-vsl-player:hover .lp-vsl-play-btn {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        .lp-vsl-play-btn svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--primary-color);
+            margin-left: 5px;
+        }
+
         /* ── Responsividade ── */
         @media (max-width: 768px) {
             .lp-hero {
@@ -758,6 +873,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             .lp-nao-para-quem { padding: 1.25rem; }
             .lp-value-stack { max-width: 100%; grid-template-columns: 1fr; }
             .lp-sticky-cta { display: block; }
+            .lp-vsl-grid { grid-template-columns: 1fr; grid-template-rows: auto; row-gap: 1.5rem; }
+            .lp-vsl-content { grid-column: 1; grid-row: 1; }
+            .lp-vsl-video { grid-column: 1; grid-row: 2; max-width: 400px; margin: 0 auto; width: 100%; }
+            .lp-vsl-cta { grid-column: 1; grid-row: 3; padding-top: 0; }
         }
         @media (max-width: 600px) {
             .lp-problema-grid { grid-template-columns: 1fr; }
@@ -849,6 +968,39 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </div>
         </div>
     </div>
+
+    <!-- ── VSL ─────────────────────────────────────────────────── -->
+    <section class="lp-vsl">
+        <div class="container">
+            <div class="lp-vsl-grid">
+                <div class="lp-vsl-video">
+                    <div class="lp-vsl-player" id="lp-vsl-player">
+                        <video playsinline preload="none" poster="../assets/img/Thumb.png" id="lp-vsl-video">
+                            <source src="../assets/video/HH-LP-Essentia.mp4" type="video/mp4">
+                        </video>
+                        <div class="lp-vsl-play-btn" id="lp-vsl-play-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="lp-vsl-content">
+                    <h2>Insegurança não se resolve na mesa de cirurgia</h2>
+                    <p>A Dra. Hexandra Hertel explica o que percebeu em 20 anos de cirurgia plástica e pesquisa. Neste vídeo, ela conta como o Essentia foi moldado e dá exemplos práticos do que você irá encontrar no programa.</p>
+                    <ul class="lp-vsl-points">
+                        <li>O padrão recorrente em milhares de pacientes</li>
+                        <li>O mito da falta de iniciativa</li>
+                        <li>Como nutrir o autocuidado sem sacrificar a rotina apertada</li>
+                    </ul>
+                    <p>Essentia é um programa digital de autocuidado para mulheres com agendas cheias. Prático, gentil e feito para encaixar na sua vida. Sem culpa e sem exageros.</p>
+                </div>
+                <div class="lp-vsl-cta">
+                    <a href="#investimento" class="btn btn-primary">Quero começar</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- ── PROBLEMA ───────────────────────────────────────────── -->
     <section class="lp-secao-alt">
@@ -1228,6 +1380,34 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             s.src = 'https://static.hotmart.com/checkout/widget.min.js';
             document.head.appendChild(s);
         })();
+    </script>
+
+    <!-- VSL: play button customizado -->
+    <script>
+    (function() {
+        var player = document.getElementById('lp-vsl-player');
+        var video  = document.getElementById('lp-vsl-video');
+        var btn    = document.getElementById('lp-vsl-play-btn');
+        if (!player || !video || !btn) return;
+
+        function showPlay() {
+            btn.style.display = 'flex';
+            video.removeAttribute('controls');
+        }
+        function hidePlay() {
+            btn.style.display = 'none';
+            video.setAttribute('controls', '');
+        }
+
+        video.defaultPlaybackRate = 1.2;
+        video.addEventListener('loadedmetadata', function() { video.playbackRate = 1.2; });
+
+        player.addEventListener('click', function() {
+            if (video.paused) { video.play(); hidePlay(); }
+        });
+        video.addEventListener('pause', showPlay);
+        video.addEventListener('ended', showPlay);
+    })();
     </script>
 
     <!-- Sticky CTA: aparece após rolar além do hero -->
