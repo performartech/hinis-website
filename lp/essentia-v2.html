@@ -740,6 +740,44 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             .lp-tema-card:nth-child(5) { grid-column: span 1; }
             .lp-numeros-grid { gap: 1.5rem; }
         }
+        /* ── Modal checkout mobile (teste iframe) ── */
+        #lp-checkout-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            flex-direction: column;
+            background: white;
+        }
+        #lp-checkout-modal.active { display: flex; }
+        .lp-checkout-header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0.4rem 0.6rem;
+            background: var(--dark-color);
+            flex-shrink: 0;
+        }
+        .lp-checkout-close {
+            background: none;
+            color: rgba(255,255,255,0.8);
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0.2rem 0.5rem;
+            line-height: 1;
+        }
+        .lp-checkout-scroll {
+            flex: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        #lp-checkout-iframe {
+            width: 100%;
+            height: 200vh;
+            border: none;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -1185,6 +1223,46 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             sticky.classList.toggle('visible', hero.getBoundingClientRect().bottom < 0);
         }
         window.addEventListener('scroll', check, { passive: true });
+    })();
+    </script>
+
+    <!-- Teste: checkout em iframe no mobile (bypassa redirect do widget Hotmart) -->
+    <script>
+    (function() {
+        var isMobile = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth < 768);
+        if (!isMobile) return;
+
+        var modal = document.createElement('div');
+        modal.id = 'lp-checkout-modal';
+        modal.innerHTML =
+            '<div class="lp-checkout-header">' +
+                '<button class="lp-checkout-close" id="lp-checkout-close">&times;</button>' +
+            '</div>' +
+            '<div class="lp-checkout-scroll">' +
+                '<iframe id="lp-checkout-iframe" src="" allow="payment" scrolling="yes"></iframe>' +
+            '</div>';
+        document.body.appendChild(modal);
+
+        function openModal() {
+            document.getElementById('lp-checkout-iframe').src = 'https://pay.hotmart.com/M104765364P?checkoutMode=2';
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            modal.classList.remove('active');
+            document.getElementById('lp-checkout-iframe').src = '';
+            document.body.style.overflow = '';
+        }
+
+        document.querySelectorAll('.hotmart__button-checkout').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                openModal();
+            }, true);
+        });
+
+        document.getElementById('lp-checkout-close').addEventListener('click', closeModal);
     })();
     </script>
 </body>
