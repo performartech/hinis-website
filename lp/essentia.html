@@ -723,7 +723,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }
         .lp-vsl-grid {
             display: grid;
-            grid-template-columns: 340px 1fr;
+            grid-template-columns: 260px 1fr;
             grid-template-rows: 1fr auto;
             column-gap: 3rem;
             align-items: start;
@@ -747,63 +747,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             box-shadow: 0 8px 40px rgba(0,0,0,0.14);
             background: var(--dark-color);
         }
-        .lp-vsl-video video {
+        .lp-vsl-yt-wrap {
             width: 100%;
-            display: block;
             aspect-ratio: 9 / 16;
+            position: relative;
         }
-        .lp-vsl-kicker {
-            font-size: 0.72rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.8px;
-            color: var(--primary-color);
-            margin-bottom: 0.65rem;
+        .lp-vsl-yt-wrap iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
         }
-        .lp-vsl-content h2 {
-            font-family: var(--font-secondary);
-            font-size: clamp(1.4rem, 2.5vw, 2rem);
-            color: var(--dark-color);
-            line-height: 1.25;
-            margin-bottom: 1rem;
-        }
-        .lp-vsl-content > p {
-            color: var(--text-light);
-            font-size: 1rem;
-            line-height: 1.7;
-            margin-bottom: 1.35rem;
-        }
-        .lp-vsl-points {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 1.75rem;
-        }
-        .lp-vsl-points li {
-            font-size: 0.95rem;
-            color: var(--text-color);
-            padding: 0.55rem 0;
-            display: flex;
-            align-items: flex-start;
-            gap: 0.7rem;
-            border-bottom: 1px solid rgba(0,0,0,0.07);
-            line-height: 1.5;
-        }
-        .lp-vsl-points li:last-child { border-bottom: none; }
-        .lp-vsl-points li::before {
-            content: '→';
-            color: var(--primary-color);
-            font-weight: 700;
-            flex-shrink: 0;
-            margin-top: 1px;
-        }
-        .lp-vsl-cta .btn {
-            display: block;
-            width: fit-content;
-            margin: 0 auto;
-        }
-        .lp-vsl-player {
+        .lp-vsl-facade {
             position: relative;
             cursor: pointer;
+            aspect-ratio: 9 / 16;
+            overflow: hidden;
+        }
+        .lp-vsl-facade img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
         .lp-vsl-play-btn {
             position: absolute;
@@ -821,7 +787,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             transition: transform 0.2s;
             pointer-events: none;
         }
-        .lp-vsl-player:hover .lp-vsl-play-btn {
+        .lp-vsl-facade:hover .lp-vsl-play-btn {
             transform: translate(-50%, -50%) scale(1.1);
         }
         .lp-vsl-play-btn svg {
@@ -829,6 +795,52 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             height: 28px;
             fill: var(--primary-color);
             margin-left: 5px;
+        }
+        .lp-vsl-kicker {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            color: var(--primary-color);
+            margin-bottom: 0.65rem;
+        }
+        .lp-vsl-content h2 {
+            font-family: var(--font-secondary);
+            font-size: clamp(1.65rem, 3vw, 2.3rem);
+            color: var(--dark-color);
+            margin-bottom: var(--spacing-md);
+        }
+        .lp-vsl-content > p {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1.35rem;
+        }
+        .lp-vsl-points {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.75rem;
+        }
+        .lp-vsl-points li {
+            font-size: 0.95rem;
+            color: var(--text-color);
+            padding: 0.35rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            line-height: 1.5;
+        }
+        .lp-vsl-points li::before {
+            content: '→';
+            color: var(--primary-color);
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .lp-vsl-cta .btn {
+            display: block;
+            width: fit-content;
+            margin: 0 auto;
         }
 
         /* ── Responsividade ── */
@@ -875,7 +887,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             .lp-sticky-cta { display: block; }
             .lp-vsl-grid { grid-template-columns: 1fr; grid-template-rows: auto; row-gap: 1.5rem; }
             .lp-vsl-content { grid-column: 1; grid-row: 1; }
-            .lp-vsl-video { grid-column: 1; grid-row: 2; max-width: 400px; margin: 0 auto; width: 100%; }
+            .lp-vsl-video { grid-column: 1; grid-row: 2; max-width: 280px; margin: 0 auto; width: 100%; }
             .lp-vsl-cta { grid-column: 1; grid-row: 3; padding-top: 0; }
         }
         @media (max-width: 600px) {
@@ -974,11 +986,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class="container">
             <div class="lp-vsl-grid">
                 <div class="lp-vsl-video">
-                    <div class="lp-vsl-player" id="lp-vsl-player">
-                        <video playsinline preload="none" poster="../assets/img/Thumb.png" id="lp-vsl-video">
-                            <source src="../assets/video/HH-LP-Essentia.mp4" type="video/mp4">
-                        </video>
-                        <div class="lp-vsl-play-btn" id="lp-vsl-play-btn">
+                    <div class="lp-vsl-facade" id="lp-vsl-facade">
+                        <img src="../assets/img/Thumb.png" alt="Assista ao vídeo da Dra. Hexandra Hertel" loading="lazy">
+                        <div class="lp-vsl-play-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
                                 <path d="M8 5v14l11-7z"/>
                             </svg>
@@ -1382,31 +1392,36 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         })();
     </script>
 
-    <!-- VSL: play button customizado -->
+    <!-- VSL: facade → YouTube IFrame API com 1.25x ao clicar -->
     <script>
     (function() {
-        var player = document.getElementById('lp-vsl-player');
-        var video  = document.getElementById('lp-vsl-video');
-        var btn    = document.getElementById('lp-vsl-play-btn');
-        if (!player || !video || !btn) return;
+        var facade = document.getElementById('lp-vsl-facade');
+        if (!facade) return;
+        facade.addEventListener('click', function() {
+            var wrap = document.createElement('div');
+            wrap.className = 'lp-vsl-yt-wrap';
+            var inner = document.createElement('div');
+            inner.id = 'lp-yt-player';
+            wrap.appendChild(inner);
+            facade.parentNode.replaceChild(wrap, facade);
 
-        function showPlay() {
-            btn.style.display = 'flex';
-            video.removeAttribute('controls');
-        }
-        function hidePlay() {
-            btn.style.display = 'none';
-            video.setAttribute('controls', '');
-        }
+            window.onYouTubeIframeAPIReady = function() {
+                new YT.Player('lp-yt-player', {
+                    videoId: 'kqxgQv6et9k',
+                    playerVars: { autoplay: 1, controls: 0, modestbranding: 1, rel: 0, playsinline: 1 },
+                    events: {
+                        onReady: function(e) {
+                            e.target.setPlaybackRate(1.25);
+                            e.target.playVideo();
+                        }
+                    }
+                });
+            };
 
-        video.defaultPlaybackRate = 1.2;
-        video.addEventListener('loadedmetadata', function() { video.playbackRate = 1.2; });
-
-        player.addEventListener('click', function() {
-            if (video.paused) { video.play(); hidePlay(); }
+            var tag = document.createElement('script');
+            tag.src = 'https://www.youtube.com/iframe_api';
+            document.head.appendChild(tag);
         });
-        video.addEventListener('pause', showPlay);
-        video.addEventListener('ended', showPlay);
     })();
     </script>
 
