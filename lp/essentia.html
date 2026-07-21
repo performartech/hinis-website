@@ -796,6 +796,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             fill: var(--primary-color);
             margin-left: 5px;
         }
+        .lp-vsl-unmute-btn {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.72);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 0.5rem 1.1rem;
+            font-size: 0.82rem;
+            font-family: var(--font-primary);
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+        .lp-vsl-unmute-btn:hover { background: rgba(0,0,0,0.92); }
         .lp-vsl-kicker {
             font-size: 0.72rem;
             font-weight: 700;
@@ -1403,16 +1424,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             var inner = document.createElement('div');
             inner.id = 'lp-yt-player';
             wrap.appendChild(inner);
+
+            var unmuteBtn = document.createElement('button');
+            unmuteBtn.className = 'lp-vsl-unmute-btn';
+            unmuteBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg> Ligar som';
+            wrap.appendChild(unmuteBtn);
+
             facade.parentNode.replaceChild(wrap, facade);
 
             window.onYouTubeIframeAPIReady = function() {
                 new YT.Player('lp-yt-player', {
                     videoId: 'h5eD0vB0WJ8',
-                    playerVars: { autoplay: 1, controls: 0, modestbranding: 1, rel: 0, playsinline: 1, cc_load_policy: 3 },
+                    playerVars: { autoplay: 1, mute: 1, controls: 0, modestbranding: 1, rel: 0, playsinline: 1, cc_load_policy: 3 },
                     events: {
                         onReady: function(e) {
                             e.target.setOption('captions', 'track', {});
                             e.target.playVideo();
+                            unmuteBtn.addEventListener('click', function() {
+                                e.target.unMute();
+                                unmuteBtn.style.display = 'none';
+                            });
                         }
                     }
                 });
