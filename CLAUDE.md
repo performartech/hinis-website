@@ -112,6 +112,13 @@ Todas as LPs do Essentia compartilham:
 - Header mínimo (logo apenas) + footer mínimo inline (disclaimer legal + dados da empresa)
 - Estilos em bloco `<style>` inline na própria página — não adicionar ao `styles.css`
 - Inclui `utm-tracker.js` e `script.js` (FAQ); não inclui `load-components.js` nem `phone-protection.js`
+- **Proteção de telefone em LPs:** como `phone-protection.js` não é carregado, usar decodificador inline ao final do `<body>`:
+  ```javascript
+  document.querySelectorAll('a[data-phone]').forEach(function(el) {
+      try { var num = atob(el.getAttribute('data-phone')).replace(/\D/g,''); el.href = el.href.replace('PHONE_PLACEHOLDER', num); } catch(e) {}
+  });
+  ```
+  Links com `href="https://wa.me/PHONE_PLACEHOLDER"` e `data-phone="KzU1MjE5OTQwNDE2NDg="`
 
 #### `lp/essentia-v0.html` — v0 (original, legado)
 - 3 CTAs Hotmart Lightbox (hero, seção intermediária, CTA final com `id="cta"`)
@@ -131,6 +138,8 @@ Todas as LPs do Essentia compartilham:
 - O card do hero usa os mesmos estilos base `.lp-preco-*` do card da seção `#investimento`
 - **⚠️ Atenção CSS:** usar `.lp-hero-content p` (não `.lp-hero p`) para estilos de texto do hero — evita vazamento de `color` e `font-size` para dentro do card
 - `.lp-hero-card` sobrescreve **apenas cores** (herdadas do contexto escuro do hero); métricas de espaçamento e tipografia vêm dos estilos base
+- **Tamanho único de botões:** regra `.btn, .btn-large { padding: 0.75rem 1.75rem; font-size: 0.95rem; }` no `<style>` inline padroniza todos os botões da página
+- **Botões WhatsApp:** flutuante (`.lp-wa-float`, `position: fixed`, bottom-right) + in-card nos dois `.lp-preco-box`; usa decodificador inline (ver padrão acima)
 
 #### Componente de preço `.lp-preco-box` (v2 e v3)
 Card reutilizável compartilhado por todas as ocorrências nas LPs. Ao editar a aparência, editar os estilos base `.lp-preco-*` — não criar overrides por seção. Estrutura:

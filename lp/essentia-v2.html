@@ -140,7 +140,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             background: var(--primary-color);
             color: white;
             text-align: center;
-            padding: 0.85rem 1.5rem;
+            padding: 0.85rem var(--spacing-md);
             font-size: 0.88rem;
             font-weight: 500;
             letter-spacing: 0.2px;
@@ -372,96 +372,41 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             margin: 0;
         }
 
-        /* ── Módulos Zigzag ── */
-        .lp-modulos-list {
-            display: flex;
-            flex-direction: column;
-            max-width: 720px;
+        /* ── Value Stack ── */
+        .lp-value-stack {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.85rem;
+            max-width: 900px;
             margin: 0 auto;
         }
-        .lp-modulo-row {
+        .lp-stack-item {
             display: flex;
-            align-items: center;
-            gap: 3rem;
-            padding: 2rem 0;
+            align-items: flex-start;
+            gap: 1.25rem;
+            padding: 1.25rem 1.5rem;
+            background: white;
+            border-radius: 10px;
+            border: 1px solid rgba(0,0,0,0.07);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-        .lp-modulo-row:nth-child(even) { flex-direction: row-reverse; }
-        .lp-modulo-texto { flex: 1; min-width: 0; }
-        .lp-modulo-header {
-            display: flex;
-            align-items: center;
-            gap: 0.65rem;
-            margin-bottom: 1.1rem;
-        }
-        .lp-modulo-icon {
+        .lp-stack-icon {
             color: var(--primary-color);
-            width: 22px;
-            height: 22px;
+            width: 26px;
+            height: 26px;
             flex-shrink: 0;
+            margin-top: 3px;
         }
-        .lp-modulo-texto h4 {
-            font-family: var(--font-secondary);
-            font-size: 1.25rem;
+        .lp-stack-content h4 {
+            font-size: 1rem;
             color: var(--dark-color);
-            margin-bottom: 0;
+            margin-bottom: 0.2rem;
         }
-        .lp-modulo-texto p {
-            font-size: 0.95rem;
+        .lp-stack-content p {
+            font-size: 0.88rem;
             color: var(--text-light);
-            line-height: 1.7;
+            line-height: 1.55;
             margin: 0;
-        }
-
-        /* ── Phone Mockup — linha fina, cor primária ── */
-        .lp-phone-mockup {
-            width: 148px;
-            flex-shrink: 0;
-            border: 2px solid var(--primary-color);
-            border-radius: 26px;
-            padding: 12px 8px;
-            background: #fff;
-            box-shadow: 0 6px 20px rgba(187, 148, 118, 0.18);
-            position: relative;
-        }
-        .lp-phone-mockup::after {
-            content: '';
-            position: absolute;
-            right: -4px;
-            top: 28%;
-            width: 2px;
-            height: 28px;
-            background: var(--primary-color);
-            border-radius: 0 2px 2px 0;
-            opacity: 0.5;
-        }
-        .lp-phone-speaker {
-            width: 34px;
-            height: 2px;
-            background: var(--primary-color);
-            border-radius: 2px;
-            margin: 0 auto 8px;
-            opacity: 0.4;
-        }
-        .lp-phone-screen {
-            background: var(--light-color);
-            border-radius: 18px;
-            overflow: hidden;
-            aspect-ratio: 9 / 19.5;
-            border: 1px solid rgba(187, 148, 118, 0.2);
-        }
-        .lp-phone-screen img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        .lp-phone-home {
-            width: 46px;
-            height: 2px;
-            background: var(--primary-color);
-            border-radius: 2px;
-            margin: 8px auto 0;
-            opacity: 0.4;
         }
 
         /* ── Temas ── */
@@ -625,7 +570,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             background: #1a1c25;
             color: #707070;
             text-align: center;
-            padding: 2rem 1.5rem;
+            padding: 2rem var(--spacing-md);
             line-height: 1.85;
         }
         .lp-footer-disclaimer {
@@ -773,34 +718,35 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         /* ── VSL ── */
         .lp-vsl {
-            padding: var(--spacing-lg) 0;
+            padding: 2rem 0;
             background: white;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
         }
+        .lp-vsl > .container { width: 100%; }
         .lp-vsl-grid {
             display: grid;
-            grid-template-columns: 260px 1fr;
+            grid-template-columns: 1fr 1fr;
             grid-template-rows: 1fr auto;
             column-gap: 3rem;
-            align-items: start;
+            align-items: stretch;
         }
         .lp-vsl-video {
-            grid-column: 1;
+            grid-column: 2;
             grid-row: 1 / 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .lp-vsl-content {
-            grid-column: 2;
+            grid-column: 1;
             grid-row: 1;
         }
         .lp-vsl-cta {
-            grid-column: 2;
+            grid-column: 1;
             grid-row: 2;
-            padding-top: 1.75rem;
-        }
-        .lp-vsl-video {
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.14);
-            background: var(--dark-color);
+            padding-top: 1rem;
         }
         .lp-vsl-yt-wrap {
             width: 100%;
@@ -819,6 +765,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             cursor: pointer;
             aspect-ratio: 9 / 16;
             overflow: hidden;
+            width: 100%;
+            max-width: 300px;
+            border-radius: 16px;
         }
         .lp-vsl-facade img {
             width: 100%;
@@ -833,22 +782,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             transform: translate(-50%, -50%);
             width: 72px;
             height: 72px;
-            background: rgba(255,255,255,0.93);
+            background: transparent;
+            border: 3px solid rgba(255,255,255,0.85);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 28px rgba(0,0,0,0.4);
-            transition: transform 0.2s;
+            box-shadow: 0 4px 28px rgba(0,0,0,0.25);
+            transition: transform 0.2s, border-color 0.2s;
             pointer-events: none;
         }
         .lp-vsl-facade:hover .lp-vsl-play-btn {
             transform: translate(-50%, -50%) scale(1.1);
+            border-color: white;
         }
         .lp-vsl-play-btn svg {
             width: 28px;
             height: 28px;
-            fill: var(--primary-color);
+            fill: white;
             margin-left: 5px;
         }
         .lp-vsl-unmute-btn {
@@ -880,22 +831,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             color: var(--primary-color);
             margin-bottom: 0.65rem;
         }
-        .lp-vsl-content h2 {
+        .lp-vsl-content h1 {
             font-family: var(--font-secondary);
-            font-size: clamp(1.65rem, 3vw, 2.3rem);
+            font-size: clamp(2.8rem, 4vw, 4rem);
+            font-weight: 700;
+            line-height: 1.15;
             color: var(--dark-color);
+            margin-top: 2rem;
             margin-bottom: var(--spacing-md);
         }
         .lp-vsl-content > p {
-            color: var(--text-light);
+            color: var(--text-color);
             font-size: 1rem;
             line-height: 1.7;
-            margin-bottom: 1.35rem;
+            margin-bottom: 1rem;
         }
         .lp-vsl-points {
             list-style: none;
             padding: 0;
-            margin: 0 0 1.75rem;
+            margin: 0 0 1.25rem;
         }
         .lp-vsl-points li {
             font-size: 0.95rem;
@@ -917,6 +871,121 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             display: block;
             width: fit-content;
             margin: 0 auto;
+        }
+
+        /* ── Seção "O que você vai encontrar" (novo layout) ── */
+        .lp-encontrar {
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        .lp-encontrar-bg {
+            position: absolute;
+            inset: 0;
+            background: #c8bfb5;
+            background-image: url('../assets/img/Essentia - MockUp-Background.png');
+            background-size: cover;
+            background-position: center;
+        }
+        .lp-encontrar-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(20,20,30,0.3);
+        }
+        .lp-encontrar > .container {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 0.35fr 1fr 1fr;
+            gap: 2.5rem;
+            align-items: center;
+            width: 100%;
+            padding: 3.5rem var(--spacing-md);
+        }
+        .lp-encontrar-titulo {
+            font-family: var(--font-secondary);
+            font-style: italic;
+            font-size: clamp(3rem, 6vw, 5rem);
+            color: white;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        .lp-encontrar-subtitulo {
+            font-size: clamp(1rem, 2vw, 1.35rem);
+            color: rgba(255,255,255,0.9);
+            font-weight: 500;
+        }
+        .lp-encontrar-imagens {
+            position: relative;
+            height: 360px;
+            overflow: visible;
+        }
+        .lp-encontrar-img-apostila {
+            position: absolute;
+            bottom: -90px;
+            right: -60px;
+            width: 32vw;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+        .lp-encontrar-img-apostila img {
+            width: 100%;
+            display: block;
+        }
+        .lp-encontrar-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        .lp-encontrar-card-texto {
+            font-size: 1.05rem;
+            color: var(--dark-color);
+            line-height: 1.5;
+            margin-bottom: 1.25rem;
+        }
+        .lp-encontrar-lista {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .lp-encontrar-lista li {
+            padding: 0.28rem 0;
+            font-size: 0.97rem;
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .lp-encontrar > .container {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto 1fr;
+            }
+            .lp-encontrar > .container > div:first-child {
+                grid-column: 1 / -1;
+            }
+            .lp-encontrar-imagens { height: 280px; }
+            .lp-encontrar-img-apostila {
+                width: 35vw;
+                right: -20px;
+                bottom: -50px;
+            }
+        }
+        @media (max-width: 768px) {
+            .lp-encontrar > .container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .lp-encontrar > .container > div:first-child { margin-top: -30px; }
+            .lp-encontrar-card { width: 75%; }
+            .lp-encontrar-imagens { height: 300px; }
+            .lp-encontrar-img-phone { width: 160px; height: 130px; }
+            .lp-encontrar-img-apostila { width: 52vw; bottom: -450px; right: -20px; }
         }
 
         /* ── Responsividade ── */
@@ -959,19 +1028,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             .lp-mecanismo-box { border-radius: 12px; padding: 1.5rem; }
             .lp-garantia-destaque { padding: 1.75rem 1.25rem; }
             .lp-nao-para-quem { padding: 1.25rem; }
-            .lp-modulo-row,
-            .lp-modulo-row:nth-child(even) {
-                flex-direction: column;
-                gap: 1.75rem;
-                text-align: center;
-                padding: 3rem 0;
-            }
-            .lp-modulo-header { justify-content: center; }
-            .lp-modulo-icon { margin: 0 auto; }
-            .lp-phone-mockup { width: 124px; margin: 0 auto; }
-            .lp-sticky-cta { display: block; }
+            .lp-value-stack { max-width: 100%; grid-template-columns: 1fr; }
+            .lp-sticky-cta { display: none; }
             .lp-vsl-grid { grid-template-columns: 1fr; grid-template-rows: auto; row-gap: 1.5rem; }
             .lp-vsl-content { grid-column: 1; grid-row: 1; }
+            .lp-vsl-content h1 { font-size: clamp(2.8rem, 6vw, 4.5rem); }
             .lp-vsl-video { grid-column: 1; grid-row: 2; max-width: 280px; margin: 0 auto; width: 100%; }
             .lp-vsl-cta { grid-column: 1; grid-row: 3; padding-top: 0; }
         }
@@ -1022,6 +1083,58 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             display: block;
         }
 
+        /* ── WhatsApp ── */
+        /* Tamanho padrão único para todos os botões da LP */
+        .btn, .btn-large {
+            padding: 0.75rem 1.75rem;
+            font-size: 0.95rem;
+        }
+        .lp-btn-whatsapp {
+            display: flex;
+            width: fit-content;
+            margin: 0.5rem auto 0;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: #25D366;
+            color: #fff;
+            border-radius: 8px;
+            padding: 0.72rem 1.75rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s ease;
+        }
+        .lp-btn-whatsapp:hover { background: #1aae57; }
+        .lp-btn-whatsapp svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+        .lp-wa-float {
+            position: fixed;
+            bottom: 28px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(37,211,102,0.45);
+            z-index: 190;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            animation: wa-pulse 3s ease-in-out infinite;
+        }
+        .lp-wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 22px rgba(37,211,102,0.6); }
+        .lp-wa-float svg { width: 30px; height: 30px; }
+        @keyframes wa-pulse {
+            0%, 100% { box-shadow: 0 4px 16px rgba(37,211,102,0.45); }
+            50%       { box-shadow: 0 4px 28px rgba(37,211,102,0.75); }
+        }
+        @media (max-width: 768px) {
+            .lp-wa-float { bottom: 24px; right: 16px; width: 50px; height: 50px; }
+            .lp-wa-float svg { width: 26px; height: 26px; }
+        }
     </style>
 </head>
 <body>
@@ -1035,42 +1148,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <img src="../assets/logo/Hinis-logo2.png" alt="Hinis" class="lp-logo">
     </header>
 
-    <!-- ── HERO ───────────────────────────────────────────────── -->
-    <section class="lp-hero">
-        <div class="lp-hero-inner container">
-            <div class="lp-hero-content">
-                <span class="lp-hero-badge">Programa Digital &nbsp;·&nbsp; Acesso Imediato</span>
-                <h1>Você cuida de todo mundo.<br>Chegou a hora de cuidar de você.</h1>
-                <p>O Essentia é um programa digital de autocuidado para mulheres com agendas cheias. Prático, gentil e feito para encaixar na sua vida — sem culpa, sem exageros.</p>
-                <p class="lp-hero-meta">Acesso imediato &nbsp;·&nbsp; De onde estiver &nbsp;·&nbsp; 7 dias de garantia</p>
-            </div>
-            <div class="lp-hero-card">
-                <div class="lp-preco-box">
-                    <div class="lp-preco-inclui">
-                        <h4>Programa Essentia</h4>
-                        <ul class="lp-preco-inclui-list">
-                            <li>8 módulos em vídeo</li>
-                            <li>Exercícios versáteis — sem equipamentos</li>
-                            <li>Book digital de autoconhecimento</li>
-                            <li>Acesso vitalício — sem prazo</li>
-                        </ul>
+    <!-- ── VSL ─────────────────────────────────────────────────── -->
+    <section class="lp-vsl">
+        <div class="container">
+            <div class="lp-vsl-grid">
+                <div class="lp-vsl-video">
+                    <div class="lp-vsl-facade" id="lp-vsl-facade">
+                        <img src="../assets/img/Thumb.png" alt="Assista ao vídeo da Dra. Hexandra Hertel" loading="lazy">
+                        <div class="lp-vsl-play-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </div>
                     </div>
-                    <p class="lp-preco-label">A partir de</p>
-                    <div class="lp-preco-parcela">
-                        <sup>R$</sup> 32<sup>,27</sup>
-                    </div>
-                    <p class="lp-preco-parcela-info">por mês &nbsp;·&nbsp; 12 parcelas sem juros</p>
-                    <p class="lp-preco-avista">ou <strong>R$ 312,00</strong> à vista</p>
-                    <a onclick="return false;"
-                       href="https://pay.hotmart.com/M104765364P?checkoutMode=2"
-                       class="btn btn-primary btn-large hotmart-fb hotmart__button-checkout">
-                       Quero começar agora
-                    </a>
-                    <p class="lp-preco-comparacao">Você paga uma vez. Acessa para sempre.</p>
-                    <div class="lp-preco-garantia">
-                        <i data-lucide="shield-check" class="lp-preco-garantia-icon" aria-hidden="true"></i>
-                        7 dias de garantia total · reembolso sem perguntas
-                    </div>
+                </div>
+                <div class="lp-vsl-content">
+                    <h1>Insegurança não se resolve na mesa de cirurgia</h1>
+                    <p>Essentia é o <strong>programa digital de autocuidado</strong> da Dra. Hexandra Hertel para mulheres com agendas cheias. Sem culpa, sem exageros e <strong>feito para caber na sua vida</strong>.</p>
+                    <p>No vídeo, ela conta o que 20 anos de consultório revelaram:</p>
+                    <ul class="lp-vsl-points">
+                        <li>O padrão que ela viu se repetir em milhares de pacientes (e que quase ninguém percebe em si mesma)</li>
+                        <li>Por que "falta de disciplina" nunca foi o seu problema</li>
+                        <li>Como cuidar de você mesma cabendo em 10 minutos do seu dia</li>
+                    </ul>
+                </div>
+                <div class="lp-vsl-cta">
+                    <a href="#investimento" class="btn btn-primary">Começar o Programa Essentia</a>
                 </div>
             </div>
         </div>
@@ -1105,124 +1208,56 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
     </div>
 
-    <!-- ── VSL ─────────────────────────────────────────────────── -->
-    <section class="lp-vsl">
-        <div class="container">
-            <div class="lp-vsl-grid">
-                <div class="lp-vsl-video">
-                    <div class="lp-vsl-facade" id="lp-vsl-facade">
-                        <img src="../assets/img/Thumb.png" alt="Assista ao vídeo da Dra. Hexandra Hertel" loading="lazy">
-                        <div class="lp-vsl-play-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-                                <path d="M8 5v14l11-7z"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="lp-vsl-content">
-                    <h2>Insegurança não se resolve na mesa de cirurgia</h2>
-                    <p>A Dra. Hexandra Hertel explica o que percebeu em 20 anos de cirurgia plástica e pesquisa. Neste vídeo, ela conta como o Essentia foi moldado e dá exemplos práticos do que você irá encontrar no programa.</p>
-                    <ul class="lp-vsl-points">
-                        <li>O padrão recorrente em milhares de pacientes</li>
-                        <li>O mito da falta de iniciativa</li>
-                        <li>Como nutrir o autocuidado sem sacrificar a rotina apertada</li>
-                    </ul>
-                    <p>Essentia é um programa digital de autocuidado para mulheres com agendas cheias. Prático, gentil e feito para encaixar na sua vida. Sem culpa e sem exageros.</p>
-                </div>
-                <div class="lp-vsl-cta">
-                    <a href="#investimento" class="btn btn-primary">Quero começar</a>
-                </div>
+    <!-- ── HERO ───────────────────────────────────────────────── -->
+    <section class="lp-hero">
+        <div class="lp-hero-inner container">
+            <div class="lp-hero-content">
+                <span class="lp-hero-badge">Programa Digital &nbsp;·&nbsp; Acesso Imediato</span>
+                <h1>Você cuida de todo mundo.<br>Chegou a hora de cuidar de você.</h1>
+                <p>O Essentia é um programa digital de autocuidado para mulheres com agendas cheias. Prático, gentil e feito para encaixar na sua vida — sem culpa, sem exageros.</p>
+                <p class="lp-hero-meta">Acesso imediato &nbsp;·&nbsp; De onde estiver &nbsp;·&nbsp; 7 dias de garantia</p>
             </div>
-        </div>
-    </section>
-
-    <!-- ── O QUE ESTÁ INCLUÍDO — MÓDULOS ZIGZAG ─────────────── -->
-    <section class="lp-secao">
-        <div class="container">
-            <h2>O que você vai encontrar</h2>
-            <div class="lp-modulos-list">
-
-                <!-- 1 — texto esquerda / phone direita -->
-                <div class="lp-modulo-row">
-                    <div class="lp-modulo-texto">
-                        <div class="lp-modulo-header">
-                            <i data-lucide="video" class="lp-modulo-icon" aria-hidden="true"></i>
-                            <h4>Módulos em vídeo</h4>
-                        </div>
-                        <p>Práticas guiadas, diretas e simples que cabem na sua rotina. Sem precisar separar horas do seu dia para assistir.</p>
+            <div class="lp-hero-card">
+                <div class="lp-preco-box">
+                    <div class="lp-preco-inclui">
+                        <h4>Programa Essentia</h4>
+                        <ul class="lp-preco-inclui-list">
+                            <li>8 módulos em vídeo</li>
+                            <li>Exercícios versáteis — sem equipamentos</li>
+                            <li>Book digital de autoconhecimento</li>
+                            <li>Acesso vitalício — sem prazo</li>
+                        </ul>
                     </div>
-                    <div class="lp-phone-mockup">
-                        <div class="lp-phone-speaker"></div>
-                        <div class="lp-phone-screen">
-                            <img src="../assets/img/mockup-modulos.png" alt="Tela de módulos em vídeo" loading="lazy">
-                        </div>
-                        <div class="lp-phone-home"></div>
+                    <p class="lp-preco-label">A partir de</p>
+                    <div class="lp-preco-parcela">
+                        <sup>R$</sup> 32<sup>,27</sup>
                     </div>
-                </div>
-
-                <!-- 2 — phone esquerda / texto direita -->
-                <div class="lp-modulo-row">
-                    <div class="lp-modulo-texto">
-                        <div class="lp-modulo-header">
-                            <i data-lucide="activity" class="lp-modulo-icon" aria-hidden="true"></i>
-                            <h4>Exercícios versáteis</h4>
-                        </div>
-                        <p>Atividades que podem ser feitas em qualquer lugar, sem equipamentos e sem horários fixos. Feitas para encaixar na sua vida, não o contrário.</p>
-                    </div>
-                    <div class="lp-phone-mockup">
-                        <div class="lp-phone-speaker"></div>
-                        <div class="lp-phone-screen">
-                            <img src="../assets/img/mockup-exercicios.png" alt="Tela de exercícios" loading="lazy">
-                        </div>
-                        <div class="lp-phone-home"></div>
+                    <p class="lp-preco-parcela-info">por mês &nbsp;·&nbsp; 12 parcelas</p>
+                    <p class="lp-preco-avista">ou <strong>R$ 312,00</strong> à vista</p>
+                    <a onclick="return false;"
+                       href="https://pay.hotmart.com/M104765364P?checkoutMode=2"
+                       class="btn btn-primary btn-large hotmart-fb hotmart__button-checkout">
+                       Começar agora
+                    </a>
+                    <a href="https://wa.me/PHONE_PLACEHOLDER?text=Oi%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20programa%20Essentia%20da%20Hinis."
+                       class="lp-btn-whatsapp"
+                       data-phone="KzU1MjE5OTQwNDE2NDg="
+                       target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                        Fale com a gente
+                    </a>
+                    <p class="lp-preco-comparacao">Você paga uma vez. Acessa para sempre.</p>
+                    <div class="lp-preco-garantia">
+                        <i data-lucide="shield-check" class="lp-preco-garantia-icon" aria-hidden="true"></i>
+                        7 dias de garantia total · reembolso sem perguntas
                     </div>
                 </div>
-
-                <!-- 3 — texto esquerda / phone direita -->
-                <div class="lp-modulo-row">
-                    <div class="lp-modulo-texto">
-                        <div class="lp-modulo-header">
-                            <i data-lucide="book-open" class="lp-modulo-icon" aria-hidden="true"></i>
-                            <h4>Book digital</h4>
-                        </div>
-                        <p>Material para aprofundar o seu autoconhecimento no seu próprio ritmo. Para ler quando quiser, quantas vezes quiser.</p>
-                    </div>
-                    <div class="lp-phone-mockup">
-                        <div class="lp-phone-speaker"></div>
-                        <div class="lp-phone-screen">
-                            <img src="../assets/img/mockup-book.png" alt="Tela do book digital" loading="lazy">
-                        </div>
-                        <div class="lp-phone-home"></div>
-                    </div>
-                </div>
-
-                <!-- 4 — phone esquerda / texto direita -->
-                <div class="lp-modulo-row">
-                    <div class="lp-modulo-texto">
-                        <div class="lp-modulo-header">
-                            <i data-lucide="infinity" class="lp-modulo-icon" aria-hidden="true"></i>
-                            <h4>Acesso sem prazo</h4>
-                        </div>
-                        <p>Você paga uma vez e acessa pelo tempo que precisar. Sem corrida contra o relógio, sem ansiedade de "terminar". No seu ritmo.</p>
-                    </div>
-                    <div class="lp-phone-mockup">
-                        <div class="lp-phone-speaker"></div>
-                        <div class="lp-phone-screen">
-                            <img src="../assets/img/mockup-acesso.png" alt="Tela de acesso ao programa" loading="lazy">
-                        </div>
-                        <div class="lp-phone-home"></div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="lp-secao-cta">
-                <a href="#investimento" class="btn btn-primary">Quero começar agora</a>
             </div>
         </div>
     </section>
 
     <!-- ── PROBLEMA ───────────────────────────────────────────── -->
-    <section class="lp-secao">
+    <section class="lp-secao-alt">
         <div class="container">
             <h2>Você se reconhece aqui?</h2>
             <div class="lp-problema-grid">
@@ -1243,11 +1278,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     <p>Olha no espelho e sente uma distância entre você e a mulher que você quer ser</p>
                 </div>
             </div>
+            <div class="lp-secao-cta">
+                <a href="#investimento" class="btn btn-primary">Sim, quero cuidar de mim</a>
+            </div>
         </div>
     </section>
 
     <!-- ── TRANSFORMAÇÃO ANTES/DEPOIS ────────────────────────── -->
-    <section class="lp-secao-alt">
+    <section class="lp-secao">
         <div class="container">
             <h2>E se fosse diferente?</h2>
             <div class="lp-transformacao-grid">
@@ -1273,8 +1311,37 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
     </section>
 
+    <!-- ── O QUE VOCÊ VAI ENCONTRAR (novo layout) ───────────── -->
+    <section class="lp-encontrar">
+        <div class="lp-encontrar-bg"></div>
+        <div class="container">
+            <div>
+                <h2 class="lp-encontrar-titulo">essentia</h2>
+                <p class="lp-encontrar-subtitulo">você, no seu tempo</p>
+            </div>
+            <div class="lp-encontrar-imagens">
+<div class="lp-encontrar-img-apostila">
+                    <img src="../assets/img/Essentia - Capa Apostila.jpeg" alt="Apostila do programa Essentia" loading="lazy">
+                </div>
+            </div>
+            <div class="lp-encontrar-card">
+                <p class="lp-encontrar-card-texto">Apostila + <strong>8 módulos práticos</strong> de exercícios, envolvendo:</p>
+                <ul class="lp-encontrar-lista">
+                    <li>Rugas frontais</li>
+                    <li>Linhas de marionete e bigode chinês</li>
+                    <li>Queixo duplo</li>
+                    <li>Linhas cervicais</li>
+                    <li>Dobras das Costas</li>
+                    <li>Postura</li>
+                    <li>Barriga</li>
+                    <li>Pelve</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
     <!-- ── AUTORIDADE — Dra. Hexandra ────────────────────────── -->
-    <section class="lp-secao">
+    <section class="lp-secao-alt">
         <div class="container">
             <div class="lp-dra-grid">
                 <img src="../assets/img/Hexandra-58-scaled.jpg" alt="Dra. Hexandra Hertel" class="lp-dra-foto" loading="lazy">
@@ -1289,7 +1356,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </section>
 
     <!-- ── MECANISMO ÚNICO ────────────────────────────────────── -->
-    <section class="lp-secao-alt">
+    <section class="lp-secao">
         <div class="container">
             <h2>Por que o Essentia funciona<br>quando o resto não funcionou</h2>
             <div class="lp-mecanismo-box">
@@ -1297,7 +1364,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <p>Falha porque foram criadas para pessoas com tempo livre — e você não tem. O Essentia foi criado ao contrário: parte do tempo que você já tem, dos gestos que você já faz, do corpo que você já carrega. Vai construindo, aos poucos, uma relação nova com tudo isso. Sem exigir perfeição. Sem te cobrar o que não é possível para a sua vida real.</p>
             </div>
             <div class="lp-secao-cta">
-                <a href="#investimento" class="btn btn-primary">Quero o Essentia</a>
+                <a href="#investimento" class="btn btn-primary">Começar rotina de autocuidado</a>
             </div>
         </div>
     </section>
@@ -1367,7 +1434,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 </ul>
             </div>
             <div class="lp-secao-cta">
-                <a href="#investimento" class="btn btn-primary">Quero começar agora</a>
+                <a href="#investimento" class="btn btn-primary">Começar agora</a>
             </div>
         </div>
     </section>
@@ -1377,7 +1444,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class="container">
             <h2>Pronta para dar esse passo?</h2>
             <p>Acesso imediato. No seu ritmo. Pelo tempo que precisar.</p>
-            <a href="#investimento" class="btn btn-primary btn-large">Quero o Essentia agora</a>
+            <a href="#investimento" class="btn btn-primary btn-large">Começar agora</a>
             <p class="lp-cta-meta">Acesso imediato &nbsp;·&nbsp; Garantia de 7 dias &nbsp;·&nbsp; De onde estiver</p>
         </div>
     </div>
@@ -1401,7 +1468,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 </div>
             </div>
             <div class="lp-secao-cta">
-                <a href="#investimento" class="btn btn-primary">Quero entrar para o Essentia</a>
+                <a href="#investimento" class="btn btn-primary">Entrar para o Essentia</a>
             </div>
         </div>
     </section>
@@ -1429,12 +1496,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <div class="lp-preco-parcela">
                     <sup>R$</sup> 32<sup>,27</sup>
                 </div>
-                <p class="lp-preco-parcela-info">por mês &nbsp;·&nbsp; 12 parcelas sem juros</p>
+                <p class="lp-preco-parcela-info">por mês &nbsp;·&nbsp; 12 parcelas</p>
                 <p class="lp-preco-avista">ou <strong>R$ 312,00</strong> à vista</p>
                 <a onclick="return false;"
                    href="https://pay.hotmart.com/M104765364P?checkoutMode=2"
                    class="btn btn-primary btn-large hotmart-fb hotmart__button-checkout">
-                   Quero começar agora
+                   Começar agora
+                </a>
+                <a href="https://wa.me/PHONE_PLACEHOLDER?text=Oi%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20programa%20Essentia%20da%20Hinis."
+                   class="lp-btn-whatsapp"
+                   data-phone="KzU1MjE5OTQwNDE2NDg="
+                   target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    Fale com a gente
                 </a>
                 <p class="lp-preco-comparacao">Você paga uma vez. Acessa para sempre.</p>
                 <div class="lp-preco-garantia">
@@ -1514,9 +1588,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     </div>
                 </div>
             </div>
-            <div class="lp-secao-cta">
-                <a href="#investimento" class="btn btn-primary">Quero o Essentia agora</a>
-            </div>
         </div>
     </section>
 
@@ -1542,15 +1613,34 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </p>
     </footer>
 
+    <!-- ── WHATSAPP FLUTUANTE ───────────────────────────────────── -->
+    <a href="https://wa.me/PHONE_PLACEHOLDER?text=Oi%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20programa%20Essentia%20da%20Hinis."
+       class="lp-wa-float"
+       data-phone="KzU1MjE5OTQwNDE2NDg="
+       target="_blank" rel="noopener"
+       aria-label="Falar pelo WhatsApp">
+        <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+
     <!-- ── STICKY CTA MOBILE ───────────────────────────────────── -->
     <div class="lp-sticky-cta" id="lpStickyCta">
-        <a href="#investimento" class="btn btn-primary">Quero o Essentia →</a>
+        <a href="#investimento" class="btn btn-primary">O Essentia →</a>
     </div>
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="../js/utm-tracker.js?v=1.0.0"></script>
     <script src="../js/script.js?v=2.0.0"></script>
+
+    <!-- Phone decoder: deofusca data-phone Base64 nos links WhatsApp -->
+    <script>
+    document.querySelectorAll('a[data-phone]').forEach(function(el) {
+        try {
+            var num = atob(el.getAttribute('data-phone')).replace(/\D/g, '');
+            el.href = el.href.replace('PHONE_PLACEHOLDER', num);
+        } catch(e) {}
+    });
+    </script>
 
     <!-- Hotmart Lightbox -->
     <script type="text/javascript">
@@ -1654,37 +1744,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         });
 
         document.getElementById('lp-checkout-close').addEventListener('click', closeModal);
-    })();
-    </script>
-
-    <!-- Stagger reveal: módulos -->
-    <script>
-    (function() {
-        var rows = Array.from(document.querySelectorAll('.lp-modulo-row'));
-        if (!rows.length || !window.IntersectionObserver) return;
-
-        // Estado inicial via inline style — não pode ser sobrescrito por CSS externo
-        rows.forEach(function(row) {
-            row.style.opacity = '0';
-            row.style.transform = 'translateY(36px)';
-            row.style.transition = 'opacity 0.65s ease, transform 0.65s ease';
-        });
-
-        var observer = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (!entry.isIntersecting) return;
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-                observer.unobserve(entry.target);
-            });
-        }, { threshold: 0.12 });
-
-        // rAF duplo: garante que o browser pintou opacity:0 antes de observar
-        requestAnimationFrame(function() {
-            requestAnimationFrame(function() {
-                rows.forEach(function(row) { observer.observe(row); });
-            });
-        });
     })();
     </script>
 </body>
