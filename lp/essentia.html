@@ -957,6 +957,59 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             border: none;
             display: block;
         }
+
+        /* ── WhatsApp ── */
+        /* Tamanho padrão único para todos os botões da LP */
+        .btn, .btn-large {
+            padding: 0.75rem 1.75rem;
+            font-size: 0.95rem;
+        }
+        .lp-btn-whatsapp {
+            display: flex;
+            width: fit-content;
+            margin: 0.5rem auto 0;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: #25D366;
+            color: #fff;
+            border-radius: 8px;
+            padding: 0.72rem 1.75rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s ease;
+        }
+        .lp-btn-whatsapp:hover { background: #1aae57; }
+        .lp-btn-whatsapp svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+        .lp-wa-float {
+            position: fixed;
+            bottom: 28px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(37,211,102,0.45);
+            z-index: 190;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            animation: wa-pulse 3s ease-in-out infinite;
+        }
+        .lp-wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 22px rgba(37,211,102,0.6); }
+        .lp-wa-float svg { width: 30px; height: 30px; }
+        @keyframes wa-pulse {
+            0%, 100% { box-shadow: 0 4px 16px rgba(37,211,102,0.45); }
+            50%       { box-shadow: 0 4px 28px rgba(37,211,102,0.75); }
+        }
+        @media (max-width: 768px) {
+            .lp-wa-float { bottom: 84px; right: 16px; width: 50px; height: 50px; }
+            .lp-wa-float svg { width: 26px; height: 26px; }
+        }
     </style>
 </head>
 <body>
@@ -994,12 +1047,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     <div class="lp-preco-parcela">
                         <sup>R$</sup> 32<sup>,27</sup>
                     </div>
-                    <p class="lp-preco-parcela-info">por mês &nbsp;·&nbsp; 12 parcelas sem juros</p>
+                    <p class="lp-preco-parcela-info">por mês &nbsp;·&nbsp; 12 parcelas</p>
                     <p class="lp-preco-avista">ou <strong>R$ 312,00</strong> à vista</p>
                     <a onclick="return false;"
                        href="https://pay.hotmart.com/M104765364P?checkoutMode=2"
                        class="btn btn-primary btn-large hotmart-fb hotmart__button-checkout">
-                       Quero começar agora
+                       Começar agora
+                    </a>
+                    <a href="https://wa.me/PHONE_PLACEHOLDER?text=Oi%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20programa%20Essentia%20da%20Hinis."
+                       class="lp-btn-whatsapp"
+                       data-phone="KzU1MjE5OTQwNDE2NDg="
+                       target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                        WhatsApp
                     </a>
                     <p class="lp-preco-comparacao">Você paga uma vez. Acessa para sempre.</p>
                     <div class="lp-preco-garantia">
@@ -1065,7 +1125,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     <p>Essentia é um programa digital de autocuidado para mulheres com agendas cheias. Prático, gentil e feito para encaixar na sua vida. Sem culpa e sem exageros.</p>
                 </div>
                 <div class="lp-vsl-cta">
-                    <a href="#investimento" class="btn btn-primary">Quero começar</a>
+                    <a href="#investimento" class="btn btn-primary">Começar o Programa Essentia</a>
                 </div>
             </div>
         </div>
@@ -1092,6 +1152,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     <i data-lucide="eye" class="lp-problema-icon" aria-hidden="true"></i>
                     <p>Olha no espelho e sente uma distância entre você e a mulher que você quer ser</p>
                 </div>
+            </div>
+            <div class="lp-secao-cta">
+                <a href="#investimento" class="btn btn-primary">Sim, quero cuidar de mim</a>
             </div>
         </div>
     </section>
@@ -1147,7 +1210,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <p>Falha porque foram criadas para pessoas com tempo livre — e você não tem. O Essentia foi criado ao contrário: parte do tempo que você já tem, dos gestos que você já faz, do corpo que você já carrega. Vai construindo, aos poucos, uma relação nova com tudo isso. Sem exigir perfeição. Sem te cobrar o que não é possível para a sua vida real.</p>
             </div>
             <div class="lp-secao-cta">
-                <a href="#investimento" class="btn btn-primary">Quero o Essentia</a>
+                <a href="#investimento" class="btn btn-primary">Começar rotina de autocuidado</a>
             </div>
         </div>
     </section>
@@ -1187,7 +1250,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 </div>
             </div>
             <div class="lp-secao-cta">
-                <a href="#investimento" class="btn btn-primary">Quero começar agora</a>
+                <a href="#investimento" class="btn btn-primary">Começar agora</a>
             </div>
         </div>
     </section>
@@ -1257,7 +1320,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 </ul>
             </div>
             <div class="lp-secao-cta">
-                <a href="#investimento" class="btn btn-primary">Quero começar agora</a>
+                <a href="#investimento" class="btn btn-primary">Começar agora</a>
             </div>
         </div>
     </section>
@@ -1267,7 +1330,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class="container">
             <h2>Pronta para dar esse passo?</h2>
             <p>Acesso imediato. No seu ritmo. Pelo tempo que precisar.</p>
-            <a href="#investimento" class="btn btn-primary btn-large">Quero o Essentia agora</a>
+            <a href="#investimento" class="btn btn-primary btn-large">Começar agora</a>
             <p class="lp-cta-meta">Acesso imediato &nbsp;·&nbsp; Garantia de 7 dias &nbsp;·&nbsp; De onde estiver</p>
         </div>
     </div>
@@ -1291,7 +1354,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 </div>
             </div>
             <div class="lp-secao-cta">
-                <a href="#investimento" class="btn btn-primary">Quero entrar para o Essentia</a>
+                <a href="#investimento" class="btn btn-primary">Entrar para o Essentia</a>
             </div>
         </div>
     </section>
@@ -1319,12 +1382,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <div class="lp-preco-parcela">
                     <sup>R$</sup> 32<sup>,27</sup>
                 </div>
-                <p class="lp-preco-parcela-info">por mês &nbsp;·&nbsp; 12 parcelas sem juros</p>
+                <p class="lp-preco-parcela-info">por mês &nbsp;·&nbsp; 12 parcelas</p>
                 <p class="lp-preco-avista">ou <strong>R$ 312,00</strong> à vista</p>
                 <a onclick="return false;"
                    href="https://pay.hotmart.com/M104765364P?checkoutMode=2"
                    class="btn btn-primary btn-large hotmart-fb hotmart__button-checkout">
-                   Quero começar agora
+                   Começar agora
+                </a>
+                <a href="https://wa.me/PHONE_PLACEHOLDER?text=Oi%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20programa%20Essentia%20da%20Hinis."
+                   class="lp-btn-whatsapp"
+                   data-phone="KzU1MjE5OTQwNDE2NDg="
+                   target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    WhatsApp
                 </a>
                 <p class="lp-preco-comparacao">Você paga uma vez. Acessa para sempre.</p>
                 <div class="lp-preco-garantia">
@@ -1404,9 +1474,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     </div>
                 </div>
             </div>
-            <div class="lp-secao-cta">
-                <a href="#investimento" class="btn btn-primary">Quero o Essentia agora</a>
-            </div>
         </div>
     </section>
 
@@ -1432,15 +1499,34 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </p>
     </footer>
 
+    <!-- ── WHATSAPP FLUTUANTE ───────────────────────────────────── -->
+    <a href="https://wa.me/PHONE_PLACEHOLDER?text=Oi%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20programa%20Essentia%20da%20Hinis."
+       class="lp-wa-float"
+       data-phone="KzU1MjE5OTQwNDE2NDg="
+       target="_blank" rel="noopener"
+       aria-label="Falar pelo WhatsApp">
+        <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+
     <!-- ── STICKY CTA MOBILE ───────────────────────────────────── -->
     <div class="lp-sticky-cta" id="lpStickyCta">
-        <a href="#investimento" class="btn btn-primary">Quero o Essentia →</a>
+        <a href="#investimento" class="btn btn-primary">O Essentia →</a>
     </div>
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="../js/utm-tracker.js?v=1.0.0"></script>
     <script src="../js/script.js?v=2.0.0"></script>
+
+    <!-- Phone decoder: deofusca data-phone Base64 nos links WhatsApp -->
+    <script>
+    document.querySelectorAll('a[data-phone]').forEach(function(el) {
+        try {
+            var num = atob(el.getAttribute('data-phone')).replace(/\D/g, '');
+            el.href = el.href.replace('PHONE_PLACEHOLDER', num);
+        } catch(e) {}
+    });
+    </script>
 
     <!-- Hotmart Lightbox -->
     <script type="text/javascript">
