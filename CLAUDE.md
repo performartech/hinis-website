@@ -177,7 +177,7 @@ Fluxo: `/lp/essentia` → `/checkout/essentia` → pagamento Hotmart (iframe) �
 - **Sem Turnstile** — decisão deliberada para não criar atrito no meio do funil de compra. Também sem rate limiting
 - **Não usa `widget.min.js`.** O pagamento abre em `#ck-pagamento-modal`, um iframe próprio apontando para `pay.hotmart.com/M104765364P?checkoutMode=2` — em desktop e mobile. O iframe permite montar a URL dinamicamente com os dados já preenchidos
 - Hotmart recebe `name`, `email` e `phonenumber` (`55` + dígitos) por query string, além de `src` com o `utm_source` quando existir
-- Lead vai para o mesmo `GOOGLE_SHEETS_URL` do `form-handler.js` (constante duplicada no script inline), com `programa: 'Essentia'` para manter a planilha consistente com o resto do site — o `landing_page` é que distingue o lead de checkout
+- Lead vai para o mesmo `GOOGLE_SHEETS_URL` do `form-handler.js` (constante duplicada no script inline), com `programa: 'Essentia'` para manter a planilha consistente com o resto do site. O payload envia `origem: 'checkout'`, que vai para a coluna `Origem` — o Apps Script também deduz pela presença de `/checkout/` no `landing_page` caso o campo não venha
 - **Falha no envio do lead nunca bloqueia a compra** — o `fetch` tem `.catch()` e o modal de pagamento abre de qualquer forma
 - Eventos no dataLayer: `begin_checkout` (no `<head>`, antes do GTM processar a fila), `generate_lead` + `add_payment_info` (no submit). Fecha o funil com o `purchase` de `bem-vinda.html`
 
@@ -217,3 +217,7 @@ Não replicar esses padrões. Estão registrados para correção futura:
 1. `faq.html` — número WhatsApp exposto em plain text no `href` (fora do sistema `data-phone`)
 2. `politica-privacidade.html` — usa número de telefone diferente do resto do site (+55 21 98860-2474 vs +55 21 99404-1648)
 3. `assets/img/Hinis-home-retrato.png` — imagem existe mas não é referenciada em nenhuma página
+4. **Apps Script v2.0.0 ainda não implantado** — `apps-script/Codigo.gs` está corrigido no repo, mas a `/exec` continua servindo o código antigo (responde `{"status":"ok"}` em vez de `"versao":"2.0.0"`)
+5. **Máscara de telefone trata DDI como DDD** — quem digita `5521…` vira `(55) 21…` em `initTelefoneMask()` (`form-handler.js`) e no script inline do checkout. Suja a planilha e gera E.164 errado no `generate_lead`
+6. **Falhas de envio são silenciosas** — `mode: 'no-cors'` torna a resposta opaca e o front assume sucesso. O Apps Script devolve `Access-Control-Allow-Origin: *`, então dá para trocar por `Content-Type: text/plain;charset=UTF-8` sem `no-cors` e ler o `{sucesso, mensagem}` de verdade
+7. **Pré-preenchimento do Hotmart não validado** — `name`, `email` e `phonenumber` na query string de `pay.hotmart.com` nunca foram conferidos contra o checkout real
