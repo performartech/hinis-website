@@ -18,8 +18,10 @@ Elevar a autoestima feminina respeitando o tempo, a história e o corpo de cada 
 - Foco: Autocuidado integrado à rotina diária
 - Formato: Digital (acesso vitalício, duração sugerida de 8 semanas)
 - Componentes: Conteúdos em vídeo, exercícios versáteis, book digital
-- Venda: Hotmart Lightbox (checkout transparente embutido no site via widget)
+- Venda: Hotmart (checkout transparente embutido no site)
 - Produto Hotmart: `M104765364P`
+- Funil da LP principal: `/lp/essentia` → `/checkout/essentia` (pré-checkout que captura o lead) → pagamento Hotmart em iframe → `/programas/essentia/bem-vinda`
+- As demais páginas (`/programas/essentia`, LPs v0 e v2) ainda abrem o Hotmart Lightbox direto via widget
 - Pós-compra: redireciona para `/programas/essentia/bem-vinda` com evento `purchase` no dataLayer
 
 ### 2. **Refugium** - De você, para você
@@ -62,6 +64,8 @@ Hinis/
 │   ├── amicae.html             # Programa Amicae
 │   └── essentia/
 │       └── bem-vinda.html      # Página de obrigado pós-compra (noindex)
+├── checkout/
+│   └── essentia.html           # Pré-checkout do Essentia (noindex) — dados pessoais + pagamento
 ├── lp/
 │   ├── essentia.html           # LP principal (v3) — hero em 2 colunas com card de preço à direita
 │   ├── essentia-v2.html        # LP v2 — otimizada para conversão, CTAs âncora para #investimento
