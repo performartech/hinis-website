@@ -18,8 +18,10 @@ Elevar a autoestima feminina respeitando o tempo, a história e o corpo de cada 
 - Foco: Autocuidado integrado à rotina diária
 - Formato: Digital (acesso vitalício, duração sugerida de 8 semanas)
 - Componentes: Conteúdos em vídeo, exercícios versáteis, book digital
-- Venda: Hotmart Lightbox (checkout transparente embutido no site via widget)
+- Venda: Hotmart (checkout transparente embutido no site)
 - Produto Hotmart: `M104765364P`
+- Funil da LP principal: `/lp/essentia` → `/checkout/essentia` (pré-checkout que captura o lead) → pagamento Hotmart em iframe → `/programas/essentia/bem-vinda`
+- As demais páginas (`/programas/essentia`, LPs v0 e v2) ainda abrem o Hotmart Lightbox direto via widget
 - Pós-compra: redireciona para `/programas/essentia/bem-vinda` com evento `purchase` no dataLayer
 
 ### 2. **Refugium** - De você, para você
@@ -62,6 +64,8 @@ Hinis/
 │   ├── amicae.html             # Programa Amicae
 │   └── essentia/
 │       └── bem-vinda.html      # Página de obrigado pós-compra (noindex)
+├── checkout/
+│   └── essentia.html           # Pré-checkout do Essentia (noindex) — dados pessoais + pagamento
 ├── lp/
 │   ├── essentia.html           # LP principal (v3) — hero em 2 colunas com card de preço à direita
 │   ├── essentia-v2.html        # LP v2 — otimizada para conversão, CTAs âncora para #investimento
@@ -79,6 +83,8 @@ Hinis/
 │   ├── load-components.js      # Carregador dinâmico de componentes
 │   ├── utm-tracker.js          # Rastreamento UTM, gclid e fbclid
 │   └── phone-protection.js     # Proteção de telefones (Base64)
+├── apps-script/
+│   └── Codigo.gs               # Backend do formulário (cópia versionada — roda no Google)
 ├── assets/
 │   ├── logo/                   # Logotipos e favicons
 │   └── img/                    # Imagens do site
@@ -97,6 +103,7 @@ Hinis/
 ### Tipos de formulário
 - **Inline** — usado na homepage, contato e programas (componente `form-contato.html`)
 - **Popup modal** — usado em Refugium e Amicae, com programa pré-selecionado
+- **Pré-checkout** — `checkout/essentia.html`, sem Turnstile e sem rate limiting (evita atrito no funil de compra); script próprio inline, não usa `form-handler.js`
 
 ### Funcionalidades
 - Envio para Google Sheets via Apps Script
@@ -116,18 +123,32 @@ Hinis/
 | Programa | select | Sim |
 
 ### Dados salvos na planilha
-| Coluna | Origem |
-|--------|--------|
-| Data/Hora | Gerada no envio (fuso São Paulo) |
-| Nome, Email, Telefone, Programa | Campos do formulário |
-| Landing Page | URL completa da página de conversão |
-| Referrer | Página anterior ou "direct" |
-| utm_source/medium/campaign/term/content | Parâmetros UTM da URL |
-| gclid | Google Ads click ID |
-| fbclid | Facebook/Meta click ID |
+Planilha **"[Hinis] Leads formulário site"**, primeira aba. Ordem das colunas:
 
-### Configuração
-A URL do Google Sheets Apps Script está em `js/form-handler.js` na constante `GOOGLE_SHEETS_URL`.
+| # | Coluna | Origem |
+|---|--------|--------|
+| 1 | Data/Hora | Gerada no envio (fuso São Paulo) |
+| 2–5 | Nome, Email, Telefone, Programa | Campos do formulário |
+| 6 | Landing Page | URL completa da página de conversão |
+| 7 | Referrer | Página anterior ou "direct" |
+| 8–12 | utm_source/medium/campaign/term/content | Parâmetros UTM da URL |
+| 13 | gclid | Google Ads click ID |
+| 14 | fbclid | Facebook/Meta click ID |
+| 15 | Origem | `contato` ou `checkout` — distingue o funil |
+
+As colunas 1–14 têm histórico alinhado e não podem mudar de posição. Colunas novas entram sempre no fim.
+
+### Backend — Google Apps Script
+
+Não existe backend próprio: o site é estático e posta direto no Web App do Apps Script.
+
+- **Projeto**: "Hinis - Formulário" (conta `pedro@performartech.com.br`)
+- **Código-fonte versionado**: `apps-script/Codigo.gs` — cópia de referência, **sincronizada manualmente**. O Google não versiona junto com o repositório
+- **Endpoint**: constante `GOOGLE_SHEETS_URL` em `js/form-handler.js` e no script inline de `checkout/essentia.html`
+- **Planilha**: pertence a `pedro@waah.com.br`. A conta que implanta o script precisa de acesso de edição nela, ou os leads param de gravar
+- **E-mails**: notificação para a equipe ligada; confirmação para o lead **desligada** (`ENVIAR_CONFIRMACAO = false`). No fluxo de checkout a confirmação nunca é enviada — quem comunica a compra é a Hotmart
+
+⚠️ **Editar o código do Apps Script não altera nada em produção.** É preciso criar uma nova versão de implantação (`Implantar → Gerenciar implantações → ✏️ → Versão: Nova versão`); a URL `/exec` permanece a mesma. Para saber o que está no ar, abrir a `/exec` no navegador — o `doGet` responde com a constante `VERSAO`.
 
 ## Componentes Reutilizáveis
 
@@ -203,6 +224,11 @@ cd hinis-website
 - **Número de telefone inconsistente**: `politica-privacidade.html` usa +55 21 98860-2474 (ofuscado em Base64 `KzU1MjE5ODg2MDI0NzQ=`) enquanto o restante do site usa +55 21 99404-1648. Verificar qual é o correto.
 - **Telefone exposto no FAQ**: `faq.html` tem o número WhatsApp hardcoded no href (`wa.me/5521994041648`) sem usar o sistema de proteção Base64 (`data-phone` + `phone-protection.js`).
 - **Imagem órfã**: `assets/img/Hinis-home-retrato.png` existe mas não é referenciada em nenhuma página.
+- **Apps Script desatualizado em produção**: a correção em `apps-script/Codigo.gs` (v2.0.0) ainda não foi implantada. A `/exec` responde `{"status":"ok"}`; depois do deploy deve responder `"versao":"2.0.0"`.
+- **Pré-preenchimento do Hotmart não validado**: o checkout envia `name`, `email` e `phonenumber` na query string. Se algum parâmetro tiver nome diferente, o campo só não vem preenchido — não quebra a compra.
+- **Máscara de telefone aceita código do país**: quem digita `5521…` recebe `(55) 21…`, tratando o DDI como DDD. Além de sujar a planilha, gera um E.164 errado no `generate_lead` das Enhanced Conversions.
+- **Falhas de envio são silenciosas**: o `fetch` usa `mode: 'no-cors'`, então a resposta é opaca e o front assume sucesso. O Apps Script devolve `Access-Control-Allow-Origin: *`, então dá para trocar por `Content-Type: text/plain;charset=UTF-8` sem `no-cors` e passar a ler o `{sucesso, mensagem}`.
+- **Planilha homônima sem uso**: existe uma "Hinis - Contatos" no Drive com cabeçalho parecido. **Não é usada** — o destino real é "[Hinis] Leads formulário site".
 
 ---
 

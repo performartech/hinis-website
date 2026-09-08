@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WMKVWGKF');</script>
+    <!-- End Google Tag Manager -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QEBQDXDXLV"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QEBQDXDXLV');
+    </script>
+    <!-- Início do checkout — disparado antes do GTM processar a fila -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+          event: 'begin_checkout',
+          ecommerce: {
+              currency: 'BRL',
+              value: 312.00,
+              items: [{
+                  item_id: 'M104765364P',
+                  item_name: 'Essentia — Você, no seu tempo',
+                  item_category: 'Programa Online',
+                  price: 312.00,
+                  quantity: 1
+              }]
+          }
+      });
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Checkout — Essentia | Hinis</title>
+    <link rel="icon" type="image/png" href="../assets/logo/Ativo-1.png">
+    <link rel="stylesheet" href="../css/styles.css?v=2.5.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://pay.hotmart.com">
+    <style>
+        /* ============================================================
+           CHECKOUT — ESSENTIA
+           Página de pré-checkout: captura o lead e entrega a compradora
+           ao pagamento da Hotmart já identificada.
+           Layout autônomo (sem header/footer de componentes).
+           ============================================================ */
+
+        html { overflow-x: hidden; }
+        body { background: var(--light-color); }
+
+        /* ── Header mínimo ── */
+        .ck-header {
+            background: var(--dark-color);
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .ck-logo { height: 34px; display: block; }
+        .ck-header-seguro {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: rgba(255,255,255,0.72);
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.4px;
+        }
+        .ck-header-seguro svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+        /* ── Título ── */
+        .ck-main { padding: var(--spacing-md) 1.25rem var(--spacing-lg); }
+        .ck-wrap { max-width: 1080px; margin: 0 auto; }
+        .ck-titulo {
+            text-align: center;
+            margin-bottom: var(--spacing-md);
+        }
+        .ck-titulo h1 {
+            font-family: var(--font-secondary);
+            font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 0.4rem;
+            line-height: 1.2;
+        }
+        .ck-titulo p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* ── Grid: formulário + resumo ── */
+        .ck-grid {
+            display: grid;
+            grid-template-columns: 1fr minmax(300px, 360px);
+            gap: 1.75rem;
+            align-items: start;
+        }
+
+        /* ── Cartões de seção ── */
+        .ck-card {
+            background: var(--white);
+            border: 1px solid rgba(48,51,66,0.09);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 14px rgba(48,51,66,0.05);
+        }
+        .ck-card + .ck-card { margin-top: 1.25rem; }
+        .ck-card-head {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin-bottom: 1.15rem;
+        }
+        .ck-passo {
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: var(--white);
+            font-size: 0.82rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ck-card-head h2 {
+            font-family: var(--font-primary);
+            font-size: 1.02rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin: 0;
+            letter-spacing: 0.2px;
+        }
+
+        /* ── Formulário ── */
+        .ck-campos {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.9rem 1rem;
+        }
+        .ck-campo { display: flex; flex-direction: column; }
+        .ck-campo-full { grid-column: 1 / -1; }
+        .ck-campo label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 0.35rem;
+            letter-spacing: 0.2px;
+        }
+        .ck-campo input {
+            width: 100%;
+            padding: 0.8rem 0.9rem;
+            border: 1px solid rgba(48,51,66,0.18);
+            border-radius: 8px;
+            font-family: var(--font-primary);
+            font-size: 0.95rem;
+            color: var(--text-color);
+            background: var(--white);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .ck-campo input::placeholder { color: #a8a8a8; }
+        .ck-campo input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(187,148,118,0.15);
+        }
+        .ck-campo input[readonly] {
+            background: #f4f1ee;
+            border-color: rgba(187,148,118,0.35);
+            color: var(--dark-color);
+            font-weight: 600;
+            cursor: default;
+        }
+        .ck-campo input[readonly]:focus {
+            border-color: rgba(187,148,118,0.35);
+            box-shadow: none;
+        }
+        .ck-campo-hint {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            margin-top: 0.3rem;
+            line-height: 1.4;
+        }
+        .ck-campo.erro input { border-color: #d9534f; }
+        .ck-campo-erro {
+            display: none;
+            font-size: 0.72rem;
+            color: #c9302c;
+            margin-top: 0.3rem;
+        }
+        .ck-campo.erro .ck-campo-erro { display: block; }
+
+        /* ── Aviso de pagamento ── */
+        .ck-aviso {
+            display: flex;
+            gap: 0.85rem;
+            background: #faf7f4;
+            border: 1px solid rgba(187,148,118,0.28);
+            border-radius: 10px;
+            padding: 1rem 1.1rem;
+            margin-bottom: 1.1rem;
+        }
+        .ck-aviso-icone {
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+            color: var(--primary-color);
+            margin-top: 2px;
+        }
+        .ck-aviso-icone svg { width: 100%; height: 100%; }
+        .ck-aviso p {
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+        }
+        .ck-aviso p + p { margin-top: 0.6rem; }
+        .ck-aviso strong { color: var(--dark-color); font-weight: 600; }
+
+        .ck-formas {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.45rem;
+            margin-bottom: 1.25rem;
+        }
+        .ck-forma {
+            font-size: 0.74rem;
+            font-weight: 600;
+            color: var(--text-light);
+            border: 1px solid rgba(48,51,66,0.14);
+            border-radius: 6px;
+            padding: 0.3rem 0.65rem;
+            background: var(--white);
+            letter-spacing: 0.3px;
+        }
+
+        /* ── Botão principal ── */
+        .ck-btn-pagar {
+            display: block;
+            width: 100%;
+            background-color: #ff8b32;
+            border: 2px solid #ff8b32;
+            color: var(--white);
+            font-family: var(--font-primary);
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 0.95rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .ck-btn-pagar:hover:not(:disabled) {
+            background-color: #e67a28;
+            border-color: #e67a28;
+            transform: translateY(-1px);
+        }
+        .ck-btn-pagar:disabled { opacity: 0.65; cursor: wait; transform: none; }
+
+        .ck-feedback {
+            display: none;
+            margin-top: 0.9rem;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        /* ── Link "O que é Hotmart?" ── */
+        .ck-link-info {
+            display: block;
+            width: fit-content;
+            margin: 0.85rem auto 0;
+            background: none;
+            border: none;
+            padding: 0;
+            font-family: var(--font-primary);
+            font-size: 0.79rem;
+            color: var(--text-light);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .ck-link-info:hover { color: var(--primary-color); }
+
+        /* ── Popup "O que é Hotmart?" ── */
+        #ck-hotmart-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9998;
+            background: rgba(30,32,45,0.7);
+            padding: 1.25rem;
+            align-items: center;
+            justify-content: center;
+        }
+        #ck-hotmart-modal.active { display: flex; }
+        .ck-info-box {
+            background: var(--white);
+            border-radius: 12px;
+            max-width: 460px;
+            width: 100%;
+            padding: 1.6rem;
+            box-shadow: 0 12px 40px rgba(30,32,45,0.3);
+            position: relative;
+        }
+        .ck-info-box h3 {
+            font-family: var(--font-secondary);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin: 0 2rem 0.75rem 0;
+            line-height: 1.25;
+        }
+        .ck-info-box p {
+            font-size: 0.88rem;
+            line-height: 1.65;
+            color: var(--text-color);
+            margin: 0;
+        }
+        .ck-info-box strong { color: var(--dark-color); font-weight: 600; }
+        .ck-info-close {
+            position: absolute;
+            top: 0.6rem;
+            right: 0.75rem;
+            background: none;
+            border: none;
+            font-size: 1.9rem;
+            line-height: 1;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 0.1rem 0.35rem;
+        }
+        .ck-info-close:hover { color: var(--dark-color); }
+        .ck-info-ok {
+            display: block;
+            width: 100%;
+            margin-top: 1.25rem;
+            background: none;
+            border: 1px solid rgba(48,51,66,0.2);
+            border-radius: 8px;
+            padding: 0.6rem 1rem;
+            font-family: var(--font-primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .ck-info-ok:hover { border-color: var(--primary-color); color: var(--primary-color); }
+
+        .ck-selos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.4rem 1.25rem;
+            margin-top: 1rem;
+        }
+        .ck-selo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.73rem;
+            color: var(--text-light);
+        }
+        .ck-selo svg { width: 13px; height: 13px; flex-shrink: 0; color: var(--primary-color); }
+
+        /* ── Resumo do pedido ── */
+        .ck-resumo {
+            background: var(--white);
+            border: 1px solid rgba(48,51,66,0.09);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 14px rgba(48,51,66,0.05);
+            position: sticky;
+            top: 1.25rem;
+        }
+        .ck-resumo h3 {
+            font-family: var(--font-primary);
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.4px;
+            color: var(--text-light);
+            margin: 0 0 1rem;
+        }
+        .ck-resumo-produto {
+            font-family: var(--font-secondary);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 0.9rem;
+            line-height: 1.25;
+        }
+        .ck-resumo-lista {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.15rem;
+        }
+        .ck-resumo-lista li {
+            position: relative;
+            padding-left: 1.15rem;
+            font-size: 0.85rem;
+            color: var(--text-color);
+            line-height: 1.5;
+            margin-bottom: 0.45rem;
+        }
+        .ck-resumo-lista li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--primary-color);
+        }
+        .ck-resumo-divisor {
+            height: 1px;
+            background: rgba(48,51,66,0.1);
+            margin: 0 0 1.05rem;
+        }
+        .ck-resumo-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            margin: 0 0 0.15rem;
+        }
+        .ck-resumo-parcela {
+            font-family: var(--font-secondary);
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            line-height: 1;
+        }
+        .ck-resumo-parcela sup {
+            font-size: 1.05rem;
+            font-weight: 600;
+            top: -0.75em;
+        }
+        .ck-resumo-parcela-info {
+            font-size: 0.82rem;
+            color: var(--text-light);
+            margin: 0.35rem 0 0.1rem;
+        }
+        .ck-resumo-avista {
+            font-size: 0.88rem;
+            color: var(--text-color);
+            margin: 0;
+        }
+        /* Bloco de preço centralizado — do "A partir de" até o valor à vista */
+        .ck-resumo-label,
+        .ck-resumo-parcela,
+        .ck-resumo-parcela-info,
+        .ck-resumo-avista { text-align: center; }
+        .ck-resumo-garantia {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-top: 1.15rem;
+            padding-top: 1.05rem;
+            border-top: 1px solid rgba(48,51,66,0.1);
+            font-size: 0.79rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+        .ck-resumo-garantia svg {
+            width: 15px;
+            height: 15px;
+            flex-shrink: 0;
+            margin-top: 1px;
+            color: var(--primary-color);
+        }
+        .ck-voltar {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            margin-top: 1.15rem;
+            font-size: 0.79rem;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .ck-voltar:hover { color: var(--primary-color); }
+        .ck-voltar svg { width: 13px; height: 13px; }
+
+        /* ── Ajuda / WhatsApp ── */
+        .ck-ajuda {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.83rem;
+            color: var(--text-light);
+        }
+        .ck-ajuda a {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .ck-ajuda a:hover { text-decoration: underline; }
+
+        /* ── Footer mínimo ── */
+        .ck-footer {
+            background: var(--dark-color);
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            padding: var(--spacing-md) 1.5rem;
+            font-size: 0.74rem;
+            line-height: 1.65;
+        }
+        .ck-footer p { margin: 0 auto 0.5rem; max-width: 800px; }
+        .ck-footer a { color: rgba(255,255,255,0.75); text-decoration: underline; }
+
+        /* ── Modal de pagamento (iframe Hotmart) ── */
+        #ck-pagamento-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(30,32,45,0.75);
+            flex-direction: column;
+        }
+        #ck-pagamento-modal.active { display: flex; }
+        .ck-modal-box {
+            background: var(--white);
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 980px;
+            height: 100%;
+            max-height: 92vh;
+            margin: auto;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .ck-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.5rem 0.6rem 0.5rem 1rem;
+            background: var(--dark-color);
+            flex-shrink: 0;
+        }
+        .ck-modal-titulo {
+            color: rgba(255,255,255,0.85);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.4px;
+        }
+        .ck-modal-close {
+            background: none;
+            color: rgba(255,255,255,0.8);
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0.1rem 0.5rem;
+            line-height: 1;
+        }
+        .ck-modal-close:hover { color: var(--white); }
+        .ck-modal-scroll {
+            flex: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        #ck-pagamento-iframe {
+            width: 100%;
+            height: 200vh;
+            border: none;
+            display: block;
+        }
+
+        /* ── Responsivo ── */
+        @media (max-width: 900px) {
+            .ck-grid { grid-template-columns: 1fr; }
+            .ck-resumo { position: static; order: -1; }
+            .ck-resumo-parcela { font-size: 2.2rem; }
+        }
+        @media (max-width: 560px) {
+            .ck-main { padding: var(--spacing-sm) 1rem var(--spacing-md); }
+            .ck-card, .ck-resumo { padding: 1.15rem; }
+            .ck-campos { grid-template-columns: 1fr; }
+            .ck-header { padding: 0.75rem 1rem; }
+            .ck-header-seguro span { display: none; }
+            .ck-modal-box { max-height: 100%; border-radius: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WMKVWGKF"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- ── HEADER MÍNIMO ─────────────────────────────────────────── -->
+    <header class="ck-header">
+        <img src="../assets/logo/Hinis-logo2.png" alt="Hinis" class="ck-logo">
+        <span class="ck-header-seguro">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>AMBIENTE SEGURO</span>
+        </span>
+    </header>
+
+    <main class="ck-main">
+        <div class="ck-wrap">
+            <div class="ck-titulo">
+                <h1>Falta pouco para você começar</h1>
+                <p>Preencha seus dados e siga para o pagamento. O acesso ao programa é liberado assim que a compra é confirmada.</p>
+            </div>
+
+            <form id="ckForm" novalidate>
+                <div class="ck-grid">
+                    <div class="ck-coluna">
+
+                        <!-- ── 1. INFORMAÇÕES PESSOAIS ───────────────── -->
+                        <section class="ck-card">
+                            <div class="ck-card-head">
+                                <span class="ck-passo">1</span>
+                                <h2>Informações pessoais</h2>
+                            </div>
+
+                            <div class="ck-campos">
+                                <div class="ck-campo ck-campo-full">
+                                    <label for="ck-nome">Nome completo</label>
+                                    <input type="text" id="ck-nome" name="nome" autocomplete="name"
+                                           placeholder="Como está no seu documento" required>
+                                    <span class="ck-campo-erro">Informe seu nome completo.</span>
+                                </div>
+
+                                <div class="ck-campo">
+                                    <label for="ck-telefone">Telefone</label>
+                                    <input type="tel" id="ck-telefone" name="telefone" autocomplete="tel"
+                                           inputmode="numeric" placeholder="(00) 00000-0000" required>
+                                    <span class="ck-campo-erro">Informe um telefone válido com DDD.</span>
+                                </div>
+
+                                <div class="ck-campo">
+                                    <label for="ck-email">E-mail</label>
+                                    <input type="email" id="ck-email" name="email" autocomplete="email"
+                                           placeholder="seu@email.com" required>
+                                    <span class="ck-campo-erro">Informe um e-mail válido.</span>
+                                    <span class="ck-campo-hint">É neste e-mail que chega o seu acesso.</span>
+                                </div>
+
+                                <div class="ck-campo ck-campo-full">
+                                    <label for="ck-produto">Produto</label>
+                                    <input type="text" id="ck-produto" name="produto" value="Hinis Essentia"
+                                           readonly tabindex="-1" aria-readonly="true">
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- ── 2. PAGAMENTO ──────────────────────────── -->
+                        <section class="ck-card">
+                            <div class="ck-card-head">
+                                <span class="ck-passo">2</span>
+                                <h2>Pagamento</h2>
+                            </div>
+
+                            <div class="ck-aviso">
+                                <span class="ck-aviso-icone">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                                </span>
+                                <div>
+                                    <p>O pagamento é processado pela <strong>Hotmart</strong>, a plataforma que hospeda o Essentia. É ela que garante a segurança da transação e a liberação do seu acesso aos módulos do programa.</p>
+                                    <p>Ao clicar em <strong>Ir para pagamento</strong>, abre um formulário para você escolher a forma de pagamento e concluir a compra.</p>
+                                </div>
+                            </div>
+
+                            <div class="ck-formas">
+                                <span class="ck-forma">CARTÃO DE CRÉDITO</span>
+                                <span class="ck-forma">PIX</span>
+                                <span class="ck-forma">BOLETO</span>
+                            </div>
+
+                            <button type="submit" class="ck-btn-pagar" id="ckSubmit">Ir para pagamento</button>
+                            <div class="ck-feedback" id="ckFeedback" role="status" aria-live="polite"></div>
+
+                            <button type="button" class="ck-link-info" id="ckHotmartLink">O que é Hotmart?</button>
+
+                            <div class="ck-selos">
+                                <span class="ck-selo">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                    Dados criptografados
+                                </span>
+                                <span class="ck-selo">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                    Compra protegida pela Hotmart
+                                </span>
+                                <span class="ck-selo">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                    Acesso imediato
+                                </span>
+                            </div>
+                        </section>
+
+                        <p class="ck-ajuda">
+                            Ficou com alguma dúvida antes de finalizar?
+                            <a href="https://wa.me/PHONE_PLACEHOLDER?text=Oi%2C%20estou%20na%20p%C3%A1gina%20de%20checkout%20do%20Essentia%20e%20fiquei%20com%20uma%20d%C3%BAvida."
+                               data-phone="KzU1MjE5OTQwNDE2NDg=" target="_blank" rel="noopener">Fale com a gente</a>.
+                        </p>
+                    </div>
+
+                    <!-- ── RESUMO DO PEDIDO ──────────────────────────── -->
+                    <aside class="ck-resumo">
+                        <h3>Resumo do pedido</h3>
+                        <p class="ck-resumo-produto">Hinis Essentia</p>
+                        <ul class="ck-resumo-lista">
+                            <li>8 módulos em vídeo</li>
+                            <li>Exercícios versáteis — sem equipamentos</li>
+                            <li>Book digital de autoconhecimento</li>
+                            <li>Acesso vitalício — sem prazo</li>
+                        </ul>
+                        <div class="ck-resumo-divisor"></div>
+                        <p class="ck-resumo-label">A partir de</p>
+                        <div class="ck-resumo-parcela"><sup>R$</sup> 32<sup>,27</sup></div>
+                        <p class="ck-resumo-parcela-info">por mês &nbsp;·&nbsp; 12 parcelas</p>
+                        <p class="ck-resumo-avista">ou <strong>R$ 312,00</strong> à vista</p>
+                        <div class="ck-resumo-garantia">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                            7 dias de garantia total · reembolso sem perguntas
+                        </div>
+                        <a href="../lp/essentia.html" class="ck-voltar">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+                            Voltar para a página do programa
+                        </a>
+                    </aside>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- ── FOOTER MÍNIMO ─────────────────────────────────────────── -->
+    <footer class="ck-footer">
+        <p>Os programas oferecidos pela Hinis possuem caráter exclusivamente educacional e de desenvolvimento pessoal. Os conteúdos não configuram atendimento médico, psicoterapia ou tratamento de saúde de qualquer natureza, não substituindo a consulta com profissionais licenciados.</p>
+        <p>Hinis Serviços Médicos LTDA &nbsp;|&nbsp; CNPJ 64.572.073/0001-30 &nbsp;|&nbsp; Rua Bambina, 124, sl 04, Botafogo, Rio de Janeiro/RJ</p>
+        <p>contato@hinis.com.br &nbsp;|&nbsp; (21) 2244-2474</p>
+        <p style="margin-top:0.85rem; font-size:0.72rem;">
+            <a href="../politica-privacidade.html">Política de Privacidade</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="../index.html">hinis.com.br</a>
+        </p>
+    </footer>
+
+    <!-- ── POPUP "O QUE É HOTMART?" ──────────────────────────────── -->
+    <div id="ck-hotmart-modal" role="dialog" aria-modal="true" aria-labelledby="ck-info-titulo">
+        <div class="ck-info-box">
+            <button type="button" class="ck-info-close" id="ck-info-close" aria-label="Fechar">&times;</button>
+            <h3 id="ck-info-titulo">O que é Hotmart?</h3>
+            <p>A Hotmart é a plataforma brasileira que hospeda e distribui programas digitais como o Essentia. É ela que processa o pagamento em ambiente criptografado — <strong>a Hinis não recebe nem armazena os dados do seu cartão</strong> —, libera o seu acesso aos módulos por e-mail assim que a compra é confirmada e administra a garantia de 7 dias, com reembolso integral caso você desista nesse período.</p>
+            <button type="button" class="ck-info-ok" id="ck-info-ok">Entendi</button>
+        </div>
+    </div>
+
+    <!-- ── MODAL DE PAGAMENTO (iframe Hotmart) ───────────────────── -->
+    <div id="ck-pagamento-modal" role="dialog" aria-modal="true" aria-label="Pagamento">
+        <div class="ck-modal-box">
+            <div class="ck-modal-header">
+                <span class="ck-modal-titulo">PAGAMENTO SEGURO · HOTMART</span>
+                <button type="button" class="ck-modal-close" id="ck-pagamento-close" aria-label="Fechar pagamento">&times;</button>
+            </div>
+            <div class="ck-modal-scroll">
+                <iframe id="ck-pagamento-iframe" src="" allow="payment" scrolling="yes" title="Checkout Hotmart"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/utm-tracker.js?v=1.0.0"></script>
+
+    <!-- Phone decoder: deofusca data-phone Base64 nos links WhatsApp -->
+    <script>
+    document.querySelectorAll('a[data-phone]').forEach(function(el) {
+        try {
+            var num = atob(el.getAttribute('data-phone')).replace(/\D/g, '');
+            el.href = el.href.replace('PHONE_PLACEHOLDER', num);
+        } catch(e) {}
+    });
+    </script>
+
+    <!-- ── CHECKOUT: validação, captura do lead e abertura do pagamento ── -->
+    <script>
+    (function() {
+        'use strict';
+
+        var HOTMART_BASE  = 'https://pay.hotmart.com/M104765364P?checkoutMode=2';
+        var HOTMART_ITEM  = 'M104765364P';
+        var PRODUTO_LABEL = 'Essentia';
+        var GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbw347vHEbcZaXUXjBGb9RQgOK-Dbq6sS0uzcizjmq5UJRRjukxc4KuQ_iPWiR_DQRNM/exec';
+
+        var form     = document.getElementById('ckForm');
+        var submit   = document.getElementById('ckSubmit');
+        var feedback = document.getElementById('ckFeedback');
+        var modal    = document.getElementById('ck-pagamento-modal');
+        var iframe   = document.getElementById('ck-pagamento-iframe');
+        var inputNome     = document.getElementById('ck-nome');
+        var inputEmail    = document.getElementById('ck-email');
+        var inputTelefone = document.getElementById('ck-telefone');
+
+        // ── Máscara de telefone ──
+        inputTelefone.addEventListener('input', function(e) {
+            var v = e.target.value.replace(/\D/g, '').slice(0, 11);
+            if (v.length <= 10) {
+                v = v.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
+            } else {
+                v = v.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, '($1) $2-$3');
+            }
+            e.target.value = v;
+        });
+
+        // ── Validação ──
+        function validarEmail(email) {
+            var regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!regex.test(email)) return false;
+            if (email.indexOf('..') !== -1) return false;
+            var partes = email.split('@');
+            if (partes[0].charAt(0) === '.' || partes[0].slice(-1) === '.') return false;
+            return partes[1].indexOf('.') !== -1;
+        }
+
+        function marcarErro(input, temErro) {
+            input.parentNode.classList.toggle('erro', temErro);
+        }
+
+        // Limpa o estado de erro assim que a pessoa corrige o campo
+        [inputNome, inputEmail, inputTelefone].forEach(function(input) {
+            input.addEventListener('input', function() { marcarErro(input, false); });
+        });
+
+        function mostrarFeedback(msg, tipo) {
+            feedback.textContent = msg;
+            feedback.style.display = 'block';
+            if (tipo === 'error') {
+                feedback.style.backgroundColor = '#f8d7da';
+                feedback.style.color = '#721c24';
+                feedback.style.border = '1px solid #f5c6cb';
+            } else {
+                feedback.style.backgroundColor = '#d4edda';
+                feedback.style.color = '#155724';
+                feedback.style.border = '1px solid #c3e6cb';
+            }
+        }
+
+        // ── Modal de pagamento ──
+        function abrirPagamento(url) {
+            iframe.src = url;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function fecharPagamento() {
+            modal.classList.remove('active');
+            iframe.src = '';
+            document.body.style.overflow = '';
+        }
+        document.getElementById('ck-pagamento-close').addEventListener('click', fecharPagamento);
+
+        // ── Popup "O que é Hotmart?" ──
+        var infoModal = document.getElementById('ck-hotmart-modal');
+        var infoLink  = document.getElementById('ckHotmartLink');
+        var infoClose = document.getElementById('ck-info-close');
+
+        function abrirInfo() {
+            infoModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            infoClose.focus();
+        }
+        function fecharInfo() {
+            infoModal.classList.remove('active');
+            document.body.style.overflow = '';
+            infoLink.focus();
+        }
+
+        infoLink.addEventListener('click', abrirInfo);
+        infoClose.addEventListener('click', fecharInfo);
+        document.getElementById('ck-info-ok').addEventListener('click', fecharInfo);
+        // Clique no fundo escuro fecha (o clique dentro do card não propaga até aqui)
+        infoModal.addEventListener('click', function(e) {
+            if (e.target === infoModal) fecharInfo();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key !== 'Escape') return;
+            if (modal.classList.contains('active')) fecharPagamento();
+            else if (infoModal.classList.contains('active')) fecharInfo();
+        });
+
+        // ── Envio ──
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var nome       = inputNome.value.trim();
+            var email      = inputEmail.value.trim();
+            var telValor   = inputTelefone.value.trim();
+            var telDigitos = telValor.replace(/\D/g, '');
+
+            var nomeInvalido  = nome.split(/\s+/).filter(Boolean).length < 2;
+            var emailInvalido = !validarEmail(email);
+            var telInvalido   = telDigitos.length < 10;
+
+            marcarErro(inputNome, nomeInvalido);
+            marcarErro(inputEmail, emailInvalido);
+            marcarErro(inputTelefone, telInvalido);
+
+            if (nomeInvalido || emailInvalido || telInvalido) {
+                mostrarFeedback('Confira os campos destacados antes de seguir.', 'error');
+                var primeiro = form.querySelector('.ck-campo.erro input');
+                if (primeiro) primeiro.focus();
+                return;
+            }
+
+            feedback.style.display = 'none';
+            submit.disabled = true;
+
+            var utm = (typeof window.HinisUTM !== 'undefined') ? window.HinisUTM.format() : {};
+
+            // URL do Hotmart já identificando a compradora
+            var url = HOTMART_BASE +
+                '&name=' + encodeURIComponent(nome) +
+                '&email=' + encodeURIComponent(email) +
+                '&phonenumber=' + encodeURIComponent('55' + telDigitos);
+            if (utm.utm_source) url += '&src=' + encodeURIComponent(utm.utm_source);
+
+            // Grava o lead antes do pagamento — quem abandonar o checkout continua recuperável.
+            // Uma falha aqui nunca bloqueia a compra.
+            var payload = {
+                data_hora: new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
+                nome: nome,
+                email: email,
+                telefone: telValor,
+                programa: PRODUTO_LABEL,
+                origem: 'checkout',
+                landing_page: window.location.href,
+                referrer: utm.referrer || document.referrer || 'direct',
+                utm_source: utm.utm_source || '',
+                utm_medium: utm.utm_medium || '',
+                utm_campaign: utm.utm_campaign || '',
+                utm_term: utm.utm_term || '',
+                utm_content: utm.utm_content || '',
+                gclid: utm.gclid || '',
+                fbclid: utm.fbclid || ''
+            };
+
+            fetch(GOOGLE_SHEETS_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).catch(function(erro) {
+                console.error('Falha ao registrar o lead do checkout:', erro);
+            });
+
+            // Conversões otimizadas (Google Ads Enhanced Conversions + Meta Advanced Matching)
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                event: 'generate_lead',
+                user_data: {
+                    email_address: email.toLowerCase(),
+                    phone_number: '+55' + telDigitos,
+                    first_name: nome.split(' ')[0].toLowerCase(),
+                    last_name: nome.split(' ').slice(1).join(' ').toLowerCase()
+                },
+                lead_data: {
+                    programa: PRODUTO_LABEL,
+                    landing_page: window.location.href,
+                    utm_source: utm.utm_source || '',
+                    utm_medium: utm.utm_medium || '',
+                    utm_campaign: utm.utm_campaign || '',
+                    utm_term: utm.utm_term || '',
+                    utm_content: utm.utm_content || '',
+                    gclid: utm.gclid || '',
+                    fbclid: utm.fbclid || ''
+                }
+            });
+
+            window.dataLayer.push({
+                event: 'add_payment_info',
+                ecommerce: {
+                    currency: 'BRL',
+                    value: 312.00,
+                    items: [{
+                        item_id: HOTMART_ITEM,
+                        item_name: 'Essentia — Você, no seu tempo',
+                        item_category: 'Programa Online',
+                        price: 312.00,
+                        quantity: 1
+                    }]
+                }
+            });
+
+            if (typeof window.HinisUTM !== 'undefined') {
+                window.HinisUTM.sendEvent('checkout_dados_preenchidos', { programa: PRODUTO_LABEL });
+            }
+
+            abrirPagamento(url);
+            submit.disabled = false;
+        });
+    })();
+    </script>
+</body>
+</html>
