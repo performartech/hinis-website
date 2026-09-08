@@ -80,6 +80,16 @@ Números em uso:
 - Rate limiting em memória (2 envios/minuto) — não migrar para localStorage
 - `js/config.js` está vazio — não referenciar nas páginas HTML
 
+### Backend do formulário — Apps Script
+
+- Projeto: **"Hinis - Formulário"** (`178RVIxQ6PVQ2NtJfEMORq5fKVnMT2aqo75E6ZfjNyC4XzracWrh6Nask`), conta `pedro@performartech.com.br`
+- Planilha de destino: **"[Hinis] Leads formulário site"** (`1TzWjN44C6_z42Lm6yVvmI3eYub0MazY1n1vserJYM2s`), **primeira aba**. A planilha pertence a `pedro@waah.com.br` — a conta que implanta precisa de acesso de edição nela, ou os leads param de gravar
+- ⚠️ **Não existe planilha "Hinis - Contatos".** Ela existe no Drive, tem cabeçalho parecido e **não é usada** — foi origem de diagnóstico errado antes
+- Código-fonte versionado em `apps-script/Codigo.gs`. **Manter em sincronia manualmente** — o Google não versiona junto com o repo
+- ⚠️ **Editar o código não muda nada em produção.** É preciso criar nova versão de implantação (`Implantar → Gerenciar implantações → ✏️ → Versão: Nova versão`). A URL `/exec` não muda. Já houve meses de divergência entre o editor e o que estava no ar por causa disso
+- Para saber o que está implantado, abrir a URL `/exec` no navegador: o `doGet` responde com a constante `VERSAO`
+- `ENVIAR_CONFIRMACAO` está em `false` — o lead não recebe e-mail. Ligar é decisão de produto, não de deploy
+
 ---
 
 ## Componentes e paths
