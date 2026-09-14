@@ -17,7 +17,7 @@ Elevar a autoestima feminina respeitando o tempo, a história e o corpo de cada 
 ### 1. **Essentia** - Você, no seu tempo
 - Foco: Autocuidado integrado à rotina diária
 - Formato: Digital (acesso vitalício, duração sugerida de 8 semanas)
-- Componentes: Conteúdos em vídeo, exercícios versáteis, book digital
+- Componentes: Conteúdos em vídeo, exercícios versáteis, apostila complementar
 - Venda: Hotmart (checkout transparente embutido no site)
 - Produto Hotmart: `M104765364P`
 - Funil da LP principal: `/lp/essentia` → `/checkout/essentia` (pré-checkout que captura o lead) → pagamento Hotmart em iframe → `/programas/essentia/bem-vinda`
