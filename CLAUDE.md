@@ -67,6 +67,33 @@ Números em uso:
 | WhatsApp principal (footer, contato) | +55 21 99404-1648 | `KzU1MjE5OTQwNDE2NDg=` |
 | Telefone fixo | (21) 2244-2474 | — (exibido em plain text no rodapé e contato.html — aceitável) |
 
+### ⚠️ WhatsApp temporariamente oculto (set/2026)
+
+O canal de WhatsApp está fora do ar. **Todos os botões e links foram comentados, não removidos.** Ao criar página nova, **não adicionar botão de WhatsApp** até o canal voltar.
+
+Marcador único para localizar tudo:
+
+```bash
+grep -rn "WHATSAPP TEMPORARIAMENTE OCULTO" --include="*.html" .
+```
+
+| Arquivo | Ocultado | Substituto colocado no lugar |
+|---------|----------|------------------------------|
+| `components/footer.html` | Ícone social WhatsApp | — (só Instagram) |
+| `contato.html` | `.info-item` inteiro (título + texto + botão) | — |
+| `faq.html` | `<li>` do WhatsApp | — |
+| `politica-privacidade.html` | Linha "WhatsApp:" + o `<br>` anterior | — (e-mail e telefone seguem) |
+| `checkout/essentia.html` | `<p class="ck-ajuda">` | `<p class="ck-ajuda">` com `mailto:` |
+| `programas/essentia/bem-vinda.html` | Botão do CTA + frase do passo 3 | Botão "Falar por e-mail" + frase com o e-mail |
+| `lp/essentia.html` | 2 botões in-card + flutuante | — |
+| `lp/essentia-v2.html` | 2 botões in-card + flutuante | — |
+
+Duas alterações **sem marcador** (não dá para comentar dentro de JSON/atributo) — reverter à mão:
+- `contato.html` — `"https://wa.me/5521994041648"` removido do `sameAs` no Schema.org
+- `contato.html` — `meta description` e `og:description`: "WhatsApp, email e telefone disponíveis" → "E-mail e telefone disponíveis"
+
+As regras CSS (`.btn-whatsapp`, `.lp-btn-whatsapp`, `.lp-wa-float`) foram mantidas de propósito, para que restaurar seja só descomentar.
+
 ---
 
 ## Sistema de formulários
