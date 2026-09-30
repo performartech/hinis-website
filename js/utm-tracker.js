@@ -4,7 +4,7 @@
  * Sistema de rastreamento de parâmetros UTM para análise de campanhas de marketing
  * Captura, armazena e envia dados de origem do tráfego
  *
- * @version 1.0.0
+ * @version 1.1.0
  * @author Hinis
  */
 
@@ -20,15 +20,57 @@
     const SESSION_DURATION = 30 * 60 * 1000; // 30 minutos
 
     // =========================================
+    // ARMAZENAMENTO
+    // =========================================
+
+    /**
+     * Escolhe onde guardar os dados.
+     *
+     * localStorage vem primeiro porque o sessionStorage é isolado por aba:
+     * se a pessoa abre a landing page e o checkout em abas diferentes, ou
+     * volta ao site depois, os UTMs se perdiam. O prazo de 30 minutos
+     * continua valendo — quem controla a janela de atribuição é o
+     * SESSION_DURATION, não o tipo de armazenamento.
+     *
+     * @returns {Storage|null} Storage disponível ou null (modo restrito)
+     */
+    let _storage;
+    function getStorage() {
+        if (_storage !== undefined) return _storage;
+
+        const candidatos = [
+            function() { return window.localStorage; },
+            function() { return window.sessionStorage; }
+        ];
+
+        for (let i = 0; i < candidatos.length; i++) {
+            try {
+                const s = candidatos[i]();
+                const teste = '__hinis_test__';
+                s.setItem(teste, '1');
+                s.removeItem(teste);
+                _storage = s;
+                return _storage;
+            } catch (error) {
+                // Storage bloqueado (navegação privada, cookies desativados) — tenta o próximo
+            }
+        }
+
+        _storage = null;
+        return _storage;
+    }
+
+    // =========================================
     // CAPTURA DE PARÂMETROS UTM
     // =========================================
 
     /**
-     * Extrai parâmetros UTM da URL atual
-     * @returns {Object} Objeto com parâmetros UTM encontrados
+     * Extrai os parâmetros UTM de uma query string
+     * @param {string} search - Query string (ex: "?utm_source=meta")
+     * @returns {Object|null} Parâmetros encontrados ou null
      */
-    function captureUTMParameters() {
-        const urlParams = new URLSearchParams(window.location.search);
+    function extrairUTM(search) {
+        const urlParams = new URLSearchParams(search || '');
         const utmData = {};
         let hasUTM = false;
 
@@ -40,25 +82,69 @@
             }
         });
 
+        return hasUTM ? utmData : null;
+    }
+
+    /**
+     * Extrai parâmetros UTM da URL atual
+     * @returns {Object} Objeto com parâmetros UTM encontrados
+     */
+    function captureUTMParameters() {
+        const utmData = extrairUTM(window.location.search);
+
         // Adiciona timestamp e página de entrada
-        if (hasUTM) {
+        if (utmData) {
             utmData.timestamp = Date.now();
             utmData.landing_page = window.location.pathname;
             utmData.referrer = document.referrer || 'direct';
         }
 
-        return hasUTM ? utmData : null;
+        return utmData;
     }
 
     /**
-     * Salva dados UTM no sessionStorage
+     * Recupera os UTMs a partir da página anterior, quando ela é do próprio site.
+     *
+     * Rede de segurança para o caso em que o armazenamento não sobreviveu à
+     * navegação (aba nova, storage bloqueado, sessão expirada por pouco):
+     * se a pessoa veio de /lp/essentia?utm_source=..., os UTMs ainda estão
+     * no document.referrer. Só vale para referrer do mesmo domínio — UTMs
+     * na URL de um site externo são da campanha dele, não da Hinis.
+     *
+     * @returns {Object|null} Dados UTM recuperados do referrer ou null
+     */
+    function captureFromReferrer() {
+        if (!document.referrer) return null;
+
+        try {
+            const ref = new URL(document.referrer);
+            if (ref.origin !== window.location.origin) return null;
+
+            const utmData = extrairUTM(ref.search);
+            if (!utmData) return null;
+
+            utmData.timestamp = Date.now();
+            utmData.landing_page = ref.pathname;
+            utmData.referrer = document.referrer;
+
+            return utmData;
+        } catch (error) {
+            return null;
+        }
+    }
+
+    /**
+     * Salva dados UTM no armazenamento
      * @param {Object} utmData - Dados UTM para armazenar
      */
     function saveUTMData(utmData) {
         if (!utmData) return;
 
+        const s = getStorage();
+        if (!s) return;
+
         try {
-            sessionStorage.setItem(STORAGE_KEY, JSON.stringify(utmData));
+            s.setItem(STORAGE_KEY, JSON.stringify(utmData));
             console.log('✓ UTM parameters captured:', utmData);
         } catch (error) {
             console.error('Erro ao salvar dados UTM:', error);
@@ -70,8 +156,11 @@
      * @returns {Object|null} Dados UTM ou null se não existirem/expiraram
      */
     function getUTMData() {
+        const s = getStorage();
+        if (!s) return null;
+
         try {
-            const stored = sessionStorage.getItem(STORAGE_KEY);
+            const stored = s.getItem(STORAGE_KEY);
             if (!stored) return null;
 
             const utmData = JSON.parse(stored);
@@ -79,7 +168,7 @@
             // Verifica se a sessão expirou
             const now = Date.now();
             if (now - utmData.timestamp > SESSION_DURATION) {
-                sessionStorage.removeItem(STORAGE_KEY);
+                s.removeItem(STORAGE_KEY);
                 return null;
             }
 
@@ -94,7 +183,8 @@
      * Limpa dados UTM armazenados
      */
     function clearUTMData() {
-        sessionStorage.removeItem(STORAGE_KEY);
+        const s = getStorage();
+        if (s) s.removeItem(STORAGE_KEY);
     }
 
     // =========================================
@@ -106,7 +196,9 @@
      * @returns {Object} Objeto com campos formatados
      */
     function formatUTMForSubmission() {
-        const utmData = getUTMData();
+        // Se o armazenamento falhou, ainda tenta a URL atual e o referrer —
+        // é melhor enviar a atribuição do que perdê-la por não conseguir gravar.
+        const utmData = getUTMData() || captureUTMParameters() || captureFromReferrer();
         if (!utmData) return {};
 
         const formatted = {
@@ -206,6 +298,14 @@
             sendGAEvent('utm_campaign_start', {
                 campaign_type: 'new_session'
             });
+        } else if (!getUTMData()) {
+            // Sem UTMs na URL e sem nada guardado: tenta recuperar da página
+            // anterior antes de dar a visita como direta
+            const doReferrer = captureFromReferrer();
+            if (doReferrer) {
+                saveUTMData(doReferrer);
+                console.log('↩ UTMs recuperados do referrer:', document.referrer);
+            }
         }
 
         // Rastreia visualização de página

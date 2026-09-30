@@ -1605,7 +1605,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="../js/utm-tracker.js?v=1.0.0"></script>
+    <script src="../js/utm-tracker.js?v=1.1.0"></script>
     <script src="../js/script.js?v=2.0.0"></script>
 
     <!-- Phone decoder: deofusca data-phone Base64 nos links WhatsApp -->
@@ -1671,6 +1671,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             sticky.classList.toggle('visible', hero.getBoundingClientRect().bottom < 0);
         }
         window.addEventListener('scroll', check, { passive: true });
+    })();
+    </script>
+
+    <!-- Repasse de UTMs para o checkout -->
+    <!-- Leva os parâmetros da campanha na própria URL do link. Assim a
+         atribuição não depende de o armazenamento sobreviver à navegação. -->
+    <script>
+    (function() {
+        var qs = window.location.search;
+        if (!qs || !/[?&](utm_|gclid|fbclid)/.test(qs)) return;
+        document.querySelectorAll('a.lp-btn-checkout').forEach(function(a) {
+            a.href += (a.href.indexOf('?') === -1 ? '?' : '&') + qs.slice(1);
+        });
     })();
     </script>
 

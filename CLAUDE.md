@@ -80,6 +80,20 @@ Números em uso:
 - Rate limiting em memória (2 envios/minuto) — não migrar para localStorage
 - `js/config.js` está vazio — não referenciar nas páginas HTML
 
+### Rastreio de UTM — `js/utm-tracker.js` (v1.1.0)
+
+Três camadas, nesta ordem, para que a atribuição não dependa de um único mecanismo:
+
+1. **URL atual** — `captureUTMParameters()` lê `window.location.search`
+2. **Armazenamento** — `localStorage` (com fallback para `sessionStorage`, e `null` se ambos estiverem bloqueados). Era só `sessionStorage`, que é **isolado por aba**: se a pessoa abrisse a LP e o checkout em abas diferentes, ou voltasse depois, os UTMs se perdiam. A janela de atribuição continua sendo o `SESSION_DURATION` de 30 minutos — quem controla o prazo é ele, não o tipo de armazenamento
+3. **Referrer do mesmo domínio** — `captureFromReferrer()` extrai os UTMs de `document.referrer` quando ele aponta para o próprio site. **Só mesma origem**: UTMs na URL de um site externo são da campanha dele, não da Hinis
+
+`format()` tenta as três antes de devolver `{}`, então um envio nunca perde a atribuição só porque o armazenamento falhou.
+
+**Repasse LP → checkout:** `lp/essentia.html` copia a query string da campanha para o `href` dos links `.lp-btn-checkout`. É o caminho mais determinístico — o checkout lê os UTMs da própria URL, sem depender de armazenamento nem de referrer.
+
+⚠️ Ao alterar `utm-tracker.js`, bumpar o `?v=` nas **14 páginas** que o referenciam.
+
 ### Backend do formulário — Apps Script
 
 - Projeto: **"Hinis - Formulário"** (`178RVIxQ6PVQ2NtJfEMORq5fKVnMT2aqo75E6ZfjNyC4XzracWrh6Nask`), conta `pedro@performartech.com.br`
