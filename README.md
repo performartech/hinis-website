@@ -20,7 +20,7 @@ Elevar a autoestima feminina respeitando o tempo, a história e o corpo de cada 
 - Componentes: Conteúdos em vídeo, exercícios versáteis, apostila complementar
 - Venda: Hotmart (checkout transparente embutido no site)
 - Produto Hotmart: `M104765364P`
-- Funil da LP principal: `/lp/essentia` → `/checkout/essentia` (pré-checkout que captura o lead) → pagamento Hotmart em iframe → `/programas/essentia/bem-vinda`
+- Funil da LP principal: `/lp/essentia` → `/checkout/essentia` (pré-checkout em 2 etapas: dados pessoais e, depois de validados, o checkout da Hotmart embutido na página) → `/programas/essentia/bem-vinda`
 - As demais páginas (`/programas/essentia`, LPs v0 e v2) ainda abrem o Hotmart Lightbox direto via widget
 - Pós-compra: redireciona para `/programas/essentia/bem-vinda` com evento `purchase` no dataLayer
 
@@ -67,7 +67,7 @@ Hinis/
 ├── checkout/
 │   └── essentia.html           # Pré-checkout do Essentia (noindex) — dados pessoais + pagamento
 ├── lp/
-│   ├── essentia.html           # LP principal (v3) — hero em 2 colunas com card de preço à direita
+│   ├── essentia.html           # LP principal (v3) — hero em 2 colunas, seção "o que você vai encontrar", VSL
 │   ├── essentia-v2.html        # LP v2 — otimizada para conversão, CTAs âncora para #investimento
 │   └── essentia-v0.html        # LP v0 (original, legado)
 ├── components/
@@ -82,6 +82,7 @@ Hinis/
 │   ├── form-handler.js         # Envio e validação do formulário
 │   ├── load-components.js      # Carregador dinâmico de componentes
 │   ├── utm-tracker.js          # Rastreamento UTM, gclid e fbclid
+│   ├── cta-tracker.js          # Eventos de clique nos CTAs (dataLayer → GTM → GA4)
 │   └── phone-protection.js     # Proteção de telefones (Base64)
 ├── apps-script/
 │   └── Codigo.gs               # Backend do formulário (cópia versionada — roda no Google)
@@ -98,12 +99,12 @@ Hinis/
 - **Frontend**: HTML5 + JavaScript (form-handler.js)
 - **Leads**: Google Sheets via Apps Script (único destino de envio)
 - **Anti-spam**: Cloudflare Turnstile (validação frontend)
-- **Analytics**: Google Analytics 4 + GTM (eventos customizados, Enhanced Conversions e Meta Advanced Matching via dataLayer)
+- **Analytics**: Google Analytics 4 + GTM — ver [Eventos de Analytics](#eventos-de-analytics)
 
 ### Tipos de formulário
 - **Inline** — usado na homepage, contato e programas (componente `form-contato.html`)
 - **Popup modal** — usado em Refugium e Amicae, com programa pré-selecionado
-- **Pré-checkout** — `checkout/essentia.html`, sem Turnstile e sem rate limiting (evita atrito no funil de compra); script próprio inline, não usa `form-handler.js`
+- **Pré-checkout** — `checkout/essentia.html`, sem Turnstile e sem rate limiting (evita atrito no funil de compra); script próprio inline, não usa `form-handler.js`. Funciona como acordeão: a etapa de pagamento só abre depois que os dados pessoais são validados, e a etapa concluída recolhe com um check verde e um link "Editar"
 
 ### Funcionalidades
 - Envio para Google Sheets via Apps Script
@@ -166,16 +167,38 @@ Os componentes são carregados via `fetch()` assíncrono. Um fallback inline exi
 
 - Meta tags (description, keywords, author, robots, canonical) em todas as páginas
 - Open Graph e Twitter Cards
-- Schema.org structured data (ItemList, Person, FAQPage, Course)
+- Schema.org structured data por página: `Organization` (index, quem-somos), `ItemList` + `Course` (programas.html), `Course` (Essentia, Refugium, Amicae), `Person` (quem-somos), `FAQPage` (faq), `ContactPage` (contato). `politica-privacidade.html` é a única sem structured data
 - DNS-prefetch e preconnect para CDNs
 - sitemap.xml e robots.txt
 
 ## Rastreamento UTM
 
-O `utm-tracker.js` captura automaticamente parâmetros de marketing da URL, persiste em `sessionStorage` por 30 minutos e injeta nos envios do formulário.
+O `utm-tracker.js` captura automaticamente parâmetros de marketing e os injeta nos envios do formulário. Parâmetros capturados: `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content`, `gclid`, `fbclid`, `landing_page`, `referrer`.
 
-Parâmetros capturados: `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content`, `gclid`, `fbclid`, `landing_page`, `referrer`.
+A atribuição tem três camadas, para não depender de um único mecanismo:
 
+1. **URL atual** — lê `window.location.search`
+2. **Armazenamento** — `localStorage`, com fallback para `sessionStorage` (e nenhum armazenamento se os dois estiverem bloqueados). A janela de atribuição é de 30 minutos (`SESSION_DURATION`)
+3. **Referrer do mesmo domínio** — extrai os UTMs do `document.referrer` quando ele aponta para o próprio site. Só mesma origem: UTM de site externo é campanha dele, não da Hinis
+
+**Repasse LP → checkout**: `lp/essentia.html` copia a query string da campanha para o `href` dos botões de checkout, então o pré-checkout lê os UTMs da própria URL.
+
+## Eventos de Analytics
+
+Todas as páginas carregam o GTM (`GTM-WMKVWGKF`) e o GA4 (`G-QEBQDXDXLV`). Os eventos chegam ao GA4 por duas vias:
+
+| Evento | Via | Quando dispara |
+|--------|-----|----------------|
+| `begin_checkout` | dataLayer | Abertura do pré-checkout (`checkout/essentia.html`) |
+| `generate_lead` | dataLayer | Formulário de contato enviado com sucesso, e submit do pré-checkout. Leva `user_data` e `lead_data` para Enhanced Conversions (Google Ads) e Advanced Matching (Meta) |
+| `purchase` | dataLayer | Abertura da página de obrigado, com `value: 312.00` e `transaction_id` vindo de `?transaction=` |
+| `cta_compreagora` | dataLayer | Clique em qualquer botão que leva ao pagamento (link para `/checkout/`, `pay.hotmart.com`, Lightbox Hotmart, "Ir para pagamento") |
+| `cta_whatsapp` | dataLayer | Clique em qualquer link de WhatsApp, inclusive o do rodapé carregado dinamicamente |
+| `page_view` | gtag | Automático, em todas as páginas |
+
+Os eventos de clique vêm do `js/cta-tracker.js`, que usa delegação no `document` **em fase de captura** — necessário porque o widget do Hotmart interrompe a propagação do clique no botão do Lightbox. Qualquer elemento pode ser marcado à mão com `data-cta="compreagora"` ou `data-cta="whatsapp"`.
+
+⚠️ O push no `dataLayer` não gera dado sozinho: cada evento precisa de acionador e tag correspondentes no GTM.
 
 ## Responsividade
 
@@ -225,7 +248,7 @@ cd hinis-website
 - **Telefone exposto no FAQ**: `faq.html` tem o número WhatsApp hardcoded no href (`wa.me/5521994041648`) sem usar o sistema de proteção Base64 (`data-phone` + `phone-protection.js`).
 - **Imagem órfã**: `assets/img/Hinis-home-retrato.png` existe mas não é referenciada em nenhuma página.
 - **Apps Script desatualizado em produção**: a correção em `apps-script/Codigo.gs` (v2.0.0) ainda não foi implantada. A `/exec` responde `{"status":"ok"}`; depois do deploy deve responder `"versao":"2.0.0"`.
-- **Pré-preenchimento do Hotmart não validado**: o checkout envia `name`, `email` e `phonenumber` na query string. Se algum parâmetro tiver nome diferente, o campo só não vem preenchido — não quebra a compra.
+- **Pré-preenchimento do Hotmart não funciona embutido**: a URL com `name`, `email` e `phonenumber` preenche os campos quando aberta como página, mas vem vazia quando carregada dentro de um iframe (testado em Chrome headless a partir de localhost). Conferir no domínio de produção; não quebra a compra, só obriga a compradora a digitar de novo.
 - **Máscara de telefone aceita código do país**: quem digita `5521…` recebe `(55) 21…`, tratando o DDI como DDD. Além de sujar a planilha, gera um E.164 errado no `generate_lead` das Enhanced Conversions.
 - **Falhas de envio são silenciosas**: o `fetch` usa `mode: 'no-cors'`, então a resposta é opaca e o front assume sucesso. O Apps Script devolve `Access-Control-Allow-Origin: *`, então dá para trocar por `Content-Type: text/plain;charset=UTF-8` sem `no-cors` e passar a ler o `{sucesso, mensagem}`.
 - **Planilha homônima sem uso**: existe uma "Hinis - Contatos" no Drive com cabeçalho parecido. **Não é usada** — o destino real é "[Hinis] Leads formulário site".
