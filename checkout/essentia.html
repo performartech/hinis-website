@@ -984,25 +984,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 }
             });
 
-            window.dataLayer.push({
-                event: 'add_payment_info',
-                ecommerce: {
-                    currency: 'BRL',
-                    value: 312.00,
-                    items: [{
-                        item_id: HOTMART_ITEM,
-                        item_name: 'Essentia — Você, no seu tempo',
-                        item_category: 'Programa Online',
-                        price: 312.00,
-                        quantity: 1
-                    }]
-                }
-            });
-
-            if (typeof window.HinisUTM !== 'undefined') {
-                window.HinisUTM.sendEvent('checkout_dados_preenchidos', { programa: PRODUTO_LABEL });
-            }
-
             abrirPagamento(url);
             submit.disabled = false;
         });

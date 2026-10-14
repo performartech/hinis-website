@@ -263,14 +263,6 @@
                 feedback
             );
 
-            // Envia evento para Google Analytics
-            if (typeof window.HinisUTM !== 'undefined') {
-                window.HinisUTM.sendEvent('form_submission', {
-                    form_type: dados.programa ? 'contato_com_programa' : 'contato_rapido',
-                    programa_selecionado: dados.programa || 'não informado'
-                });
-            }
-
             // Push para GTM dataLayer — Conversões Otimizadas (Google Ads Enhanced Conversions + Meta Advanced Matching)
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({
