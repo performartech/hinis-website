@@ -927,8 +927,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         .lp-encontrar-img-apostila {
             position: absolute;
             bottom: -90px;
-            right: -60px;
-            width: 32vw;
+            /* Ancorada ao card: a imagem avança no gap de 2.5rem da grid e para
+               20px antes da lateral do card, em qualquer largura de tela.
+               Largura em % da própria coluna (nunca em vw) para não invadir o
+               título à esquerda nem o card à direita. */
+            right: -20px;
+            width: calc(100% + 20px);
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 12px 48px rgba(0,0,0,0.3);
@@ -979,14 +983,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }
         @media (max-width: 768px) {
             .lp-encontrar > .container {
-                grid-template-columns: 1fr;
+                /* minmax(0,1fr): sem isso a coluna estoura na largura intrínseca
+                   da imagem da apostila, que agora está no fluxo */
+                grid-template-columns: minmax(0, 1fr);
                 gap: 2rem;
             }
             .lp-encontrar > .container > div:first-child { margin-top: -30px; }
-            .lp-encontrar-card { width: 75%; }
-            .lp-encontrar-imagens { height: 300px; }
-            .lp-encontrar-img-phone { width: 160px; height: 130px; }
-            .lp-encontrar-img-apostila { width: 52vw; bottom: -450px; right: -20px; }
+            .lp-encontrar-card { width: 100%; }
+            /* Em coluna única a imagem entra no fluxo, acima do card:
+               sem posicionamento absoluto, não há como sobrepor nada. */
+            .lp-encontrar-imagens { height: auto; }
+            .lp-encontrar-img-apostila {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                width: 100%;
+            }
         }
 
         /* ── Responsividade ── */
