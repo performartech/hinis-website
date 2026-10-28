@@ -330,7 +330,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             width: 100%;
             background-color: #ff8b32;
             border: 2px solid #ff8b32;
-            color: var(--white);
+            color: #000;
             font-family: var(--font-primary);
             font-weight: 700;
             font-size: 1rem;
@@ -422,40 +422,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             margin-bottom: 0.9rem;
             line-height: 1.25;
         }
-        .ck-resumo-lista {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 1.15rem;
-        }
-        .ck-resumo-lista li {
-            position: relative;
-            padding-left: 1.15rem;
-            font-size: 0.85rem;
-            color: var(--text-color);
-            line-height: 1.5;
-            margin-bottom: 0.45rem;
-        }
-        .ck-resumo-lista li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0.5rem;
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: var(--primary-color);
-        }
         .ck-resumo-divisor {
             height: 1px;
             background: rgba(48,51,66,0.1);
             margin: 0 0 1.05rem;
-        }
-        .ck-resumo-label {
-            font-size: 0.75rem;
-            color: var(--text-light);
-            letter-spacing: 0.6px;
-            text-transform: uppercase;
-            margin: 0 0 0.15rem;
         }
         .ck-resumo-parcela {
             font-family: var(--font-secondary);
@@ -479,8 +449,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             color: var(--text-color);
             margin: 0;
         }
-        /* Bloco de preço centralizado — do "A partir de" até o valor à vista */
-        .ck-resumo-label,
+        /* Bloco de preço centralizado — do valor da parcela até o valor à vista */
         .ck-resumo-parcela,
         .ck-resumo-parcela-info,
         .ck-resumo-avista { text-align: center; }
@@ -693,14 +662,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     <aside class="ck-resumo">
                         <h3>Resumo do pedido</h3>
                         <p class="ck-resumo-produto">Hinis Essentia</p>
-                        <ul class="ck-resumo-lista">
-                            <li>8 módulos em vídeo</li>
-                            <li>Exercícios versáteis — sem equipamentos</li>
-                            <li>Apostila complementar</li>
-                            <li>Acesso vitalício — sem prazo</li>
-                        </ul>
                         <div class="ck-resumo-divisor"></div>
-                        <p class="ck-resumo-label">A partir de</p>
                         <div class="ck-resumo-parcela"><sup>R$</sup> 32<sup>,27</sup></div>
                         <p class="ck-resumo-parcela-info">por mês &nbsp;·&nbsp; 12 parcelas</p>
                         <p class="ck-resumo-avista">ou <strong>R$ 312,00</strong> à vista</p>
