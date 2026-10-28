@@ -51,7 +51,7 @@ Versões em produção e quantas páginas referenciam cada arquivo — se um nú
 
 | Arquivo | Versão | Páginas |
 |---------|--------|---------|
-| `css/styles.css` | 2.5.0 | 14 |
+| `css/styles.css` | 2.6.0 | 14 |
 | `js/utm-tracker.js` | 1.1.0 | 14 |
 | `js/cta-tracker.js` | 1.0.0 | 14 |
 | `js/script.js` | 2.0.0 | 13 |

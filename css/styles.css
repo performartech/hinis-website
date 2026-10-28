@@ -40,7 +40,7 @@
 html {
     scroll-behavior: smooth;
     /* Tipografia fluida: escala automaticamente entre mobile e desktop */
-    font-size: clamp(14px, 1.5vw, 16px);
+    font-size: clamp(15px, calc(1.5vw + 1px), 17px);
     /* Previne double-tap zoom sem bloquear iframes */
     touch-action: manipulation;
 }
@@ -3269,7 +3269,7 @@ input:focus {
     .form-group select,
     .form-group textarea {
         min-height: var(--touch-target-min);
-        font-size: 16px; /* Previne zoom no iOS */
+        font-size: 17px; /* Previne zoom no iOS (mínimo 16px) */
         padding: 0.875rem;
     }
 
@@ -3279,7 +3279,7 @@ input:focus {
 
     /* Newsletter form */
     .newsletter-form input {
-        font-size: 16px; /* Previne zoom no iOS */
+        font-size: 17px; /* Previne zoom no iOS (mínimo 16px) */
         min-height: var(--touch-target-min);
     }
 
@@ -3287,7 +3287,7 @@ input:focus {
     .contato-rapido-form input,
     .contato-rapido-form select,
     .contato-rapido-form textarea {
-        font-size: 16px; /* Previne zoom no iOS */
+        font-size: 17px; /* Previne zoom no iOS (mínimo 16px) */
         min-height: var(--touch-target-min);
     }
 
@@ -3435,7 +3435,7 @@ input:focus {
     .contato-form-wrapper .contato-rapido-form input,
     .contato-form-wrapper .contato-rapido-form select,
     .contato-form-wrapper .contato-rapido-form textarea {
-        font-size: 16px; /* Previne zoom no iOS */
+        font-size: 17px; /* Previne zoom no iOS (mínimo 16px) */
         min-height: var(--touch-target-min);
     }
 
